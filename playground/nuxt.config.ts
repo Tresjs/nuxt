@@ -1,6 +1,7 @@
 export default defineNuxtConfig({
   modules: ['../src/module'],
   tres: {
-    modules: ['@tresjs/cientos', '@tresjs/post-processing'],
+    // for testing purposes, and so we test both deduplication + auto-detection capabilities
+    modules: ['@tresjs/cientos'],
   },
 })
