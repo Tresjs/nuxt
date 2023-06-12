@@ -1,4 +1,6 @@
 export default defineNuxtConfig({
   modules: ['../src/module'],
-  tres: {},
+  tres: {
+    modules: ['@tresjs/cientos', '@tresjs/post-processing'],
+  },
 })
