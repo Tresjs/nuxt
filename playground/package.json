@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@tresjs/cientos": "^2.1.4",
-    "@tresjs/post-processing": "^0.2.0",
+    "@tresjs/post-processing": "^0.3.0",
     "nuxt": "latest"
   }
 }
