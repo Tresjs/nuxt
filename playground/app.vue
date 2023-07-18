@@ -10,12 +10,12 @@ const gl = {
   toneMapping: NoToneMapping,
 };
 
-const bloomParams = reactive({
+/* const bloomParams = reactive({
   luminanceThreshold: 0.2,
   luminanceSmoothing: 0.3,
   mipmapBlur: true,
   intensity: 0.5,
-});
+}); */
 </script>
 <template>
   <div style="height: 100vh">

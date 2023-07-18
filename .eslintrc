@@ -1,4 +1,4 @@
 {
   "root": true,
-  "extends": ["@nuxt/eslint-config", "@alvarosabu/eslint-config-vue"]
+  "extends": ["@nuxt/eslint-config"]
 }
