@@ -44,7 +44,7 @@
     "typescript": "^5.1.6"
   },
   "devDependencies": {
-    "@alvarosabu/eslint-config-vue": "^0.3.3",
+    "@alvarosabu/eslint-config-vue": "^0.4.0",
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxt/module-builder": "^0.4.0",
     "@nuxt/schema": "^3.6.3",
