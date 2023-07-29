@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@tresjs/cientos':
-    specifier: ^2.3.0
-    version: 2.3.0(@tresjs/core@2.4.2)(three@0.154.0)(vue@3.3.4)
+    specifier: ^3.0.0
+    version: 3.0.0(three@0.154.0)(vue@3.3.4)
   '@tresjs/post-processing':
     specifier: ^0.3.0
     version: 0.3.0(@tresjs/core@2.4.2)(three@0.154.0)(vue@3.3.4)
@@ -1121,15 +1121,15 @@ packages:
       rollup: 3.26.3
     dev: true
 
-  /@tresjs/cientos@2.3.0(@tresjs/core@2.4.2)(three@0.154.0)(vue@3.3.4):
-    resolution: {integrity: sha512-FTbb3/PmAnd5zeQEYurLNR795NSL9gznyBjamhVWYXZxgCo2ceE9Rnjzf+XVbsABJ/JhwaPUhC670DevM7MF1g==}
+  /@tresjs/cientos@3.0.0(three@0.154.0)(vue@3.3.4):
+    resolution: {integrity: sha512-++5q74oHFkpe8ZWM9UcjBqJGGEyvj0GQtPHy+q86T0w52+mqCT173dIcF2ISN23mQAGYTjVyu4arQbIClvL3Xw==}
     peerDependencies:
-      '@tresjs/core': '>=2.1.3'
       three: '>=0.133'
       vue: '>=3.3'
     dependencies:
-      '@tresjs/core': 2.4.2(three@0.154.0)(vue@3.3.4)
+      '@tresjs/core': 3.0.1(three@0.154.0)(vue@3.3.4)
       '@vueuse/core': 10.2.1(vue@3.3.4)
+      camera-controls: 2.7.0(three@0.154.0)
       three: 0.154.0
       three-stdlib: 2.23.13(three@0.154.0)
       vue: 3.3.4
@@ -1139,6 +1139,20 @@ packages:
 
   /@tresjs/core@2.4.2(three@0.154.0)(vue@3.3.4):
     resolution: {integrity: sha512-9Em0F3MSSP1Bem/l9lFZLKVTcRxnunIRX/6rV3uO4r0cbkmFrS9nSLHITU6dw3agZmj6a/A01aKcNg1ggJadQA==}
+    peerDependencies:
+      three: '>=0.133'
+      vue: '>=3.3'
+    dependencies:
+      '@alvarosabu/utils': 3.1.1
+      '@vueuse/core': 10.2.1(vue@3.3.4)
+      three: 0.154.0
+      vue: 3.3.4
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+    dev: true
+
+  /@tresjs/core@3.0.1(three@0.154.0)(vue@3.3.4):
+    resolution: {integrity: sha512-bhLOXqDXCT527dFwdyvUpq7H+WpOgJrmJTFK3tCxrULv996+rIgS0Nz6QRLsFAuyVJwqg29FPD0H/MYEjrviSQ==}
     peerDependencies:
       three: '>=0.133'
       vue: '>=3.3'
@@ -1714,6 +1728,14 @@ packages:
   /camelcase@6.3.0:
     resolution: {integrity: sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==}
     engines: {node: '>=10'}
+    dev: true
+
+  /camera-controls@2.7.0(three@0.154.0):
+    resolution: {integrity: sha512-HONMoMYHieOCQOoweS639bdWHP/P/fvVGR08imnECGVUp04mqGfsX/zp1ZufLeiAA5hA6i1JhP6SrnOwh01C0w==}
+    peerDependencies:
+      three: '>=0.126.1'
+    dependencies:
+      three: 0.154.0
     dev: true
 
   /caniuse-api@3.0.0:

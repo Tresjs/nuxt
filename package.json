@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.6.3",
-    "@tresjs/cientos": "^2.3.0",
+    "@tresjs/cientos": "^3.0.0",
     "@tresjs/core": "^2.4.2",
     "@tresjs/post-processing": "^0.3.0",
     "@types/three": "^0.154.0",
