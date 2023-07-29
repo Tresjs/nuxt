@@ -10,13 +10,13 @@ dependencies:
     version: 3.6.3(rollup@3.25.1)
   '@tresjs/cientos':
     specifier: ^2.3.0
-    version: 2.3.0(@tresjs/core@2.4.2)(three@0.154.0)(vue@3.3.4)
+    version: 2.3.0(@tresjs/core@3.0.0)(three@0.154.0)(vue@3.3.4)
   '@tresjs/core':
-    specifier: ^2.4.2
-    version: 2.4.2(three@0.154.0)(vue@3.3.4)
+    specifier: ^3.0.0
+    version: 3.0.0(three@0.154.0)(vue@3.3.4)
   '@tresjs/post-processing':
     specifier: ^0.3.0
-    version: 0.3.0(@tresjs/core@2.4.2)(three@0.154.0)(vue@3.3.4)
+    version: 0.3.0(@tresjs/core@3.0.0)(three@0.154.0)(vue@3.3.4)
   '@types/three':
     specifier: ^0.154.0
     version: 0.154.0
@@ -1612,14 +1612,14 @@ packages:
       defer-to-connect: 2.0.1
     dev: true
 
-  /@tresjs/cientos@2.3.0(@tresjs/core@2.4.2)(three@0.154.0)(vue@3.3.4):
+  /@tresjs/cientos@2.3.0(@tresjs/core@3.0.0)(three@0.154.0)(vue@3.3.4):
     resolution: {integrity: sha512-FTbb3/PmAnd5zeQEYurLNR795NSL9gznyBjamhVWYXZxgCo2ceE9Rnjzf+XVbsABJ/JhwaPUhC670DevM7MF1g==}
     peerDependencies:
       '@tresjs/core': '>=2.1.3'
       three: '>=0.133'
       vue: '>=3.3'
     dependencies:
-      '@tresjs/core': 2.4.2(three@0.154.0)(vue@3.3.4)
+      '@tresjs/core': 3.0.0(three@0.154.0)(vue@3.3.4)
       '@vueuse/core': 10.2.1(vue@3.3.4)
       three: 0.154.0
       three-stdlib: 2.23.13(three@0.154.0)
@@ -1628,8 +1628,8 @@ packages:
       - '@vue/composition-api'
     dev: false
 
-  /@tresjs/core@2.4.2(three@0.154.0)(vue@3.3.4):
-    resolution: {integrity: sha512-9Em0F3MSSP1Bem/l9lFZLKVTcRxnunIRX/6rV3uO4r0cbkmFrS9nSLHITU6dw3agZmj6a/A01aKcNg1ggJadQA==}
+  /@tresjs/core@3.0.0(three@0.154.0)(vue@3.3.4):
+    resolution: {integrity: sha512-ezpalILBVl4qweO23sPHJOATZb6XcFBRcgCzTHhKjRYzOaotaRBmF7kyogmBJfxdwSiyCjX/zrUfTInHxqmhxw==}
     peerDependencies:
       three: '>=0.133'
       vue: '>=3.3'
@@ -1642,14 +1642,14 @@ packages:
       - '@vue/composition-api'
     dev: false
 
-  /@tresjs/post-processing@0.3.0(@tresjs/core@2.4.2)(three@0.154.0)(vue@3.3.4):
+  /@tresjs/post-processing@0.3.0(@tresjs/core@3.0.0)(three@0.154.0)(vue@3.3.4):
     resolution: {integrity: sha512-0xxq46hZOjPjX/WcHV3MmkMER+4b+N5qUbcsIXB2hZSi6JZXCirxNxqOH1bkGnbnAwoYxJn04bytJ7v+sx0Psw==}
     peerDependencies:
       '@tresjs/core': '>=2.3.0'
       three: '>=0.133'
       vue: '>=3.3'
     dependencies:
-      '@tresjs/core': 2.4.2(three@0.154.0)(vue@3.3.4)
+      '@tresjs/core': 3.0.0(three@0.154.0)(vue@3.3.4)
       '@vueuse/core': 10.2.1(vue@3.3.4)
       postprocessing: 6.32.2(three@0.154.0)
       three: 0.154.0
