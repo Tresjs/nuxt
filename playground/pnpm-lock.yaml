@@ -9,8 +9,8 @@ devDependencies:
     specifier: ^3.0.0
     version: 3.0.0(three@0.154.0)(vue@3.3.4)
   '@tresjs/post-processing':
-    specifier: ^0.3.0
-    version: 0.3.0(@tresjs/core@3.0.1)(three@0.154.0)(vue@3.3.4)
+    specifier: ^0.4.0
+    version: 0.4.0(three@0.154.0)(vue@3.3.4)
   nuxt:
     specifier: ^3.6.5
     version: 3.6.5(@types/node@20.4.5)
@@ -1151,10 +1151,9 @@ packages:
       - '@vue/composition-api'
     dev: true
 
-  /@tresjs/post-processing@0.3.0(@tresjs/core@3.0.1)(three@0.154.0)(vue@3.3.4):
-    resolution: {integrity: sha512-0xxq46hZOjPjX/WcHV3MmkMER+4b+N5qUbcsIXB2hZSi6JZXCirxNxqOH1bkGnbnAwoYxJn04bytJ7v+sx0Psw==}
+  /@tresjs/post-processing@0.4.0(three@0.154.0)(vue@3.3.4):
+    resolution: {integrity: sha512-BlGsb/C/BwhYVmHen1nQ4XB5mhsLbIFj/XY8s/MLdrFhaSVUmPMjaegSYTsLuBG2mffBQjwBmqPYt4Uddxng1Q==}
     peerDependencies:
-      '@tresjs/core': '>=2.3.0'
       three: '>=0.133'
       vue: '>=3.3'
     dependencies:
