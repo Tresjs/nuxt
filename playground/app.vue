@@ -10,32 +10,31 @@ const gl = {
   toneMapping: NoToneMapping,
 }
 
-const bloomParams = reactive({
+/* const bloomParams = reactive({
   luminanceThreshold: 0.2,
   luminanceSmoothing: 0.3,
   mipmapBlur: true,
   intensity: 0.5,
-})
+}) */
 </script>
 
 <template>
   <div style="height: 100vh">
-
-      <TresCanvas v-bind="gl">
-        <TresPerspectiveCamera
-          :position="[-5.3, 8.3, 10.6]"
-          :look-at="[0, 0, 0]"
-        />
-        <OrbitControls />
+    <TresCanvas v-bind="gl">
+      <TresPerspectiveCamera
+        :position="[-5.3, 8.3, 10.6]"
+        :look-at="[0, 0, 0]"
+      />
+      <OrbitControls />
   
-        <!--   <EffectComposer :depth-buffer="true">
-          <Bloom v-bind="bloomParams" />
-        </EffectComposer> -->
+      <!--  <EffectComposer :depth-buffer="true">
+        <Bloom v-bind="bloomParams" />
+      </EffectComposer> -->
   
-        <Suspense>
-          <NuxtStones />
-        </Suspense>
-      </TresCanvas>
+      <Suspense>
+        <NuxtStones />
+      </Suspense>
+    </TresCanvas>
   </div>
 </template>
 
