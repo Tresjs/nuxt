@@ -33,6 +33,9 @@ const { onLoop } = useRenderLoop()
 onLoop(({ elapsed }) => {
   nodes.Logo.material.emissiveIntensity = Math.sin(elapsed) * 6 + 7
 })
+
+const ctx = useNuxtApp()
+console.log({ ctx, useFetch: await useFetch('api/url') })
 </script>
 
 <template>
