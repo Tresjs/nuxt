@@ -1,9 +1,9 @@
 import { readFile } from 'fs/promises'
 import { defineNuxtModule, addImports, addComponent, createResolver, resolvePath } from '@nuxt/kit'
 import * as core from '@tresjs/core'
+import { templateCompilerOptions } from '@tresjs/core'
 import { readPackageJSON } from 'pkg-types'
 import { findExportNames } from 'mlly'
-import { templateCompilerOptions } from '@tresjs/core'
 
 export interface ModuleOptions {
   modules: string[]
@@ -17,11 +17,11 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     modules: [],
   },
-  async setup(options, nuxt) {
-    const resolver = createResolver(import.meta.url)
+  async setup(options, nuxt) { 
     addComponent({
-      filePath: resolver.resolve('./runtime/components/TresCanvas.vue'),
       name: 'TresCanvas',
+      filePath: '@tresjs/core',
+      export: 'TresCanvas',
     })
     nuxt.options.build.transpile.push(/@tresjs/)
 
@@ -61,6 +61,7 @@ export default defineNuxtModule<ModuleOptions>({
       if (entry === mod) continue
 
       const imports = findExportNames(await readFile(entry, 'utf8'))
+    
       for (const name of imports) {
         if (name.match(/^[a-z]/)) {
           addImports({

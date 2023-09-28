@@ -8,6 +8,7 @@
     "generate": "nuxi generate"
   },
   "devDependencies": {
+    "@nuxt/devtools": "^0.8.5",
     "@tresjs/cientos": "^3.3.0",
     "@tresjs/post-processing": "^0.4.0",
     "nuxt": "^3.7.1",
