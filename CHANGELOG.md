@@ -1,5 +1,12 @@
 
 
+## [1.2.0-next.0](https://example.com///compare/1.1.7...1.2.0-next.0) (2023-09-28)
+
+
+### Features
+
+* remove runtime wrapper ([60db258](https://example.com///commit/60db25805bdf99f266b2e6f753587bd5ce7864b9))
+
 ## [1.1.7](https://example.com///compare/1.1.6...1.1.7) (2023-09-16)
 
 ## [1.1.6](https://example.com///compare/1.1.5...1.1.6) (2023-09-12)
