@@ -80,7 +80,7 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     nuxt.options.vite.resolve = defu(nuxt.options.vite.resolve, {
-      dedupe: ['three']
+      dedupe: ['three'],
     })
   },
 })
