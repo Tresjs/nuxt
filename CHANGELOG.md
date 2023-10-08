@@ -1,5 +1,7 @@
 
 
+## [1.2.0-next.2](https://example.com///compare/1.2.0-next.1...1.2.0-next.2) (2023-10-08)
+
 ## [1.2.0-next.1](https://example.com///compare/1.1.9...1.2.0-next.1) (2023-10-08)
 
 
