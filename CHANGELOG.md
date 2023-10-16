@@ -1,11 +1,17 @@
+## [1.2.0-next.2](https://example.com///compare/1.2.0-next.1...1.2.0-next.2) (2023-10-08)
 
+## [1.2.0-next.1](https://example.com///compare/1.1.9...1.2.0-next.1) (2023-10-08)
 
 ## [1.2.0-next.0](https://example.com///compare/1.1.7...1.2.0-next.0) (2023-09-28)
-
 
 ### Features
 
 * remove runtime wrapper ([60db258](https://example.com///commit/60db25805bdf99f266b2e6f753587bd5ce7864b9))
+
+### Bug Fixes
+
+* force three to be a peer dep ([ad2fb55](https://example.com///commit/ad2fb553a5138605b0ba419988286a005dcd0bd9))
+
 ## [1.1.9](https://example.com///compare/1.1.7...1.1.9) (2023-10-06)
 
 
