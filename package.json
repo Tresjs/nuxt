@@ -50,7 +50,7 @@
     "@nuxt/module-builder": "^0.5.2",
     "@nuxt/schema": "^3.7.4",
     "@nuxt/test-utils": "^3.7.4",
-    "@release-it/conventional-changelog": "^7.0.2",
+    "@release-it/conventional-changelog": "^8.0.0",
     "@types/node": "^20.8.7",
     "changelogen": "^0.5.5",
     "eslint": "^8.51.0",
