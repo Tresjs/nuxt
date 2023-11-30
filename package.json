@@ -38,7 +38,7 @@
   "dependencies": {
     "@nuxt/kit": "^3.7.4",
     "@tresjs/core": "3.4.1",
-    "@types/three": "^0.157.2",
+    "@types/three": "^0.159.0",
     "defu": "^6.1.2",
     "mlly": "^1.4.2",
     "pkg-types": "^1.0.3",
@@ -57,7 +57,7 @@
     "nuxt": "^3.7.4",
     "playwright": "^1.39.0",
     "release-it": "^16.2.1",
-    "three": "^0.157.0",
+    "three": "^0.159.0",
     "vitest": "^0.34.6"
   }
 }
