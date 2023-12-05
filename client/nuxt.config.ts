@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/devtools-ui-kit',
     '@unocss/nuxt',
+    '@nuxt/ui',
   ],
   nitro: {
     output: {

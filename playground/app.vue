@@ -15,6 +15,8 @@ const showScene = ref(false)
 setTimeout(() => {
   showScene.value = true
 }, 500)
+
+const showCube = ref(true)
 </script>
 
 <template>
@@ -26,7 +28,22 @@ setTimeout(() => {
         :look-at="[0, 0, 0]"
       />
       <OrbitControls />
-
+      <TresAmbientLight
+        :color="0xffffff"
+        :intensity="0.5"
+      />
+      <TresMesh
+        v-if="showCube"
+        :position="[3, 2, 0]"
+        :rotation="[0, 0, 0]"
+      >
+        <TresBoxGeometry />
+        <TresMeshStandardMaterial
+          :color="0x00ff00"
+          :wireframe="true"
+        />
+        ]
+      </TresMesh>
       <Suspense>
         <NuxtStones />
       </Suspense>

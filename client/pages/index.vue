@@ -24,15 +24,19 @@ const icons: Record<string, string> = {
   perspectivecamera: 'i-carbon-video',
   mesh: 'i-carbon-cube',
   group: 'i-carbon-group',
+  ambientlight: 'i-carbon-light',
+  directionallight: 'i-carbon-light',
+  spotlight: 'i-iconoir-project-curve-3d',
+  position: 'i-iconoir-axes',
+  rotation: 'i-carbon-rotate-clockwise',
+  scale: 'i-iconoir-ellipse-3d-three-points',
 }
 
 function createNode(object) {
-  return {
+  const node = {
     name: object.name,
     type: object.type,
     icon: icons[object.type.toLowerCase()] || 'i-carbon-cube',
-    material: object.material ? object.material.type : 'None',
-    geometry: object.geometry ? object.geometry.type : 'None',
     position: {
       x: object.position.x,
       y: object.position.y,
@@ -43,8 +47,25 @@ function createNode(object) {
       y: object.rotation.y,
       z: object.rotation.z,
     },
+
     children: [],
   }
+
+  if (object.type === 'Mesh') {
+    node.material = object.material
+    node.geometry = object.geometry
+    node.scale = {
+      x: object.scale.x,
+      y: object.scale.y,
+      z: object.scale.z,
+    }
+  }
+
+  if (object.type.includes('Light')) {
+    node.color = object.color.getHexString()
+    node.intensity = object.intensity
+  }
+  return node
 }
 
 function getSceneGraph(scene) {
@@ -81,7 +102,6 @@ const tresGlobalHook = {
     Object.assign(tres, context)
     scene.objects = countObjectsInScene(context.scene.value)
     scene.graph = getSceneGraph(context.scene.value)
-    console.log('tresGlobalHook', scene.graph )
   },
 }
 
@@ -113,13 +133,12 @@ window.parent.parent.__TRES__DEVTOOLS__ = tresGlobalHook
     </header>
  
     <div
-      v-if="client"
+      v-if="client && scene.objects > 0"
       class="flex flex-col gap-2"
     >
       <NSectionBlock
-        icon="i-carbon-web-services-container"
+        icon="i-iconoir-movie"
         text="Scene Graph"
-        border="b base"
         :description="`Total Objects ${scene.objects}`"
       >
         <TreeItem :item="scene.graph" />
@@ -130,6 +149,11 @@ window.parent.parent.__TRES__DEVTOOLS__ = tresGlobalHook
       >
         Awiwi
       </NSectionBlock>
+    </div>
+    <div v-else-if="scene.objects === 0">
+      <div class="p4 h-full">
+        <NLoading />
+      </div>
     </div>
     <div v-else>
       <NTip n="yellow">

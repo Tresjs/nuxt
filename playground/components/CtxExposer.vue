@@ -7,13 +7,27 @@ onMounted(() => {
     renderer,
     scene,
   }
+})
 
-  setTimeout(() => {
+let accumulatedTime = 0
+const interval = 1 // Interval in milliseconds, e.g., 1000 ms = 1 second
+
+onLoop(({ delta }) => {
+  if (!window.__TRES__DEVTOOLS__) return
+
+  // Accumulate the delta time
+  accumulatedTime += delta
+
+  // Check if the accumulated time is greater than or equal to the interval
+  if (accumulatedTime >= interval) {
     window.__TRES__DEVTOOLS__.cb({
       renderer,
       scene,
     })
-  }, 3000)
+
+    // Reset the accumulated time
+    accumulatedTime = 0
+  }
 })
 
 /* 
