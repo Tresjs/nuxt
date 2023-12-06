@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { useDevtoolsClient } from '@nuxt/devtools-kit/iframe-client'
+import type { TresObject } from '@tresjs/core'
+import type { Scene, WebGLRenderer } from 'three'
+import type { SceneGraphObject } from '../types'
 
 const client = useDevtoolsClient()
 const tres = reactive({})
@@ -7,17 +10,6 @@ const scene = reactive({
   objects: 0,
   graph: {},
 })
-
-/* window.addEventListener('message', (event) => {
-  switch (event.data.type) {
-    case 'tresjs:devtools':
-      tres.value = JSON.parse(event.data.payload)
-      break
-  
-    default:
-      break
-  }
-}) */
 
 const icons: Record<string, string> = {
   scene: 'i-carbon-web-services-container',
@@ -32,8 +24,8 @@ const icons: Record<string, string> = {
   scale: 'i-iconoir-ellipse-3d-three-points',
 }
 
-function createNode(object) {
-  const node = {
+function createNode(object: TresObject) {
+  const node: SceneGraphObject = {
     name: object.name,
     type: object.type,
     icon: icons[object.type.toLowerCase()] || 'i-carbon-cube',
@@ -47,7 +39,6 @@ function createNode(object) {
       y: object.rotation.y,
       z: object.rotation.z,
     },
-
     children: [],
   }
 
@@ -68,10 +59,10 @@ function createNode(object) {
   return node
 }
 
-function getSceneGraph(scene) {
+function getSceneGraph(scene: TresObject) {
   
-  function buildGraph(object, node) {
-    object.children.forEach((child) => {
+  function buildGraph(object: TresObject, node: SceneGraphObject) {
+    object.children.forEach((child: TresObject) => {
       const childNode = createNode(child)
       node.children.push(childNode)
       buildGraph(child, childNode)
@@ -84,7 +75,7 @@ function getSceneGraph(scene) {
   return root
 }
 
-function countObjectsInScene(scene) {
+function countObjectsInScene(scene: Scene) {
   let count = 0
 
   scene.traverse((object) => {
@@ -98,10 +89,10 @@ function countObjectsInScene(scene) {
 }
 
 const tresGlobalHook = {
-  cb(context) {
+  cb(context: { renderer: Ref<WebGLRenderer>; scene: Ref<Scene> }) {
     Object.assign(tres, context)
     scene.objects = countObjectsInScene(context.scene.value)
-    scene.graph = getSceneGraph(context.scene.value)
+    scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
   },
 }
 
@@ -147,7 +138,9 @@ window.parent.parent.__TRES__DEVTOOLS__ = tresGlobalHook
         icon="i-iconoir-dashboard-speed"
         text="Performance"
       >
-        Awiwi
+        <template #actions>
+          <NTip />
+        </template>
       </NSectionBlock>
     </div>
     <div v-else-if="scene.objects === 0">
