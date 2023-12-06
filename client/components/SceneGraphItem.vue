@@ -34,6 +34,56 @@ function roundNumber(num: number) {
         >
           {{ item.name }}
         </UBadge>
+        <template v-if="item.type.includes('Light') && !isExpanded">
+          <UBadge
+            color="gray"
+            variant="soft"
+          > 
+            <span
+              class="w4 h4 rounded-full mr-2 border border-gray-200"
+              :style="{ backgroundColor: `#${item.color}` }"
+            />
+            #{{ item.color }}
+          </UBadge>
+          <UBadge
+            color="green"
+            variant="soft"
+          > 
+            {{ item.intensity }}
+          </UBadge>
+        </template>
+        <template v-if="item.type.includes('Camera') && !isExpanded">
+          <UTooltip
+              text="X"
+            >
+              <UBadge
+                color="gray"
+                variant="soft"
+              >
+                {{ roundNumber(item.position.x) }}
+              </UBadge>
+            </UTooltip>
+            <UTooltip
+              text="Y"
+            >
+              <UBadge
+                color="gray"
+                variant="soft"
+              >
+                {{ roundNumber(item.position.y) }}
+              </UBadge>
+            </UTooltip>
+            <UTooltip
+              text="Z"
+            >
+              <UBadge
+                color="gray"
+                variant="soft"
+              >
+                {{ roundNumber(item.position.z) }}
+              </UBadge>
+            </UTooltip>
+        </template>
       </div>
     </div>
     <div
@@ -42,7 +92,7 @@ function roundNumber(num: number) {
       :class="{ 'border-l border-gray-300': item.children.length > 0 }"
     >
       <template v-if="item.children.length > 0">
-        <TreeItem
+        <SceneGraphItem
           v-for="(child, index) in item.children"
           :key="index"
           :depth="depth + 1"

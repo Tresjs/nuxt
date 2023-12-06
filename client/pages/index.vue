@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useDevtoolsClient } from '@nuxt/devtools-kit/iframe-client'
-import { bytesToMB } from '../utils'
 import { useDevtoolsHook } from '~/composables/useDevtoolsHook'
 
 const client = useDevtoolsClient()
@@ -55,7 +54,7 @@ const icons: Record<string, string> = {
         text="Scene Graph"
         :description="`Total Objects ${scene.objects}`"
       >
-        <TreeItem :item="scene.graph" />
+        <SceneGraphItem :item="scene.graph" />
       </NSectionBlock>
       <NSectionBlock
         icon="i-iconoir-dashboard-speed"
