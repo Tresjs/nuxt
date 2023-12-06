@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { useDevtoolsClient } from '@nuxt/devtools-kit/iframe-client'
-import type { TresObject } from '@tresjs/core'
-import type { Scene, WebGLRenderer } from 'three'
-import type { SceneGraphObject } from '../types'
+import { bytesToMB } from '../utils'
+import { useDevtoolsHook } from '~/composables/useDevtoolsHook'
 
 const client = useDevtoolsClient()
-const tres = reactive({})
-const scene = reactive({
-  objects: 0,
-  graph: {},
-})
+
+// Scene Graph
+const { scene, memory, fps } = useDevtoolsHook()
 
 const icons: Record<string, string> = {
   scene: 'i-carbon-web-services-container',
@@ -23,80 +20,6 @@ const icons: Record<string, string> = {
   rotation: 'i-carbon-rotate-clockwise',
   scale: 'i-iconoir-ellipse-3d-three-points',
 }
-
-function createNode(object: TresObject) {
-  const node: SceneGraphObject = {
-    name: object.name,
-    type: object.type,
-    icon: icons[object.type.toLowerCase()] || 'i-carbon-cube',
-    position: {
-      x: object.position.x,
-      y: object.position.y,
-      z: object.position.z,
-    },
-    rotation: {
-      x: object.rotation.x,
-      y: object.rotation.y,
-      z: object.rotation.z,
-    },
-    children: [],
-  }
-
-  if (object.type === 'Mesh') {
-    node.material = object.material
-    node.geometry = object.geometry
-    node.scale = {
-      x: object.scale.x,
-      y: object.scale.y,
-      z: object.scale.z,
-    }
-  }
-
-  if (object.type.includes('Light')) {
-    node.color = object.color.getHexString()
-    node.intensity = object.intensity
-  }
-  return node
-}
-
-function getSceneGraph(scene: TresObject) {
-  
-  function buildGraph(object: TresObject, node: SceneGraphObject) {
-    object.children.forEach((child: TresObject) => {
-      const childNode = createNode(child)
-      node.children.push(childNode)
-      buildGraph(child, childNode)
-    })
-  }
-
-  const root = createNode(scene)
-  buildGraph(scene, root)
-
-  return root
-}
-
-function countObjectsInScene(scene: Scene) {
-  let count = 0
-
-  scene.traverse((object) => {
-    // Check if the object is a 3D object
-    if (object.isObject3D) {
-      count++
-    }
-  })
-
-  return count
-}
-
-const tresGlobalHook = {
-  cb(context: { renderer: Ref<WebGLRenderer>; scene: Ref<Scene> }) {
-    Object.assign(tres, context)
-    scene.objects = countObjectsInScene(context.scene.value)
-    scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
-  },
-}
-
-window.parent.parent.__TRES__DEVTOOLS__ = tresGlobalHook
 </script>
 
 <template>
@@ -119,7 +42,7 @@ window.parent.parent.__TRES__DEVTOOLS__ = tresGlobalHook
         n="green"
         icon="carbon-checkmark"
       >
-        Nuxt DevTools is connected
+        connected
       </NTip>
     </header>
  
@@ -139,7 +62,17 @@ window.parent.parent.__TRES__DEVTOOLS__ = tresGlobalHook
         text="Performance"
       >
         <template #actions>
-          <NTip />
+          <NBadge n="green">
+            FPS: {{ fps.value }}
+          </NBadge>
+          <NBadge
+            n="yellow"
+          >
+            Memory: {{ Math.round(memory?.currentMem) }}MB
+          </NBadge>
+        </template>
+        <template #default>
+          <PerformanceMonitor />
         </template>
       </NSectionBlock>
     </div>

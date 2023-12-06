@@ -10,19 +10,17 @@ const gl = reactive({
   toneMapping: NoToneMapping,
 })
 
-const showScene = ref(false)
+const showCube = ref(false)
 
 setTimeout(() => {
-  showScene.value = true
-}, 500)
+  showCube.value = true
+}, 5000)
 
-const showCube = ref(true)
 </script>
 
 <template>
   <div style="height: 100vh">
     <TresCanvas v-bind="gl">
-      <CtxExposer />
       <TresPerspectiveCamera
         :position="[-5.3, 8.3, 10.6]"
         :look-at="[0, 0, 0]"
