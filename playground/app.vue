@@ -15,7 +15,6 @@ const showCube = ref(false)
 setTimeout(() => {
   showCube.value = true
 }, 5000)
-
 </script>
 
 <template>
@@ -30,18 +29,9 @@ setTimeout(() => {
         :color="0xffffff"
         :intensity="0.5"
       />
-      <TresMesh
-        v-if="showCube"
-        :position="[3, 2, 0]"
-        :rotation="[0, 0, 0]"
-      >
-        <TresBoxGeometry />
-        <TresMeshStandardMaterial
-          :color="0x00ff00"
-          :wireframe="true"
-        />
-        ]
-      </TresMesh>
+      <Suspense>
+        <UglyNakedBunny />
+      </Suspense>
       <Suspense>
         <NuxtStones />
       </Suspense>

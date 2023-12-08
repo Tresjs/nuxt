@@ -28,7 +28,8 @@ function roundNumber(num: number) {
         class="h-1 border-b border-gray-300 w-4"
       />
       <div class="flex gap-2 items-center -mb2.5">
-        <i :class="item.icon" />{{ item.type }} <UBadge
+        <Icon :name="item.icon" />
+        <!-- <i :class="item.icon" /> -->{{ item.type }} <UBadge
           v-if="item.name "
           variant="soft"
         >
@@ -54,42 +55,41 @@ function roundNumber(num: number) {
         </template>
         <template v-if="item.type.includes('Camera') && !isExpanded">
           <UTooltip
-              text="X"
+            text="X"
+          >
+            <UBadge
+              color="gray"
+              variant="soft"
             >
-              <UBadge
-                color="gray"
-                variant="soft"
-              >
-                {{ roundNumber(item.position.x) }}
-              </UBadge>
-            </UTooltip>
-            <UTooltip
-              text="Y"
+              {{ roundNumber(item.position.x) }}
+            </UBadge>
+          </UTooltip>
+          <UTooltip
+            text="Y"
+          >
+            <UBadge
+              color="gray"
+              variant="soft"
             >
-              <UBadge
-                color="gray"
-                variant="soft"
-              >
-                {{ roundNumber(item.position.y) }}
-              </UBadge>
-            </UTooltip>
-            <UTooltip
-              text="Z"
+              {{ roundNumber(item.position.y) }}
+            </UBadge>
+          </UTooltip>
+          <UTooltip
+            text="Z"
+          >
+            <UBadge
+              color="gray"
+              variant="soft"
             >
-              <UBadge
-                color="gray"
-                variant="soft"
-              >
-                {{ roundNumber(item.position.z) }}
-              </UBadge>
-            </UTooltip>
+              {{ roundNumber(item.position.z) }}
+            </UBadge>
+          </UTooltip>
         </template>
       </div>
     </div>
     <div
       v-if="isExpanded"
-      class="ml2.5"
-      :class="{ 'border-l border-gray-300': item.children.length > 0 }"
+      :class="{ 'border-l border-gray-300': item.children.length > 0, 'ml2.5': depth === 0, 'ml6.5': depth > 0 }"
     >
       <template v-if="item.children.length > 0">
         <SceneGraphItem
@@ -100,7 +100,7 @@ function roundNumber(num: number) {
         />
       </template>
       <template v-else>
-        <div class="p4 ml2 text-gray-400 text-xs font-mono">
+        <div class="p4 text-gray-400 text-xs font-mono">
           <div
             v-if="item.geometry"
             class="mb-2 flex items-center gap-2"
@@ -148,7 +148,6 @@ function roundNumber(num: number) {
               />
               #{{ item.material.color.getHexString() }}
             </UBadge>
-            <pre> {{ item.material }}</pre>
           </div>
           <div
             v-if="item.color"

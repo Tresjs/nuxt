@@ -1,9 +1,6 @@
 import type { TresObject } from '@tresjs/core'
 import type { Scene, WebGLRenderer } from 'three'
-import { useTresContextProvider } from '@tresjs/core'
 import type { SceneGraphObject } from '../types'
-import { calculateMemoryUsage } from '../utils'
-import { iants } from './../.nuxt/tailwind.config.d'
 
 const scene = reactive({
   objects: 0,
@@ -34,13 +31,15 @@ const icons: Record<string, string> = {
   scene: 'i-carbon-web-services-container',
   perspectivecamera: 'i-carbon-video',
   mesh: 'i-carbon-cube',
-  group: 'i-carbon-group',
+  group: 'i-carbon-group-objects',
   ambientlight: 'i-carbon-light',
   directionallight: 'i-carbon-light',
   spotlight: 'i-iconoir-project-curve-3d',
   position: 'i-iconoir-axes',
   rotation: 'i-carbon-rotate-clockwise',
   scale: 'i-iconoir-ellipse-3d-three-points',
+  bone: 'i-ph-bone',
+  skinnedmesh: 'carbon:3d-print-mesh',
 }
 
 function createNode(object: TresObject) {
@@ -108,11 +107,6 @@ function countObjectsInScene(scene: Scene) {
 }
 
 export function useDevtoolsHook() {
-  /* const updateInterval = 100 // Update interval in milliseconds
-  const fps = useFps({ every: updateInterval }) 
-  const { isSupported, memory } = useMemory({ interval: updateInterval })
-  const maxFrames = 160 */
-
   // Connect with Core
   const tresGlobalHook = {
     cb(context: { renderer: Ref<WebGLRenderer>; scene: Ref<Scene> }) {
@@ -128,49 +122,6 @@ export function useDevtoolsHook() {
   }
 
   window.parent.parent.__TRES__DEVTOOLS__ = tresGlobalHook
-
- /*  let lastUpdateTime = performance.now()
-
-  const updatePerformanceData = ({ timestamp }: { timestamp: number }) => {
-
-    // Update WebGL Memory Usage (Placeholder for actual logic)
-    // perf.memory.value = calculateMemoryUsage(gl)
-    if (scene.value) {
-      gl.memory.allocatedMem = calculateMemoryUsage(scene.value as unknown as TresObject)
-    }
-    
-    // Update memory usage
-    if (timestamp - lastUpdateTime >= updateInterval) {
-      lastUpdateTime = timestamp
-
-      // Update FPS
-      gl.fps.accumulator.push(fps.value as never)
-
-      if (gl.fps.accumulator.length > maxFrames) {
-        gl.fps.accumulator.shift()
-      }
-
-      gl.fps.value = fps.value
-
-      // Update memory
-      if (isSupported.value && memory.value) {
-        gl.memory.accumulator.push(memory.value.usedJSHeapSize / 1024 / 1024 as never)
-
-        if (gl.memory.accumulator.length > maxFrames) {
-          gl.memory.accumulator.shift()
-        }
-
-        gl.memory.currentMem = gl.memory.accumulator.reduce((a, b) => a + b, 0) / gl.memory.accumulator.length
-        
-      }
-    }
-  }
-
-  const { pause, resume } = useRafFn(updatePerformanceData, { immediate: true })
-
-  onUnmounted(() => {
-    pause()
-  }) */
 
   return {
     scene,
