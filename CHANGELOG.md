@@ -1,5 +1,17 @@
 
 
+## [1.4.0-next.1](https://example.com///compare/1.4.0-next.0...1.4.0-next.1) (2023-12-10)
+
+
+### Features
+
+* icons for bones, groups, skinned mesh and fix subitem tree borders ([d0672da](https://example.com///commit/d0672da7598e2b637e95caf086734831729ff069))
+
+
+### Bug Fixes
+
+* issues with reactivity and renderer info ([6fbb87c](https://example.com///commit/6fbb87cb7f85800e48935b183abfc64c1a52bc28))
+
 ## [1.4.0-next.0](https://example.com///compare/1.3.0...1.4.0-next.0) (2023-12-06)
 
 
