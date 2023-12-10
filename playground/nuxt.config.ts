@@ -6,7 +6,4 @@ export default defineNuxtConfig({
     devtools: true,
     glsl: true,
   },
-/*   vite: {
-    plugins: [glsl()],
-  }, */
 })
