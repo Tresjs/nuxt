@@ -12,19 +12,18 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/types.d.ts",
-      "require": "./dist/module.cjs",
-      "import": "./dist/module.mjs"
+      "types": "./dist/types.d.mts",
+      "default": "./dist/module.mjs"
     }
   },
-  "main": "./dist/module.cjs",
-  "types": "./dist/types.d.ts",
+  "main": "dist/module.mjs",
+  "types": "dist/types.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "prepack": "nuxt-module-build && npm run client:build",
-    "client:build": "nuxi generate client",
+    "prepack": "nuxt-module-build prepare && nuxt-module-build build && npm run client:build",
+    "client:build": "nuxt prepare client && nuxi generate client",
     "client:dev": "nuxi dev client --port 3300",
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
@@ -72,5 +71,24 @@
     "three": "^0.159.0",
     "vite-plugin-glsl": "^1.2.1",
     "vitest": "^1.0.4"
+  },
+  "build": {
+    "externals": [
+      "node:child_process",
+      "vite-plugin-glsl",
+      "@rollup/pluginutils",
+      "vite",
+      "esbuild",
+      "rollup",
+      "estree-walker",
+      "picomatch",
+      "postcss",
+      "lightningcss",
+      "fsevents",
+      "pnpapi",
+      "picocolors",
+      "source-map-js",
+      "nanoid/non-secure"
+    ]
   }
 }
