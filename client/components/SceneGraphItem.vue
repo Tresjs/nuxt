@@ -88,7 +88,7 @@ function roundNumber(num: number) {
       </div>
     </div>
     <div
-      v-if="isExpanded"
+      v-if="isExpanded || depth === 0"
       :class="{ 'border-l border-gray-300': item.children.length > 0, 'ml2.5': depth === 0, 'ml6.5': depth > 0 }"
     >
       <template v-if="item.children.length > 0">

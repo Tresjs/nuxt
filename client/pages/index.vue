@@ -1,24 +1,10 @@
 <script setup lang="ts">
 import { useDevtoolsClient } from '@nuxt/devtools-kit/iframe-client'
-import { useDevtoolsHook } from '~/composables/useDevtoolsHook'
 
 const client = useDevtoolsClient()
 
 // Scene Graph
 const { scene, memory, fps } = useDevtoolsHook()
-
-const icons: Record<string, string> = {
-  scene: 'i-carbon-web-services-container',
-  perspectivecamera: 'i-carbon-video',
-  mesh: 'i-carbon-cube',
-  group: 'i-carbon-group',
-  ambientlight: 'i-carbon-light',
-  directionallight: 'i-carbon-light',
-  spotlight: 'i-iconoir-project-curve-3d',
-  position: 'i-iconoir-axes',
-  rotation: 'i-carbon-rotate-clockwise',
-  scale: 'i-iconoir-ellipse-3d-three-points',
-}
 </script>
 
 <template>
@@ -37,12 +23,34 @@ const icons: Record<string, string> = {
           TresJS DevTools
         </h2>
       </div>  
-      <NTip
-        n="green"
-        icon="carbon-checkmark"
-      >
-        connected
-      </NTip>
+      <div class="flex items-center gap-2">
+        <UButton
+          variant="ghost"
+          color="white"
+          size="sm"
+          icon="i-carbon-document"
+          target="_blank"
+          to="https://docs.tresjs.org/"
+        />
+        <UButton
+          variant="ghost"
+          color="white"
+          size="sm"
+          icon="i-iconoir-github"
+          target="_blank"
+          to="https://github.com/Tresjs/nuxt"
+        />
+        <UButton
+          variant="solid"
+          color="white"
+          size="sm"
+          target="_blank"
+          class="ml2"
+          to="https://github.com/Tresjs/nuxt/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.yml"
+        >
+          Request feature
+        </UButton>
+      </div>
     </header>
  
     <div

@@ -53,6 +53,7 @@
   "devDependencies": {
     "@alvarosabu/eslint-config-vue": "^0.4.0",
     "@iconify-json/carbon": "^1.1.24",
+    "@iconify-json/file-icons": "^1.1.7",
     "@iconify-json/iconoir": "^1.1.36",
     "@iconify-json/ph": "^1.1.8",
     "@nuxt/devtools-ui-kit": "^1.0.4",
@@ -69,6 +70,7 @@
     "playwright": "^1.40.1",
     "release-it": "^17.0.0",
     "three": "^0.159.0",
+    "vite-plugin-glsl": "^1.2.0",
     "vitest": "^0.34.6"
   }
 }

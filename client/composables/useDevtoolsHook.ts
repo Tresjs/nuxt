@@ -1,21 +1,70 @@
-import type { TresObject } from '@tresjs/core'
+import type { TresContext, TresObject } from '@tresjs/core'
 import type { Scene, WebGLRenderer } from 'three'
 import type { SceneGraphObject } from '../types'
 
-const scene = reactive({
+interface FPSState {
+  value: number
+  accumulator: number[]
+  lastLoggedTime: number
+  logInterval: number
+}
+
+interface MemoryState {
+  currentMem: number
+  averageMem: number
+  maxMemory: number
+  allocatedMem: number
+  accumulator: number[]
+  lastLoggedTime: number
+  logInterval: number
+}
+
+interface RendererState {
+  info: {
+    render: {
+      frame: number
+      calls: number
+      triangles: number
+      points: number
+      lines: number
+    }
+    memory: {
+      geometries: number
+      textures: number
+    }
+    programs: WebGLProgram[]
+  }
+}
+
+interface DevtoolsHookReturn {
+  scene: {
+    objects: number
+    graph: Record<string, unknown>
+    value: Scene | undefined
+  }
+  fps: FPSState
+  memory: MemoryState
+  renderer: RendererState
+}
+
+const scene = reactive<{
+  objects: number
+  graph: Record<string, unknown>
+  value: Scene | undefined
+}>({
   objects: 0,
   graph: {},
-  value: undefined as Scene | undefined,
+  value: undefined,
 })
 
 const gl = {
-  fps: reactive({
+  fps: reactive<FPSState>({
     value: 0,
     accumulator: [],
     lastLoggedTime: Date.now(),
     logInterval: 1000,
   }),
-  memory: reactive({
+  memory: reactive<MemoryState>({
     currentMem: 0,
     averageMem: 0,
     maxMemory: 0,
@@ -24,7 +73,22 @@ const gl = {
     lastLoggedTime: Date.now(),
     logInterval: 1000,
   }),
-  renderer: undefined as WebGLRenderer | undefined,
+  renderer: reactive<RendererState>({
+    info: {
+      render: {
+        frame: 0,
+        calls: 0,
+        triangles: 0,
+        points: 0,
+        lines: 0,
+      },
+      memory: {
+        geometries: 0,
+        textures: 0,
+      },
+      programs: [],
+    },
+  }),
 }
 
 const icons: Record<string, string> = {
@@ -106,18 +170,22 @@ function countObjectsInScene(scene: Scene) {
   return count
 }
 
-export function useDevtoolsHook() {
+export function useDevtoolsHook(): DevtoolsHookReturn {
   // Connect with Core
   const tresGlobalHook = {
-    cb(context: { renderer: Ref<WebGLRenderer>; scene: Ref<Scene> }) {
+    cb(context: TresContext) {
       scene.value = context.scene.value
       scene.objects = countObjectsInScene(context.scene.value)
-      gl.renderer = context.renderer.value
+      Object.assign(gl.renderer.info.render, context.renderer.value.info.render)
+      Object.assign(gl.renderer.info.memory, context.renderer.value.info.memory)
+      gl.renderer.info.programs = [...context.renderer.value.info.programs as WebGLProgram[]]
       Object.assign(gl.fps, context.perf.fps)
       gl.fps.accumulator = [...context.perf.fps.accumulator]
       Object.assign(gl.memory, context.perf.memory)
       gl.memory.accumulator = [...context.perf.memory.accumulator]
       scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
+      /* 
+      console.log('Devtools hook updated', context.renderer.value.info.render.triangles) */
     },
   }
 
@@ -125,8 +193,8 @@ export function useDevtoolsHook() {
 
   return {
     scene,
-    gl,
     fps: gl.fps,
     memory: gl.memory,
+    renderer: gl.renderer,
   }
 }

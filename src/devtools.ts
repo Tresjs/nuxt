@@ -33,7 +33,6 @@ export function setupDevToolsUI(nuxt: Nuxt, resolver: Resolver) {
     })
   }
 
-  // @ts-expect-error
   nuxt.hook('devtools:customTabs', (tabs) => {
     tabs.push({
       // unique identifier

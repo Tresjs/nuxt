@@ -30,11 +30,9 @@ setTimeout(() => {
         :intensity="0.5"
       />
       <Suspense>
-        <UglyNakedBunny />
+        <NuxtStones v-if="showCube" />
       </Suspense>
-      <Suspense>
-        <NuxtStones />
-      </Suspense>
+      <ShaderBall />
     </TresCanvas>
   </div>
 </template>

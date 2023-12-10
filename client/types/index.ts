@@ -51,3 +51,15 @@ export interface PerfData {
   gl: WebGLRenderer | undefined
   scene: Scene | undefined
 }
+
+export interface ProgramObject {
+  type: string
+  name: string
+  id: number
+  vertexShader: string
+  fragmentShader: string
+  uniforms: Record<string, unknown>
+  attributes: Record<string, unknown>
+  program: WebGLProgram
+  usedTimes: number
+}
