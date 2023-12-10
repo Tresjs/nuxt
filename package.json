@@ -71,6 +71,6 @@
     "release-it": "^17.0.0",
     "three": "^0.159.0",
     "vite-plugin-glsl": "^1.2.0",
-    "vitest": "^0.34.6"
+    "vitest": "^1.0.0"
   }
 }
