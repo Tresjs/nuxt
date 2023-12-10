@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ProgramObject } from '~/types'
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   item: ProgramObject
   depth?: number
 }>(), {
@@ -9,8 +9,6 @@ const props = withDefaults(defineProps<{
 })
 
 const isExpanded = ref(false)
-
-console.log('ProgramsModuleItem', props.item)
 </script>
 
 <template>

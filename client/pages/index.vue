@@ -1,3 +1,4 @@
+<!-- eslint-disable max-len -->
 <script setup lang="ts">
 import { useDevtoolsClient } from '@nuxt/devtools-kit/iframe-client'
 
@@ -46,7 +47,7 @@ const { scene, memory, fps } = useDevtoolsHook()
           size="sm"
           target="_blank"
           class="ml2"
-          to="https://github.com/Tresjs/nuxt/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.yml"
+          to="https://github.com/Tresjs/nuxt/issues/new?labels=enhancement&template=feature_request.yml"
         >
           Request feature
         </UButton>

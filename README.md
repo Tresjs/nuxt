@@ -72,8 +72,6 @@ export default defineNuxtConfig({
 ```
 
 
-
-
 ## Development
 
 ```bash
