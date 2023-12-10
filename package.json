@@ -22,7 +22,7 @@
     "dist"
   ],
   "scripts": {
-    "prepack": "nuxt-module-build prepare && nuxt-module-build build && npm run client:build",
+    "prepack": "nuxt-module-build prepare && nuxt-module-build build && jiti scripts/postbuild.ts && npm run client:build",
     "client:build": "nuxt prepare client && nuxi generate client",
     "client:dev": "nuxi dev client --port 3300",
     "dev": "nuxi dev playground",
