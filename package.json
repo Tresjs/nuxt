@@ -48,7 +48,8 @@
     "mlly": "^1.4.2",
     "pkg-types": "^1.0.3",
     "sirv": "^2.0.3",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite-plugin-glsl": "^1.2.1"
   },
   "devDependencies": {
     "@alvarosabu/eslint-config-vue": "^0.4.0",
@@ -70,7 +71,6 @@
     "playwright": "^1.40.1",
     "release-it": "^17.0.1",
     "three": "^0.159.0",
-    "vite-plugin-glsl": "^1.2.1",
     "vitest": "^1.0.4"
   },
   "build": {
