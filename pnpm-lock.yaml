@@ -68,8 +68,8 @@ devDependencies:
     specifier: ^0.2.0
     version: 0.2.0(eslint@8.55.0)
   '@nuxt/module-builder':
-    specifier: ^0.5.4
-    version: 0.5.4(@nuxt/kit@3.8.2)(nuxi@3.10.0)(typescript@5.3.3)
+    specifier: ^0.5.5
+    version: 0.5.5(@nuxt/kit@3.8.2)(nuxi@3.10.0)(typescript@5.3.3)
   '@nuxt/schema':
     specifier: ^3.8.2
     version: 3.8.2(rollup@3.29.4)
@@ -1796,12 +1796,12 @@ packages:
       - rollup
       - supports-color
 
-  /@nuxt/module-builder@0.5.4(@nuxt/kit@3.8.2)(nuxi@3.10.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-lCPh8s8LSfYqHgIMMsctDhz+AX1z6TnATkUes/GXc/No4kApC0zmJkQWrbtDRjmsWjElwl1kE7l7OzYdYc3d4w==}
+  /@nuxt/module-builder@0.5.5(@nuxt/kit@3.8.2)(nuxi@3.10.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-ifFfwA1rbSXSae25RmqA2kAbV3xoShZNrq1yK8VXB/EnIcDn4WiaYR1PytaSxIt5zsvWPn92BJXiIUBiMQZ0hw==}
     hasBin: true
     peerDependencies:
-      '@nuxt/kit': ^3.8.1
-      nuxi: ^3.9.1
+      '@nuxt/kit': ^3.8.2
+      nuxi: ^3.10.0
     dependencies:
       '@nuxt/kit': 3.8.2(rollup@3.29.4)
       citty: 0.1.5
@@ -8048,7 +8048,7 @@ packages:
       citty: 0.1.5
       cssnano: 6.0.1(postcss@8.4.32)
       defu: 6.1.3
-      esbuild: 0.19.8
+      esbuild: 0.19.9
       fs-extra: 11.2.0
       globby: 13.2.2
       jiti: 1.21.0
@@ -10818,7 +10818,7 @@ packages:
       citty: 0.1.5
       consola: 3.2.3
       defu: 6.1.3
-      esbuild: 0.19.8
+      esbuild: 0.19.9
       globby: 13.2.2
       hookable: 5.5.3
       jiti: 1.21.0

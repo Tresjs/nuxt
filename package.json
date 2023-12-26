@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "prepack": "npm run module:build && npm run client:build",
-    "module:build": "nuxt-module-build prepare && nuxt-module-build build && jiti scripts/postbuild.ts",
+    "module:build": "nuxt-module-build prepare && nuxt-module-build build",
     "client:build": "nuxt prepare client && nuxi generate client",
     "client:dev": "nuxi dev client --port 3300",
     "dev": "nuxi dev playground",
@@ -60,7 +60,7 @@
     "@iconify-json/ph": "^1.1.9",
     "@nuxt/devtools-ui-kit": "^1.0.5",
     "@nuxt/eslint-config": "^0.2.0",
-    "@nuxt/module-builder": "^0.5.4",
+    "@nuxt/module-builder": "^0.5.5",
     "@nuxt/schema": "^3.8.2",
     "@nuxt/test-utils": "^3.8.1",
     "@release-it/conventional-changelog": "^8.0.1",
