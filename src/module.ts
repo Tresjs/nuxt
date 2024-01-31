@@ -33,11 +33,11 @@ export default defineNuxtModule<ModuleOptions>({
       mode: 'client',
       _raw: true,
     })
-    addComponent({
+    /*  addComponent({
       name: 'TresCanvas',
       filePath: resolver.resolve('./runtime/ServerTresCanvas.vue'),
       mode: 'server',
-    })
+    }) */
     nuxt.options.build.transpile.push(/@tresjs/)
 
     for (const name in core) {
