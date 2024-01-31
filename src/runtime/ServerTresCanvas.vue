@@ -3,7 +3,5 @@
 </script>
 
 <template>
-  <div>
-    <canvas style="" />
-  </div>
+  <canvas style="" />
 </template>
