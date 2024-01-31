@@ -30,8 +30,8 @@ export default defineNuxtModule<ModuleOptions>({
       name: 'TresCanvas',
       filePath: '@tresjs/core',
       export: 'TresCanvas',
-      mode: 'client',
-      _raw: true,
+      /* mode: 'client', */
+      /* _raw: true, */
     })
     /*  addComponent({
       name: 'TresCanvas',
