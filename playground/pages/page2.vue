@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// for testing purposes with auto-import disabled
+// import { TresCanvas } from '#components'
 </script>
 
 <template>
