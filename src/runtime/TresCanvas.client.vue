@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { TresCanvas as CoreTresCanvas } from '@tresjs/core'
-
-defineOptions({ inheritAttrs: false })
 </script>
 
 <template>
-  <CoreTresCanvas v-bind="$attrs">
+  <CoreTresCanvas>
     <slot />
   </CoreTresCanvas>
 </template>
