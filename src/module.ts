@@ -92,10 +92,28 @@ export default defineNuxtModule<ModuleOptions>({
       include: ['three'],
     })
 
-    await addComponent({
-      name: 'TresCanvas',
-      filePath: resolver.resolve('./runtime/TresCanvas'),
-    })
+    if (nuxt.options.ssr) {
+      await Promise.all([
+        addComponent({
+          name: 'TresCanvas',
+          filePath: resolver.resolve('./runtime/TresCanvas.client.vue'),
+        }),
+        addComponent({
+          name: 'TresCanvas',
+          filePath: resolver.resolve('./runtime/TresCanvas.server.vue'),
+        }),
+      ])
+    }
+    else {
+      await addComponent({
+        name: 'TresCanvas',
+        filePath: resolver.resolve('./runtime/TresCanvas.client.vue'),
+      })
+    }
+    // await addComponent({
+    //   name: 'TresCanvas',
+    //   filePath: resolver.resolve('./runtime/TresCanvas'),
+    // })
 
     if (options.devtools)
       setupDevToolsUI(nuxt, resolver)
