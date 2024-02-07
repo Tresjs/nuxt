@@ -49,7 +49,7 @@
     "@nuxt/kit": "^3.10.0",
     "@nuxt/ui": "^2.13.0",
     "@tresjs/core": "3.7.0",
-    "@tresjs/nuxt": "2.1.0",
+    "@tresjs/nuxt": "2.1.1",
     "@types/three": "^0.160.0",
     "@unocss/nuxt": "^0.58.4",
     "defu": "^6.1.4",
