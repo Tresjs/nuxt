@@ -1,5 +1,16 @@
 
 
+## [3.0.0-next.0](https://github.com/tresjs/nuxt/compare/2.1.1...3.0.0-next.0) (2024-03-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* `@tresjs/core introduces a new Event manager, conditional rendering and reactive `obj` for primitives
+
+### Features
+
+* update `core` to v4 nightly release ([c012c91](https://github.com/tresjs/nuxt/commit/c012c9163110bcdd22e2cc5df3b692bcbe181a3f))
+
 ## [2.1.1](https://github.com/tresjs/nuxt/compare/2.1.0...2.1.1) (2024-02-07)
 
 
