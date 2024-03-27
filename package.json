@@ -48,7 +48,7 @@
     "@nuxt/devtools-kit": "^1.0.8",
     "@nuxt/kit": "^3.10.0",
     "@nuxt/ui": "^2.13.0",
-    "@tresjs/core": "4.0.0-next.1",
+    "@tresjs/core": "4.0.0-next.2",
     "@tresjs/nuxt": "2.1.0",
     "@types/three": "^0.160.0",
     "@unocss/nuxt": "^0.58.4",
