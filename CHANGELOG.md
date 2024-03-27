@@ -1,5 +1,7 @@
 
 
+## [3.0.0-next.1](https://github.com/tresjs/nuxt/compare/3.0.0-next.0...3.0.0-next.1) (2024-03-27)
+
 ## [3.0.0-next.0](https://github.com/tresjs/nuxt/compare/2.1.1...3.0.0-next.0) (2024-03-19)
 
 
