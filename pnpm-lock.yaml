@@ -16,13 +16,13 @@ dependencies:
     version: 2.13.0(nuxt@3.10.0)(rollup@3.29.4)(vite@5.0.12)(vue@3.4.15)
   '@tresjs/core':
     specifier: 3.7.0
-    version: 3.7.0(three@0.161.0)(vue@3.4.15)
+    version: 3.7.0(three@0.163.0)(vue@3.4.15)
   '@tresjs/nuxt':
     specifier: 2.1.0
-    version: 2.1.0(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.161.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1)
+    version: 2.1.0(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.163.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1)
   '@types/three':
-    specifier: ^0.160.0
-    version: 0.160.0
+    specifier: ^0.163.0
+    version: 0.163.0
   '@unocss/nuxt':
     specifier: ^0.58.4
     version: 0.58.4(postcss@8.4.33)(rollup@3.29.4)(vite@5.0.12)(webpack@5.90.1)
@@ -101,8 +101,8 @@ devDependencies:
     specifier: ^17.0.3
     version: 17.0.3(typescript@5.3.3)
   three:
-    specifier: ^0.161.0
-    version: 0.161.0
+    specifier: ^0.163.0
+    version: 0.163.0
   vitest:
     specifier: ^1.2.2
     version: 1.2.2(@types/node@20.11.16)
@@ -1954,6 +1954,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     bundledDependencies:
       - napi-wasm
 
@@ -2469,7 +2470,7 @@ packages:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
     dev: true
 
-  /@tresjs/core@3.6.0-next.0(three@0.161.0)(vue@3.4.15):
+  /@tresjs/core@3.6.0-next.0(three@0.163.0)(vue@3.4.15):
     resolution: {integrity: sha512-/061QUCYgTHGH7a2/JKy6OymEbOMEZBgHX6AgYvt9bBwGk4mQRNEdBn8U/NS8Xk6vPd6sS1u3CP2da+F/MnDRQ==}
     peerDependencies:
       three: '>=0.133'
@@ -2477,13 +2478,13 @@ packages:
     dependencies:
       '@alvarosabu/utils': 3.1.1
       '@vueuse/core': 10.7.2(vue@3.4.15)
-      three: 0.161.0
+      three: 0.163.0
       vue: 3.4.15(typescript@5.3.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
     dev: false
 
-  /@tresjs/core@3.6.1(three@0.161.0)(vue@3.4.15):
+  /@tresjs/core@3.6.1(three@0.163.0)(vue@3.4.15):
     resolution: {integrity: sha512-lNOghF3bMUbSTuPgC7z4s0D6j56vQzdpRFE20cXN3t0QehlGC8p9lri70TN1Sd2snP9ceewT1HXmCws6mkye1g==}
     peerDependencies:
       three: '>=0.133'
@@ -2491,13 +2492,13 @@ packages:
     dependencies:
       '@alvarosabu/utils': 3.1.1
       '@vueuse/core': 10.7.2(vue@3.4.15)
-      three: 0.161.0
+      three: 0.163.0
       vue: 3.4.15(typescript@5.3.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
     dev: false
 
-  /@tresjs/core@3.7.0(three@0.161.0)(vue@3.4.15):
+  /@tresjs/core@3.7.0(three@0.163.0)(vue@3.4.15):
     resolution: {integrity: sha512-Hg6VK7RQuGiXyLlbB+7FdPyS4KERxIpnU8EO/UzmN4/Bfr6I9Kuo1F0LF+5BBFyxBPqc7sD1Dcy7Epj8We9ETg==}
     peerDependencies:
       three: '>=0.133'
@@ -2505,13 +2506,13 @@ packages:
     dependencies:
       '@alvarosabu/utils': 3.1.1
       '@vueuse/core': 10.7.2(vue@3.4.15)
-      three: 0.161.0
+      three: 0.163.0
       vue: 3.4.15(typescript@5.3.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
     dev: false
 
-  /@tresjs/nuxt@2.0.1(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.161.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1):
+  /@tresjs/nuxt@2.0.1(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.163.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1):
     resolution: {integrity: sha512-wq/2LfPrbuaU4BpXeNSJqKwOIM3m9N00BKTIaZrMLL/A5ulxJ4aAUKWyG9W+nJH7dOeSefB+kdL8GvuCEUi1kA==}
     peerDependencies:
       three: '>=0.133'
@@ -2519,15 +2520,15 @@ packages:
       '@nuxt/devtools-kit': 1.0.8(nuxt@3.10.0)(rollup@3.29.4)(vite@5.0.12)
       '@nuxt/kit': 3.10.0(rollup@3.29.4)
       '@nuxt/ui': 2.13.0(nuxt@3.10.0)(rollup@3.29.4)(vite@5.0.12)(vue@3.4.15)
-      '@tresjs/core': 3.6.0-next.0(three@0.161.0)(vue@3.4.15)
-      '@tresjs/nuxt': 2.0.1-next.0(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.161.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1)
+      '@tresjs/core': 3.6.0-next.0(three@0.163.0)(vue@3.4.15)
+      '@tresjs/nuxt': 2.0.1-next.0(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.163.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1)
       '@types/three': 0.159.0
       '@unocss/nuxt': 0.58.4(postcss@8.4.33)(rollup@3.29.4)(vite@5.0.12)(webpack@5.90.1)
       defu: 6.1.4
       mlly: 1.5.0
       pkg-types: 1.0.3
       sirv: 2.0.4
-      three: 0.161.0
+      three: 0.163.0
       typescript: 5.3.3
       vite-plugin-glsl: 1.2.1(rollup@3.29.4)(vite@5.0.12)
     transitivePeerDependencies:
@@ -2553,7 +2554,7 @@ packages:
       - webpack
     dev: false
 
-  /@tresjs/nuxt@2.0.1-next.0(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.161.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1):
+  /@tresjs/nuxt@2.0.1-next.0(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.163.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1):
     resolution: {integrity: sha512-WYQ+DvTP92aY/GI0daa3VhhikQL2f0HEmYJi4N9Pk0jJV6vO+ZqOTE3BZwXXBLfrYws2VfBksK/5JRhufxlhNw==}
     peerDependencies:
       three: '>=0.133'
@@ -2561,14 +2562,14 @@ packages:
       '@nuxt/devtools-kit': 1.0.8(nuxt@3.10.0)(rollup@3.29.4)(vite@5.0.12)
       '@nuxt/kit': 3.10.0(rollup@3.29.4)
       '@nuxt/ui': 2.13.0(nuxt@3.10.0)(rollup@3.29.4)(vite@5.0.12)(vue@3.4.15)
-      '@tresjs/core': 3.6.0-next.0(three@0.161.0)(vue@3.4.15)
+      '@tresjs/core': 3.6.0-next.0(three@0.163.0)(vue@3.4.15)
       '@types/three': 0.159.0
       '@unocss/nuxt': 0.58.4(postcss@8.4.33)(rollup@3.29.4)(vite@5.0.12)(webpack@5.90.1)
       defu: 6.1.4
       mlly: 1.5.0
       pkg-types: 1.0.3
       sirv: 2.0.4
-      three: 0.161.0
+      three: 0.163.0
       typescript: 5.3.3
       vite-plugin-glsl: 1.2.1(rollup@3.29.4)(vite@5.0.12)
     transitivePeerDependencies:
@@ -2594,7 +2595,7 @@ packages:
       - webpack
     dev: false
 
-  /@tresjs/nuxt@2.0.2(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.161.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1):
+  /@tresjs/nuxt@2.0.2(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.163.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1):
     resolution: {integrity: sha512-7EUPb7EQZnxxQGSLcpV2vXpPT6in9rQvy0LHpceBw8QNZJbhuiIq3mGvcPqgiZUjqigIWW4UbuPjAzUAjG7osA==}
     peerDependencies:
       three: '>=0.133'
@@ -2602,15 +2603,15 @@ packages:
       '@nuxt/devtools-kit': 1.0.8(nuxt@3.10.0)(rollup@3.29.4)(vite@5.0.12)
       '@nuxt/kit': 3.10.0(rollup@3.29.4)
       '@nuxt/ui': 2.13.0(nuxt@3.10.0)(rollup@3.29.4)(vite@5.0.12)(vue@3.4.15)
-      '@tresjs/core': 3.6.1(three@0.161.0)(vue@3.4.15)
-      '@tresjs/nuxt': 2.0.1(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.161.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1)
+      '@tresjs/core': 3.6.1(three@0.163.0)(vue@3.4.15)
+      '@tresjs/nuxt': 2.0.1(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.163.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1)
       '@types/three': 0.160.0
       '@unocss/nuxt': 0.58.4(postcss@8.4.33)(rollup@3.29.4)(vite@5.0.12)(webpack@5.90.1)
       defu: 6.1.4
       mlly: 1.5.0
       pkg-types: 1.0.3
       sirv: 2.0.4
-      three: 0.161.0
+      three: 0.163.0
       typescript: 5.3.3
       vite-plugin-glsl: 1.2.1(rollup@3.29.4)(vite@5.0.12)
     transitivePeerDependencies:
@@ -2636,7 +2637,7 @@ packages:
       - webpack
     dev: false
 
-  /@tresjs/nuxt@2.1.0(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.161.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1):
+  /@tresjs/nuxt@2.1.0(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.163.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1):
     resolution: {integrity: sha512-e4OfIMluzHT7VlQVyhpgqZfNZPfFk75PHBShuxiD17dALhiCZ413q1MM5UTEK1N525DazlvjHkzV/0SaJNNnLA==}
     peerDependencies:
       three: '>=0.133'
@@ -2644,15 +2645,15 @@ packages:
       '@nuxt/devtools-kit': 1.0.8(nuxt@3.10.0)(rollup@3.29.4)(vite@5.0.12)
       '@nuxt/kit': 3.10.0(rollup@3.29.4)
       '@nuxt/ui': 2.13.0(nuxt@3.10.0)(rollup@3.29.4)(vite@5.0.12)(vue@3.4.15)
-      '@tresjs/core': 3.7.0(three@0.161.0)(vue@3.4.15)
-      '@tresjs/nuxt': 2.0.2(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.161.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1)
+      '@tresjs/core': 3.7.0(three@0.163.0)(vue@3.4.15)
+      '@tresjs/nuxt': 2.0.2(nuxt@3.10.0)(postcss@8.4.33)(rollup@3.29.4)(three@0.163.0)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1)
       '@types/three': 0.160.0
       '@unocss/nuxt': 0.58.4(postcss@8.4.33)(rollup@3.29.4)(vite@5.0.12)(webpack@5.90.1)
       defu: 6.1.4
       mlly: 1.5.0
       pkg-types: 1.0.3
       sirv: 2.0.4
-      three: 0.161.0
+      three: 0.163.0
       typescript: 5.3.3
       vite-plugin-glsl: 1.2.1(rollup@3.29.4)(vite@5.0.12)
     transitivePeerDependencies:
@@ -2692,6 +2693,10 @@ packages:
     dependencies:
       '@tufjs/canonical-json': 2.0.0
       minimatch: 9.0.3
+
+  /@tweenjs/tween.js@23.1.1:
+    resolution: {integrity: sha512-ZpboH7pCPPeyBWKf8c7TJswtCEQObFo3bOBYalm99NzZarATALYCo5OhbCa/n4RQyJyHfhkdx+hNrdL5ByFYDw==}
+    dev: false
 
   /@types/eslint-scope@3.7.7:
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
@@ -2765,6 +2770,16 @@ packages:
       '@types/stats.js': 0.17.3
       '@types/webxr': 0.5.12
       fflate: 0.6.10
+      meshoptimizer: 0.18.1
+    dev: false
+
+  /@types/three@0.163.0:
+    resolution: {integrity: sha512-uIdDhsXRpQiBUkflBS/i1l3JX14fW6Ot9csed60nfbZNXHDTRsnV2xnTVwXcgbvTiboAR4IW+t+lTL5f1rqIqA==}
+    dependencies:
+      '@tweenjs/tween.js': 23.1.1
+      '@types/stats.js': 0.17.3
+      '@types/webxr': 0.5.12
+      fflate: 0.8.2
       meshoptimizer: 0.18.1
     dev: false
 
@@ -5837,6 +5852,10 @@ packages:
     resolution: {integrity: sha512-IQrh3lEPM93wVCEczc9SaAOvkmcoQn/G8Bo1e8ZPlY3X3bnAxWaBdvTdvM1hP62iZp0BXWDy4vTAy4fF0+Dlpg==}
     dev: false
 
+  /fflate@0.8.2:
+    resolution: {integrity: sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==}
+    dev: false
+
   /figures@5.0.0:
     resolution: {integrity: sha512-ej8ksPF4x6e5wvK9yevct0UCXh8TTFlWGVLlgjZuoBH1HwjIfKE/IdL5mq89sFA7zELi1VhKpmtDnrs7zWyeyg==}
     engines: {node: '>=14'}
@@ -7731,6 +7750,9 @@ packages:
     resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
     engines: {node: ^14 || ^16 || >=18}
     hasBin: true
+
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
 
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -10182,8 +10204,8 @@ packages:
       any-promise: 1.3.0
     dev: false
 
-  /three@0.161.0:
-    resolution: {integrity: sha512-LC28VFtjbOyEu5b93K0bNRLw1rQlMJ85lilKsYj6dgTu+7i17W+JCCEbvrpmNHF1F3NAUqDSWq50UD7w9H2xQw==}
+  /three@0.163.0:
+    resolution: {integrity: sha512-HlMgCb2TF/dTLRtknBnjUTsR8FsDqBY43itYop2+Zg822I+Kd0Ua2vs8CvfBVefXkBdNDrLMoRTGCIIpfCuDew==}
 
   /through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
