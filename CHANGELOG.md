@@ -1,5 +1,17 @@
 
 
+## [3.0.0-beta.0](https://github.com/tresjs/nuxt/compare/2.1.2...3.0.0-beta.0) (2024-06-01)
+
+
+### Features
+
+* update to core v4 ([5043afe](https://github.com/tresjs/nuxt/commit/5043afe212afb335e2392fe44ee6d458a0b24888))
+
+
+### Bug Fixes
+
+* augmenting types from `@tresjs/core` ([e991a26](https://github.com/tresjs/nuxt/commit/e991a26beebed55c65106048f44e248ad0749451))
+
 ## [2.1.1](https://github.com/tresjs/nuxt/compare/2.1.0...2.1.1) (2024-02-07)
 
 
