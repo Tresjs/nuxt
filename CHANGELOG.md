@@ -1,5 +1,12 @@
 
 
+## [3.0.0-beta.1](https://github.com/tresjs/nuxt/compare/3.0.0-beta.0...3.0.0-beta.1) (2024-06-06)
+
+
+### Bug Fixes
+
+* update core to v4.0.2 for performance issues ([559e72d](https://github.com/tresjs/nuxt/commit/559e72db3874a36c1241b75d1fb7a87a422143bc))
+
 ## [3.0.0-beta.0](https://github.com/tresjs/nuxt/compare/2.1.2...3.0.0-beta.0) (2024-06-01)
 
 
