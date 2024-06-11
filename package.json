@@ -52,7 +52,7 @@
     "@tresjs/core": "3.9.0",
     "@tresjs/nuxt": "2.1.1",
     "@types/three": "^0.164.0",
-    "@unocss/nuxt": "^0.59.4",
+    "@unocss/nuxt": "^0.61.0",
     "defu": "^6.1.4",
     "mlly": "^1.7.0",
     "pkg-types": "^1.1.0",
