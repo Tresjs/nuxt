@@ -18,8 +18,8 @@ importers:
         specifier: ^2.17.0
         version: 2.17.0(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.1))(vue@3.4.31(typescript@5.5.3))
       '@tresjs/core':
-        specifier: 4.1.0
-        version: 4.1.0(three@0.166.1)(vue@3.4.31(typescript@5.5.3))
+        specifier: 4.2.1
+        version: 4.2.1(three@0.166.1)(vue@3.4.31(typescript@5.5.3))
       '@tresjs/nuxt':
         specifier: 3.0.0
         version: 3.0.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.38)(rollup@4.18.1)(three@0.166.1)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.1))(vue@3.4.31(typescript@5.5.3))(webpack@5.92.1)
@@ -1719,8 +1719,8 @@ packages:
       three: '>=0.133'
       vue: '>=3.4'
 
-  '@tresjs/core@4.1.0':
-    resolution: {integrity: sha512-gqISOYpjerG4Us7qAVHxkhaQwl+ZhmnfEs4ON6UC/aEuq0+q6qyUJQkcU5kZ32XuxpDdnk8FbSpnqQ3o5V5cHQ==}
+  '@tresjs/core@4.2.1':
+    resolution: {integrity: sha512-sgjidv+2QA6FPerXgbLslicIuxNCJrSkTcZ2RJFWJ7mVWir8LtVs8CpSJLDVJwuhmjNwn9IIFl2WH94H8xgy4Q==}
     peerDependencies:
       three: '>=0.133'
       vue: '>=3.4'
@@ -8543,7 +8543,7 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  '@tresjs/core@4.1.0(three@0.166.1)(vue@3.4.31(typescript@5.5.3))':
+  '@tresjs/core@4.2.1(three@0.166.1)(vue@3.4.31(typescript@5.5.3))':
     dependencies:
       '@alvarosabu/utils': 3.2.0
       '@vue/devtools-api': 6.6.3
