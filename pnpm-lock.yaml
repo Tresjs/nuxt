@@ -21,8 +21,8 @@ importers:
         specifier: 4.2.1
         version: 4.2.1(three@0.166.1)(vue@3.4.32(typescript@5.5.3))
       '@tresjs/nuxt':
-        specifier: 3.0.1
-        version: 3.0.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.166.1)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))(vue@3.4.32(typescript@5.5.3))(webpack@5.93.0)
+        specifier: 3.0.2
+        version: 3.0.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.166.1)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))(vue@3.4.32(typescript@5.5.3))(webpack@5.93.0)
       '@types/three':
         specifier: ^0.166.0
         version: 0.166.0
@@ -1755,6 +1755,11 @@ packages:
 
   '@tresjs/nuxt@3.0.1':
     resolution: {integrity: sha512-66i5LCr6ZFrFp2QDcsH7dLMLtTs8fNY3yIcj6EQpNBQBvrq5P1xcDW7R4iwtOBX5PIq7wqkeMO4ANxZg237m4g==}
+    peerDependencies:
+      three: '>=0.133'
+
+  '@tresjs/nuxt@3.0.2':
+    resolution: {integrity: sha512-sMSNHmuU/oQlzjc19RfLzF10raKJx3rxAxlKpWLLyOg00dEKud/log/O7eaPF56QBYK0SQvlNsCUhy9msbeO6w==}
     peerDependencies:
       three: '>=0.133'
 
@@ -8788,6 +8793,45 @@ snapshots:
       '@nuxt/ui': 2.17.0(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))(vue@3.4.32(typescript@5.5.3))
       '@tresjs/core': 4.1.0(three@0.166.1)(vue@3.4.32(typescript@5.5.3))
       '@tresjs/nuxt': 3.0.0(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.166.1)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))(vue@3.4.32(typescript@5.5.3))(webpack@5.93.0)
+      '@types/three': 0.166.0
+      '@unocss/nuxt': 0.61.5(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))(webpack@5.93.0)
+      defu: 6.1.4
+      mlly: 1.7.1
+      pkg-types: 1.1.3
+      sirv: 2.0.4
+      three: 0.166.1
+      typescript: 5.5.3
+      vite-plugin-glsl: 1.3.0(rollup@4.18.1)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - async-validator
+      - axios
+      - change-case
+      - drauu
+      - focus-trap
+      - idb-keyval
+      - jwt-decode
+      - magicast
+      - nprogress
+      - postcss
+      - qrcode
+      - rollup
+      - sortablejs
+      - supports-color
+      - ts-node
+      - uWebSockets.js
+      - universal-cookie
+      - vite
+      - vue
+      - webpack
+
+  '@tresjs/nuxt@3.0.2(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.166.1)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))(vue@3.4.32(typescript@5.5.3))(webpack@5.93.0)':
+    dependencies:
+      '@nuxt/devtools-kit': 1.3.9(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))
+      '@nuxt/kit': 3.12.3(magicast@0.3.4)(rollup@4.18.1)
+      '@nuxt/ui': 2.17.0(focus-trap@7.5.4)(magicast@0.3.4)(rollup@4.18.1)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))(vue@3.4.32(typescript@5.5.3))
+      '@tresjs/core': 4.2.1(three@0.166.1)(vue@3.4.32(typescript@5.5.3))
+      '@tresjs/nuxt': 3.0.1(focus-trap@7.5.4)(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(three@0.166.1)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))(vue@3.4.32(typescript@5.5.3))(webpack@5.93.0)
       '@types/three': 0.166.0
       '@unocss/nuxt': 0.61.5(magicast@0.3.4)(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))(webpack@5.93.0)
       defu: 6.1.4
