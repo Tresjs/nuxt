@@ -53,7 +53,7 @@ importers:
         version: 1.1.36
       '@iconify-json/file-icons':
         specifier: ^1.1.8
-        version: 1.1.8
+        version: 1.1.9
       '@iconify-json/iconoir':
         specifier: ^1.1.44
         version: 1.1.44
@@ -1021,8 +1021,8 @@ packages:
   '@iconify-json/carbon@1.1.36':
     resolution: {integrity: sha512-NC3VcqLtwLZpi7+LeXj+99/byv+asrnCQxiDNCZV6hKr9WcNh6C25kJguJYfN+dV54kOkw78e+6PitQi2Bppnw==}
 
-  '@iconify-json/file-icons@1.1.8':
-    resolution: {integrity: sha512-gzkxwnzEN0FVJZQIM/X7aqlN98z/XQ8ymb/BC1ebr3lJHvmQ5n8gMhWeytnJHHwRERg/zokTXSQDt62ANwcs/w==}
+  '@iconify-json/file-icons@1.1.9':
+    resolution: {integrity: sha512-8asHoWRdQURabZTcqx/JdGIgpoGgbYvfsdYPRAlfsVW+o1ITOjdgW67pYd9Lelh+wAQM19HctMmbXvYwCdIubQ==}
 
   '@iconify-json/heroicons@1.1.22':
     resolution: {integrity: sha512-UNfSBdD/JBYBvFFhce6e3FsmeqshGz8u964R36npJvIzuORhIHUXrFerulBWFmbG0V1xvMqLZVZc4bPyjP5p7A==}
@@ -7380,7 +7380,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/file-icons@1.1.8':
+  '@iconify-json/file-icons@1.1.9':
     dependencies:
       '@iconify/types': 2.0.0
 
