@@ -53,7 +53,7 @@ importers:
         version: 1.1.37
       '@iconify-json/file-icons':
         specifier: ^1.1.10
-        version: 1.1.10
+        version: 1.2.0
       '@iconify-json/iconoir':
         specifier: ^1.1.46
         version: 1.1.46
@@ -1007,8 +1007,8 @@ packages:
   '@iconify-json/carbon@1.1.37':
     resolution: {integrity: sha512-Hj9oZtRmN63yt29YovqgqOJQhaoVMNMTkFLT3HKAJm4HjvI405Juez5UfdysYmLjF708U7gJNx4U6K1k5+fTBw==}
 
-  '@iconify-json/file-icons@1.1.10':
-    resolution: {integrity: sha512-cWuniolO5dIrsokw72Da7iVZEaE0H7GXdkkBGvgs9c8z/6YZlsqjCSz+dWHlOGiNPHz0LYOFqcz7YSoJtniwbg==}
+  '@iconify-json/file-icons@1.2.0':
+    resolution: {integrity: sha512-y48I29CqVj3pLFPLKShadGq3sweA49uuN88+zKPPzz72KOJX3SpyiifwfcbnFhJpXuIolrgqHfr8GwyLs2foSA==}
 
   '@iconify-json/heroicons@1.1.24':
     resolution: {integrity: sha512-Axd6nxsEeQMpuK8ugkAkJ1kS6cbmgXX1s1+Z6NbANvtgtNTBIx9bLQcEL6loKjxpfktDXERElrR5G6xzWOqysg==}
@@ -1828,6 +1828,9 @@ packages:
 
   '@types/node@22.5.1':
     resolution: {integrity: sha512-KkHsxej0j9IW1KKOOAA/XBA0z08UFSrRQHErzEfA3Vgq57eXIMYboIlHJuYIfd+lwCQjtKqUu3UnmKbtUc9yRw==}
+
+  '@types/node@22.5.2':
+    resolution: {integrity: sha512-acJsPTEqYqulZS/Yp/S3GgeE6GZ0qYODUR8aVr/DkhHQ8l9nd4j5x1/ZJy9/gHrRlFMqkO6i0I3E27Alu4jjPg==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -7560,7 +7563,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/file-icons@1.1.10':
+  '@iconify-json/file-icons@1.2.0':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -9138,6 +9141,10 @@ snapshots:
       '@types/unist': 2.0.11
 
   '@types/node@22.5.1':
+    dependencies:
+      undici-types: 6.19.8
+
+  '@types/node@22.5.2':
     dependencies:
       undici-types: 6.19.8
 
@@ -12473,7 +12480,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.5.1
+      '@types/node': 22.5.2
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
