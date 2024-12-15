@@ -51,7 +51,7 @@
     "@nuxt/ui": "^2.18.4",
     "@tresjs/core": "4.2.10",
     "@tresjs/nuxt": "3.0.7",
-    "@types/three": "^0.168.0",
+    "@types/three": "^0.171.0",
     "@unocss/nuxt": "^0.62.3",
     "defu": "^6.1.4",
     "mlly": "^1.7.1",
@@ -79,7 +79,7 @@
     "nuxt": "^3.13.1",
     "playwright": "^1.47.0",
     "release-it": "^17.6.0",
-    "three": "^0.168.0",
+    "three": "^0.171.0",
     "vitest": "^2.0.5"
   },
   "build": {
