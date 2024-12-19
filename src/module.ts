@@ -76,7 +76,25 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.vue.compilerOptions.isCustomElement = templateCompilerOptions.template.compilerOptions.isCustomElement
 
-    const promises: Promise<void>[] = []
+    nuxt.options.vite.resolve = defu(nuxt.options.vite.resolve, {
+      dedupe: ['three'],
+    })
+
+    nuxt.options.vite.optimizeDeps = defu(nuxt.options.vite.optimizeDeps, {
+      include: ['three'],
+    })
+
+    const promises: Promise<void>[] = [
+      addComponent({
+        name: 'TresCanvas',
+        filePath: resolver.resolve('./runtime/TresCanvas.client.vue'),
+      }),
+      addComponent({
+        name: 'TresCanvas',
+        filePath: resolver.resolve('./runtime/TresCanvas.server.vue'),
+      }),
+    ]
+
     for (const mod of new Set([...options.modules, ...coreDeps])) {
       if (mod === '@tresjs/core' || mod === '@tresjs/nuxt') {
         continue
@@ -105,27 +123,6 @@ export default defineNuxtModule<ModuleOptions>({
         }
       }
     }
-
-    await Promise.all(promises)
-
-    nuxt.options.vite.resolve = defu(nuxt.options.vite.resolve, {
-      dedupe: ['three'],
-    })
-
-    nuxt.options.vite.optimizeDeps = defu(nuxt.options.vite.optimizeDeps, {
-      include: ['three'],
-    })
-
-    promises.push(
-      addComponent({
-        name: 'TresCanvas',
-        filePath: resolver.resolve('./runtime/TresCanvas.client.vue'),
-      }),
-      addComponent({
-        name: 'TresCanvas',
-        filePath: resolver.resolve('./runtime/TresCanvas.server.vue'),
-      }),
-    )
 
     await Promise.all(promises)
 
