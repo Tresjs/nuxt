@@ -13,8 +13,8 @@
   "devDependencies": {
     "@nuxt/devtools": "1.4.1",
     "@tresjs/cientos": "^4.0.1",
-    "@tresjs/post-processing": "^0.7.1",
-    "@types/three": "^0.167.2",
+    "@tresjs/post-processing": "^1.0.0",
+    "@types/three": "^0.171.0",
     "nuxt": "^3.13.0",
     "postprocessing": "^6.36.0",
     "tweakpane": "^4.0.4"
