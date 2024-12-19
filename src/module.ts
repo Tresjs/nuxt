@@ -5,6 +5,7 @@ import { templateCompilerOptions } from '@tresjs/core'
 import { defu } from 'defu'
 import { findExportNames } from 'mlly'
 import { readPackageJSON } from 'pkg-types'
+
 import glsl from 'vite-plugin-glsl'
 import { setupDevToolsUI } from './devtools'
 
@@ -61,6 +62,19 @@ export default defineNuxtModule<ModuleOptions>({
 
     for (const mod of new Set([...options.modules, ...coreDeps])) {
       if (mod === '@tresjs/core' || mod === '@tresjs/nuxt') { continue }
+
+      if (mod === '@tresjs/post-processing') {
+        addImports({
+          from: '@tresjs/post-processing/three',
+          name: 'PostProcessingThree',
+        })
+        addImports({
+          from: '@tresjs/post-processing/pmndrs',
+          name: 'PostProcessingPmndrs',
+        })
+
+        return
+      }
 
       const entry = await resolvePath(mod)
       if (entry === mod) { continue }

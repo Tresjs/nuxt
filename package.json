@@ -29,7 +29,7 @@
     "dist"
   ],
   "scripts": {
-    "prepack": "npm run module:build && npm run client:build",
+    "prepack": "pnpm run module:build && pnpm run client:build",
     "module:build": "nuxt-module-build prepare && nuxt-module-build build",
     "client:build": "nuxt prepare client && nuxi generate client",
     "client:dev": "nuxi dev client --port 3300",
@@ -49,9 +49,9 @@
     "@nuxt/devtools-kit": "^1.4.1",
     "@nuxt/kit": "^3.13.1",
     "@nuxt/ui": "^2.18.4",
-    "@tresjs/core": "4.2.10",
+    "@tresjs/core": "4.3.1",
     "@tresjs/nuxt": "3.0.7",
-    "@types/three": "^0.168.0",
+    "@types/three": "^0.171.0",
     "@unocss/nuxt": "^0.62.3",
     "defu": "^6.1.4",
     "mlly": "^1.7.1",
@@ -72,14 +72,14 @@
     "@nuxt/schema": "^3.13.1",
     "@nuxt/test-utils": "^3.14.1",
     "@release-it/conventional-changelog": "^8.0.1",
-    "@tresjs/eslint-config": "^1.2.0",
+    "@tresjs/eslint-config": "^1.4.0",
     "@types/node": "^22.5.4",
     "changelogen": "^0.5.5",
     "eslint": "^9.9.1",
     "nuxt": "^3.13.1",
     "playwright": "^1.47.0",
     "release-it": "^17.6.0",
-    "three": "^0.168.0",
+    "three": "^0.171.0",
     "vitest": "^2.0.5"
   },
   "build": {
