@@ -75,9 +75,6 @@ importers:
       '@tresjs/cientos':
         specifier: ^4.0.3
         version: 4.0.3(@tresjs/core@4.3.1(three@0.171.0)(vue@3.5.13(typescript@5.6.3)))(@types/three@0.171.0)(three@0.171.0)(vue@3.5.13(typescript@5.6.3))
-      '@tresjs/post-processing':
-        specifier: ^1.0.0
-        version: 1.0.0(@tresjs/core@4.3.1(three@0.171.0)(vue@3.5.13(typescript@5.6.3)))(three@0.171.0)(vue@3.5.13(typescript@5.6.3))
       '@types/node':
         specifier: ^22.10.2
         version: 22.10.2
@@ -1597,13 +1594,6 @@ packages:
     resolution: {integrity: sha512-81//cbtReAN/azjBgSGOsjmgPQGDNrqAsODuAnThILcAJcNDx5n/Qwut7kfnoyCHef4LynuAHCyd8EbvDSwyJg==}
     peerDependencies:
       three: '>=0.133'
-      vue: '>=3.4'
-
-  '@tresjs/post-processing@1.0.0':
-    resolution: {integrity: sha512-SGRdr9NL+w06JwcR9nGIUuPFAHUyD9wg3KlKeK/ITp7933+Phb60bCIe2B/N574gc3O5/vejMttnMp6B2pxTRg==}
-    peerDependencies:
-      '@tresjs/core': '>=4.0'
-      three: '>=0.169'
       vue: '>=3.4'
 
   '@trysound/sax@0.2.0':
@@ -4654,11 +4644,6 @@ packages:
     resolution: {integrity: sha512-OCVPnIObs4N29kxTjzLfUryOkvZEq+pf8jTF0lg8E7uETuWHA+v7j3c/xJmiqpX450191LlmZfUKkXxkTry7nA==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postprocessing@6.36.4:
-    resolution: {integrity: sha512-3fAyBGuLNR7Rg/q+f2SNlsVCI5mDrymvxhOif3tPKEej8M38z4TvwzNZm+RNpRY2tACE7qQUNE5IHyMcqgvlAg==}
-    peerDependencies:
-      three: '>= 0.157.0 < 0.171.0'
-
   potpack@1.0.2:
     resolution: {integrity: sha512-choctRBIV9EMT9WGAZHn3V7t0Z2pMQyl0EZE6pFc/6ml3ssw7Dlf/oAOvFwjm1HVsqfQN8GfeFyJ+d8tRzqueQ==}
 
@@ -7572,16 +7557,6 @@ snapshots:
       '@alvarosabu/utils': 3.2.0
       '@vue/devtools-api': 6.6.4
       '@vueuse/core': 11.3.0(vue@3.5.13(typescript@5.6.3))
-      three: 0.171.0
-      vue: 3.5.13(typescript@5.6.3)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-
-  '@tresjs/post-processing@1.0.0(@tresjs/core@4.3.1(three@0.171.0)(vue@3.5.13(typescript@5.6.3)))(three@0.171.0)(vue@3.5.13(typescript@5.6.3))':
-    dependencies:
-      '@tresjs/core': 4.3.1(three@0.171.0)(vue@3.5.13(typescript@5.6.3))
-      '@vueuse/core': 11.3.0(vue@3.5.13(typescript@5.6.3))
-      postprocessing: 6.36.4(three@0.171.0)
       three: 0.171.0
       vue: 3.5.13(typescript@5.6.3)
     transitivePeerDependencies:
@@ -11209,10 +11184,6 @@ snapshots:
       nanoid: 3.3.8
       picocolors: 1.1.1
       source-map-js: 1.2.1
-
-  postprocessing@6.36.4(three@0.171.0):
-    dependencies:
-      three: 0.171.0
 
   potpack@1.0.2: {}
 
