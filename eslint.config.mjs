@@ -8,11 +8,16 @@ export default createConfigForNuxt({
     tooling: true,
     // Rules for formatting
     stylistic: true,
+
   },
   dirs: {
     src: [
       './playground',
     ],
+  },
+}, {
+  rules: {
+    'vue/multi-word-component-names': 'off',
   },
 })
   .append(

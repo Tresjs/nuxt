@@ -1,7 +1,6 @@
 import { resolve } from 'pathe'
 
 export default defineNuxtConfig({
-  ssr: false,
 
   modules: [
     '@nuxt/devtools-ui-kit',
@@ -9,6 +8,13 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/icon',
   ],
+  ssr: false,
+
+  app: {
+    baseURL: '/__tres_nuxt_devtools',
+  },
+
+  compatibilityDate: '2024-12-19',
 
   nitro: {
     output: {
@@ -23,10 +29,4 @@ export default defineNuxtConfig({
       mesh: 'carbon:cube',
     },
   },
-
-  app: {
-    baseURL: '/__tres_nuxt_devtools',
-  },
-
-  compatibilityDate: '2024-12-19',
 })
