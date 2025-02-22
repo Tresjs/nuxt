@@ -1,5 +1,12 @@
 
 
+## [4.0.0-next.0](https://github.com/tresjs/nuxt/compare/3.0.7...4.0.0-next.0) (2025-02-22)
+
+### Bug Fixes
+
+* **deps:** update dependency @tresjs/nuxt to v3.0.7 ([#106](https://github.com/tresjs/nuxt/issues/106)) ([8a73538](https://github.com/tresjs/nuxt/commit/8a735385edffdeda2fb12fa2cbe51376008ae39f))
+* **deps:** update dependency typescript to v5.6.2 ([#136](https://github.com/tresjs/nuxt/issues/136)) ([a32ec04](https://github.com/tresjs/nuxt/commit/a32ec043fe65e1fb396a42a206eb32b3cb6df6a3))
+
 ## [3.0.7](https://github.com/tresjs/nuxt/compare/3.0.6...3.0.7) (2024-09-06)
 
 
