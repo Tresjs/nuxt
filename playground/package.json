@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@tresjs/cientos": "^4.0.3",
-    "@tresjs/core": "^4.3.1"
+    "@tresjs/core": "https://pkg.pr.new/@tresjs/core@47bb9e7"
   },
   "devDependencies": {
     "@nuxt/devtools": "1.6.4",
