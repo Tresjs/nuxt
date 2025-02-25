@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@tresjs/cientos':
         specifier: ^4.0.3
-        version: 4.0.3(@tresjs/core@4.3.1(three@0.170.0)(vue@3.5.13(typescript@5.7.2)))(@types/three@0.171.0)(three@0.170.0)(vue@3.5.13(typescript@5.7.2))
+        version: 4.0.3(@tresjs/core@https://pkg.pr.new/@tresjs/core@47bb9e7(three@0.170.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2)))(@types/three@0.171.0)(three@0.170.0)(vue@3.5.13(typescript@5.7.2))
       '@tresjs/core':
-        specifier: ^4.3.1
-        version: 4.3.1(three@0.170.0)(vue@3.5.13(typescript@5.7.2))
+        specifier: https://pkg.pr.new/@tresjs/core@47bb9e7
+        version: https://pkg.pr.new/@tresjs/core@47bb9e7(three@0.170.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))
     devDependencies:
       '@nuxt/devtools':
         specifier: 1.6.4
@@ -850,13 +850,15 @@ packages:
 
   '@tresjs/cientos@4.0.3':
     resolution: {integrity: sha512-6urkgwGtXzxj7JBZh0HjX5sJwaoNVHXXclFNwFyWVIOBHBikAxFF52GhxTaAlOYfMnun2YKBW/StjnWutq7zAQ==}
+    version: 4.0.3
     peerDependencies:
       '@tresjs/core': '>=4.2.1'
       three: '>=0.133'
       vue: '>=3.3'
 
-  '@tresjs/core@4.3.1':
-    resolution: {integrity: sha512-81//cbtReAN/azjBgSGOsjmgPQGDNrqAsODuAnThILcAJcNDx5n/Qwut7kfnoyCHef4LynuAHCyd8EbvDSwyJg==}
+  '@tresjs/core@https://pkg.pr.new/@tresjs/core@47bb9e7':
+    resolution: {tarball: https://pkg.pr.new/@tresjs/core@47bb9e7}
+    version: 4.3.3
     peerDependencies:
       three: '>=0.133'
       vue: '>=3.4'
@@ -1005,11 +1007,20 @@ packages:
   '@vueuse/core@11.3.0':
     resolution: {integrity: sha512-7OC4Rl1f9G8IT6rUfi9JrKiXy4bfmHhZ5x2Ceojy0jnd3mHNEvV4JaRygH362ror6/NZ+Nl+n13LPzGiPN8cKA==}
 
+  '@vueuse/core@12.7.0':
+    resolution: {integrity: sha512-jtK5B7YjZXmkGNHjviyGO4s3ZtEhbzSgrbX+s5o+Lr8i2nYqNyHuPVOeTdM1/hZ5Tkxg/KktAuAVDDiHMraMVA==}
+
   '@vueuse/metadata@11.3.0':
     resolution: {integrity: sha512-pwDnDspTqtTo2HwfLw4Rp6yywuuBdYnPYDq+mO38ZYKGebCUQC/nVj/PXSiK9HX5otxLz8Fn7ECPbjiRz2CC3g==}
 
+  '@vueuse/metadata@12.7.0':
+    resolution: {integrity: sha512-4VvTH9mrjXqFN5LYa5YfqHVRI6j7R00Vy4995Rw7PQxyCL3z0Lli86iN4UemWqixxEvYfRjG+hF9wL8oLOn+3g==}
+
   '@vueuse/shared@11.3.0':
     resolution: {integrity: sha512-P8gSSWQeucH5821ek2mn/ciCk+MS/zoRKqdQIM3bHq6p7GXDAJLmnRRKmF5F65sAVJIfzQlwR3aDzwCn10s8hA==}
+
+  '@vueuse/shared@12.7.0':
+    resolution: {integrity: sha512-coLlUw2HHKsm7rPN6WqHJQr18WymN4wkA/3ThFaJ4v4gWGWAQQGK+MJxLuJTBs4mojQiazlVWAKNJNpUWGRkNw==}
 
   '@webgpu/types@0.1.52':
     resolution: {integrity: sha512-eI883Nlag2hGIkhXxAnq8s4APpqXWuPL3Gbn2ghiU12UjLvfCbVqHK4XfXl3eLRTatqcMmeK7jws7IwWsGfbzw==}
@@ -4068,9 +4079,9 @@ snapshots:
 
   '@sindresorhus/merge-streams@2.3.0': {}
 
-  '@tresjs/cientos@4.0.3(@tresjs/core@4.3.1(three@0.170.0)(vue@3.5.13(typescript@5.7.2)))(@types/three@0.171.0)(three@0.170.0)(vue@3.5.13(typescript@5.7.2))':
+  '@tresjs/cientos@4.0.3(@tresjs/core@https://pkg.pr.new/@tresjs/core@47bb9e7(three@0.170.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2)))(@types/three@0.171.0)(three@0.170.0)(vue@3.5.13(typescript@5.7.2))':
     dependencies:
-      '@tresjs/core': 4.3.1(three@0.170.0)(vue@3.5.13(typescript@5.7.2))
+      '@tresjs/core': https://pkg.pr.new/@tresjs/core@47bb9e7(three@0.170.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))
       '@vueuse/core': 11.3.0(vue@3.5.13(typescript@5.7.2))
       camera-controls: 2.9.0(three@0.170.0)
       stats-gl: 2.4.2(@types/three@0.171.0)(three@0.170.0)
@@ -4085,15 +4096,15 @@ snapshots:
       - '@vue/composition-api'
       - react
 
-  '@tresjs/core@4.3.1(three@0.170.0)(vue@3.5.13(typescript@5.7.2))':
+  '@tresjs/core@https://pkg.pr.new/@tresjs/core@47bb9e7(three@0.170.0)(typescript@5.7.2)(vue@3.5.13(typescript@5.7.2))':
     dependencies:
       '@alvarosabu/utils': 3.2.0
       '@vue/devtools-api': 6.6.4
-      '@vueuse/core': 11.3.0(vue@3.5.13(typescript@5.7.2))
+      '@vueuse/core': 12.7.0(typescript@5.7.2)
       three: 0.170.0
       vue: 3.5.13(typescript@5.7.2)
     transitivePeerDependencies:
-      - '@vue/composition-api'
+      - typescript
 
   '@trysound/sax@0.2.0': {}
 
@@ -4327,7 +4338,18 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
+  '@vueuse/core@12.7.0(typescript@5.7.2)':
+    dependencies:
+      '@types/web-bluetooth': 0.0.20
+      '@vueuse/metadata': 12.7.0
+      '@vueuse/shared': 12.7.0(typescript@5.7.2)
+      vue: 3.5.13(typescript@5.7.2)
+    transitivePeerDependencies:
+      - typescript
+
   '@vueuse/metadata@11.3.0': {}
+
+  '@vueuse/metadata@12.7.0': {}
 
   '@vueuse/shared@11.3.0(vue@3.5.13(typescript@5.7.2))':
     dependencies:
@@ -4335,6 +4357,12 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+
+  '@vueuse/shared@12.7.0(typescript@5.7.2)':
+    dependencies:
+      vue: 3.5.13(typescript@5.7.2)
+    transitivePeerDependencies:
+      - typescript
 
   '@webgpu/types@0.1.52': {}
 
