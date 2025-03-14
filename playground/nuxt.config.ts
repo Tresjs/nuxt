@@ -2,7 +2,11 @@ export default defineNuxtConfig({
   modules: ['../src/module', '@nuxt/devtools'],
   ssr: true,
 
-  compatibilityDate: '2024-07-17',
+  future: {
+    compatibilityVersion: 4,
+  },
+
+  compatibilityDate: '2025-03-14',
 
   // for testing purposes: include some nuxt build tests
   nitro: {
