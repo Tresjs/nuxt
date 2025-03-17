@@ -10,11 +10,6 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
 
-  experimental: {
-    componentIslands: true,
-    clientFallback: true,
-  },
-
   compatibilityDate: '2025-03-14',
 
   // for testing purposes: include some nuxt build tests

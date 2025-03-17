@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { TresCanvas as CoreTresCanvas } from '#imports'
+import { TresCanvas as CoreTresCanvas } from '@tresjs/core'
 </script>
 
 <template>
-  <CoreTresCanvas nuxt-client>
+  <CoreTresCanvas>
     <slot />
   </CoreTresCanvas>
 </template>
