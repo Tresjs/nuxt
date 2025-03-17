@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url'
 import { $fetch, createPage, setup, url } from '@nuxt/test-utils'
 import { describe, expect, it } from 'vitest'
+import { version } from '@tresjs/core/package.json'
 
 describe('ssr', async () => {
   await setup({
@@ -10,7 +11,7 @@ describe('ssr', async () => {
 
   it('renders a client-only component', async () => {
     const html = await $fetch('/')
-    expect(html).toContain('<div style="height:100vh;"><span></span></div>')
+    expect(html).toContain(`data-tres="tresjs ${version}"`)
   })
 
   it('has no errors on the client', async () => {
