@@ -1,7 +1,6 @@
 import { resolve } from 'pathe'
 
 export default defineNuxtConfig({
-
   modules: [
     '@nuxt/devtools-ui-kit',
     '@unocss/nuxt',
@@ -9,7 +8,6 @@ export default defineNuxtConfig({
     '@nuxt/icon',
   ],
   ssr: false,
-
   app: {
     baseURL: '/__tres_nuxt_devtools',
   },

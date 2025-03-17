@@ -11,8 +11,9 @@ export default defineNuxtConfig({
   // for testing purposes: include some nuxt build tests
   nitro: {
     routeRules: {
+      '/': { ssr: false }, // <== client rendered page
       '/page1': { ssr: false }, // <== client rendered page
-      '/page2': { prerender: true }, // <== server SSG page + payload
+      '/page2': { prerender: true, ssr: false }, // <== server SSG page + payload
     },
   },
 
