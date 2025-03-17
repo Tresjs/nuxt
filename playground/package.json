@@ -8,13 +8,13 @@
     "generate": "nuxi generate"
   },
   "dependencies": {
-    "@tresjs/cientos": "^4.3.3",
+    "@tresjs/cientos": "^4.2.0",
     "@tresjs/core": "^4.3.3"
   },
   "devDependencies": {
     "@nuxt/devtools": "1.6.4",
     "@types/three": "^0.171.0",
-    "nuxt": "^3.14.1592",
+    "nuxt": "^3.16",
     "postprocessing": "^6.36.4",
     "tweakpane": "^4.0.5"
   }

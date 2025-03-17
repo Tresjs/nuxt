@@ -2,7 +2,6 @@
   "name": "@tresjs/nuxt",
   "type": "module",
   "version": "3.0.8",
-  "packageManager": "pnpm@9.15.4",
   "description": "TresJS integration for Nuxt.",
   "author": "Daniel Roe (https://github.com/danielroe/)",
   "license": "MIT",
@@ -46,7 +45,6 @@
     "three": ">=0.133"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.14.1592",
     "@nuxt/ui": "^2.20.0",
     "@tresjs/core": "4.3.3",
     "@unocss/nuxt": "^0.65.2",
@@ -65,8 +63,9 @@
     "@nuxt/devtools-ui-kit": "^1.6.4",
     "@nuxt/eslint-config": "^0.7.3",
     "@nuxt/icon": "^1.10.2",
+    "@nuxt/kit": "^3.16.0",
     "@nuxt/module-builder": "^0.8.4",
-    "@nuxt/schema": "^3.14.1592",
+    "@nuxt/schema": "^3.16.0",
     "@nuxt/test-utils": "^3.15.1",
     "@release-it/conventional-changelog": "^9.0.3",
     "@tresjs/cientos": "^4.0.3",
@@ -74,7 +73,7 @@
     "@types/three": "^0.171.0",
     "changelogen": "^0.5.7",
     "eslint": "^9.17.0",
-    "nuxt": "^3.14.1592",
+    "nuxt": "^3.16.0",
     "playwright": "^1.49.1",
     "release-it": "^17.10.0",
     "three": "^0.171.0",
@@ -98,6 +97,19 @@
       "picocolors",
       "source-map-js",
       "nanoid/non-secure"
+    ]
+  },
+  "packageManager": "pnpm@10.6.3+sha512.bb45e34d50a9a76e858a95837301bfb6bd6d35aea2c5d52094fa497a467c43f5c440103ce2511e9e0a2f89c3d6071baac3358fc68ac6fb75e2ceb3d2736065e6",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3",
+      "sharp"
+    ],
+    "ignoredBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "vue-demi",
+      "workerd"
     ]
   }
 }
