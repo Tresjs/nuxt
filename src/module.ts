@@ -100,10 +100,12 @@ export default defineNuxtModule<ModuleOptions>({
       addComponent({
         name: 'TresCanvas',
         filePath: resolver.resolve('./runtime/components/TresCanvas.client.vue'),
+        mode: 'client',
       }),
       addComponent({
         name: 'TresCanvas',
         filePath: resolver.resolve('./runtime/components/TresCanvas.server.vue'),
+        mode: 'server',
       }),
     ])
 

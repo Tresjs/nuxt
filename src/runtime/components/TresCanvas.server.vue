@@ -2,5 +2,7 @@
 </script>
 
 <template>
-  <span />
+  <div>
+    <span />
+  </div>
 </template>

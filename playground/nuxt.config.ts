@@ -2,8 +2,17 @@ export default defineNuxtConfig({
   modules: ['../src/module', '@nuxt/devtools'],
   ssr: true,
 
+  build: {
+    transpile: ['@tresjs/core'],
+  },
+
   future: {
     compatibilityVersion: 4,
+  },
+
+  experimental: {
+    componentIslands: true,
+    clientFallback: true,
   },
 
   compatibilityDate: '2025-03-14',
@@ -11,9 +20,9 @@ export default defineNuxtConfig({
   // for testing purposes: include some nuxt build tests
   nitro: {
     routeRules: {
-      '/': { ssr: false }, // <== client rendered page
-      '/page1': { ssr: false }, // <== client rendered page
-      '/page2': { prerender: true, ssr: false }, // <== server SSG page + payload
+      '/': { ssr: true }, // <== client rendered page
+      '/page1': { ssr: true }, // <== client rendered page
+      '/page2': { prerender: true, ssr: true }, // <== server SSG page + payload
     },
   },
 
