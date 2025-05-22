@@ -100,12 +100,10 @@ export default defineNuxtModule<ModuleOptions>({
       addComponent({
         name: 'TresCanvas',
         filePath: resolver.resolve('./runtime/components/TresCanvas.client'),
-        mode: 'client',
       }),
       addComponent({
         name: 'TresCanvas',
         filePath: resolver.resolve('./runtime/components/TresCanvas.server'),
-        mode: 'server',
       }),
     ])
 
