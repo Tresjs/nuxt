@@ -2,10 +2,6 @@ export default defineNuxtConfig({
   modules: ['../src/module', '@nuxt/devtools'],
   ssr: true,
 
-  build: {
-    transpile: ['@tresjs/core'],
-  },
-
   future: {
     compatibilityVersion: 4,
   },
