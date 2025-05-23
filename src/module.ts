@@ -99,11 +99,11 @@ export default defineNuxtModule<ModuleOptions>({
     await Promise.all([
       addComponent({
         name: 'TresCanvas',
-        filePath: resolver.resolve('./runtime/TresCanvas.client.vue'),
+        filePath: resolver.resolve('./runtime/TresCanvas.client'),
       }),
       addComponent({
         name: 'TresCanvas',
-        filePath: resolver.resolve('./runtime/TresCanvas.server.vue'),
+        filePath: resolver.resolve('./runtime/TresCanvas.server'),
       }),
     ])
 

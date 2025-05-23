@@ -12,9 +12,9 @@
     "@tresjs/core": "^4.3.1"
   },
   "devDependencies": {
-    "@nuxt/devtools": "1.6.4",
+    "@nuxt/devtools": "2.4.0",
     "@types/three": "^0.171.0",
-    "nuxt": "^3.14.1592",
+    "nuxt": "^3.17.3",
     "postprocessing": "^6.36.4",
     "tweakpane": "^4.0.5"
   }
