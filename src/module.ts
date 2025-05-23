@@ -1,3 +1,4 @@
+import { version } from '../package.json'
 import { readFile } from 'node:fs/promises'
 import { addComponent, addImports, addVitePlugin, createResolver, defineNuxtModule, resolvePath } from '@nuxt/kit'
 import * as core from '@tresjs/core'
@@ -18,6 +19,10 @@ export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: '@tresjs/nuxt',
     configKey: 'tres',
+    compatibility: {
+      nuxt: '>=3.16.0',
+    },
+    version,
   },
   defaults: {
     modules: [],
