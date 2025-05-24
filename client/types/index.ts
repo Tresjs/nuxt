@@ -52,7 +52,7 @@ export interface PerfData {
   scene: Scene | undefined
 }
 
-export type ProgramObject = {
+export interface ProgramObject {
   type: string
   name: string
   id: number
