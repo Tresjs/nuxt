@@ -51,7 +51,7 @@ const { fps, memory, renderer } = useDevtoolsHook()
         </div>
       </div>
       <div class="p4">
-        <NTip class="text-sm flex items-center gap-2">
+        <NTip class="text-sm">
           <div class="flex items-center gap-2">
             <Icon
               class="flex-shrink-0"
