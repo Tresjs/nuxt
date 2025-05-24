@@ -21,10 +21,17 @@
     ".": {
       "types": "./dist/types.d.mts",
       "default": "./dist/module.mjs"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "main": "dist/module.mjs",
-  "types": "dist/types.d.ts",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/types.d.mts"
+      ]
+    }
+  },
   "files": [
     "dist"
   ],
