@@ -1,4 +1,3 @@
-import { version } from '../package.json'
 import { readFile } from 'node:fs/promises'
 import { addComponent, addImports, addVitePlugin, createResolver, defineNuxtModule, resolvePath } from '@nuxt/kit'
 import * as core from '@tresjs/core'
@@ -7,6 +6,7 @@ import { defu } from 'defu'
 import { findExportNames } from 'mlly'
 import { readPackageJSON } from 'pkg-types'
 import glsl from 'vite-plugin-glsl'
+import { version } from '../package.json'
 import { setupDevToolsUI } from './devtools'
 
 export interface ModuleOptions {

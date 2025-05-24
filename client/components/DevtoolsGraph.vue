@@ -2,11 +2,11 @@
 import { computed, ref, watchEffect } from 'vue'
 
 const props = withDefaults(defineProps<{
-  points: Array<number> // Array of y-values
-  value: number
-  unit: string
-  label: string
-  color: string
+  points?: Array<number> // Array of y-values
+  value?: number
+  unit?: string
+  label?: string
+  color?: string
 }>(), {
   points: () => [],
   value: 0,
