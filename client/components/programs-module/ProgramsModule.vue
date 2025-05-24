@@ -16,7 +16,7 @@ const programs = computed(() => renderer.info.programs.map(
 </script>
 
 <template>
-  <ProgramsModuleItem
+  <ProgramsModuleitem
     v-for="item in programs"
     :key="item.id"
     :item="item"

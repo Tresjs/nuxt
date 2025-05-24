@@ -11,7 +11,7 @@ const { fps, memory, renderer } = useDevtoolsHook()
       class="col-span-1"
       n="green"
     >
-      <Graph
+      <DevtoolsGraph
         :points="fps.accumulator"
         :value="fps.value"
         color="green"
@@ -24,7 +24,7 @@ const { fps, memory, renderer } = useDevtoolsHook()
       class="col-span-1"
       n="green"
     >
-      <Graph
+      <DevtoolsGraph
         :points="memory.accumulator"
         :value="memory.currentMem"
         color="yellow"
@@ -33,7 +33,7 @@ const { fps, memory, renderer } = useDevtoolsHook()
         label="memory"
       />
     </NCard>
-    <Pane title="Memory ">
+    <DevtoolsPane title="Memory ">
       <div class="flex p4 justify-around w-full">
         <div class="flex flex-col items-center gap-2">
           <div class="flex items-center font-mono gap-2">
@@ -58,8 +58,8 @@ const { fps, memory, renderer } = useDevtoolsHook()
           />Memory allocated by objects is aprox <strong>{{ bytesToKB(memory.allocatedMem) }} KB </strong>
         </NTip>
       </div>
-    </Pane>
-    <Pane title="Render">
+    </DevtoolsPane>
+    <DevtoolsPane title="Render">
       <div class="grid grid-cols-2 p4 justify-around w-full">
         <div class="flex flex-col items-center gap-2 mb4">
           <div class="flex items-center font-mono gap-2">
@@ -90,11 +90,11 @@ const { fps, memory, renderer } = useDevtoolsHook()
           <span class="text-xs text-gray-500">Lines</span>
         </div>
       </div>
-    </Pane>
+    </DevtoolsPane>
   </div>
   <div class="">
-    <Pane title="Programs">
+    <DevtoolsPane title="Programs">
       <ProgramsModule />
-    </Pane>
+    </DevtoolsPane>
   </div>
 </template>

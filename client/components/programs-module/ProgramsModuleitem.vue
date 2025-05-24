@@ -27,7 +27,7 @@ const isExpanded = ref(false)
         <i :class="item.icon" />
         <!-- <Icon :name="item.icon" /> -->
         <!-- <i :class="item.icon" /> -->{{ item.type }} <UBadge
-          v-if="item.name "
+          v-if="item.name"
           variant="soft"
         >
           {{ item.name }}
