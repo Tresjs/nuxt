@@ -71,7 +71,7 @@
     "@nuxt/eslint-config": "^1.4.1",
     "@nuxt/icon": "^1.10.2",
     "@nuxt/module-builder": "^1.0.1",
-    "@nuxt/schema": "^3.17.3",
+    "@nuxt/schema": "^3.17.4",
     "@nuxt/ui": "^2.20.0",
     "@unocss/nuxt": "^66.1.2",
     "@nuxt/test-utils": "^3.18.0",
@@ -81,7 +81,7 @@
     "@types/three": "^0.171.0",
     "changelogen": "^0.6.1",
     "eslint": "^9.26.0",
-    "nuxt": "^3.17.3",
+    "nuxt": "^3.17.4",
     "playwright": "^1.49.1",
     "release-it": "^17.10.0",
     "three": "^0.171.0",
@@ -90,7 +90,7 @@
   },
   "resolutions": {
     "@nuxt/kit": "3.17.4",
-    "nuxt": "3.17.3",
+    "nuxt": "3.17.4",
     "vue": "3.5.14"
   },
   "build": {
