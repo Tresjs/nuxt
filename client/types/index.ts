@@ -52,14 +52,17 @@ export interface PerfData {
   scene: Scene | undefined
 }
 
-export interface ProgramObject {
+export type ProgramObject = {
   type: string
   name: string
   id: number
   vertexShader: string
   fragmentShader: string
-  uniforms: Record<string, unknown>
-  attributes: Record<string, unknown>
-  program: WebGLProgram
+  getUniforms: () => Record<string, unknown>
+  getAttributes: () => Record<string, unknown>
   usedTimes: number
+  program: WebGLProgram
+  uniforms: Record<string, { value: unknown }>
+  attributes: Record<string, { value: unknown }>
+  isProgram: true
 }

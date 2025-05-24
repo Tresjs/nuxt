@@ -51,11 +51,16 @@ const { fps, memory, renderer } = useDevtoolsHook()
         </div>
       </div>
       <div class="p4">
-        <NTip class="text-sm">
-          <Icon
-            class="mr2"
-            name="carbon:information"
-          />Memory allocated by objects is aprox <strong>{{ bytesToKB(memory.allocatedMem) }} KB </strong>
+        <NTip class="text-sm flex items-center gap-2">
+          <div class="flex items-center gap-2">
+            <Icon
+              class="flex-shrink-0"
+              name="carbon:information"
+            />
+            <span class="flex items-center text-blue-gray-300">
+              Memory allocated by objects is approx <strong class="ml-1">{{ bytesToKB(memory.allocatedMem) }} KB</strong>
+            </span>
+          </div>
         </NTip>
       </div>
     </DevtoolsPane>
