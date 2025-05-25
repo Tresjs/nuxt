@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { SceneGraphObject } from '../types'
+import { ref } from '#imports'
 
 withDefaults(defineProps<{
   item: SceneGraphObject

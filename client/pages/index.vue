@@ -1,6 +1,7 @@
 <!-- eslint-disable max-len -->
 <script setup lang="ts">
 import { useDevtoolsClient } from '@nuxt/devtools-kit/iframe-client'
+import { useDevtoolsHook } from '../composables/useDevtoolsHook'
 
 const client = useDevtoolsClient()
 

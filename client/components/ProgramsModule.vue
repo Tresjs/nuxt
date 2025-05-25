@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useDevtoolsHook } from '../composables/useDevtoolsHook'
+import { computed } from '#imports'
 
 const { renderer } = useDevtoolsHook()
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { ProgramObject } from '../types'
+import { ref } from '#imports'
 
 withDefaults(defineProps<{
   item: ProgramObject

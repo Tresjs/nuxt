@@ -1,7 +1,8 @@
 import type { TresContext, TresObject } from '@tresjs/core'
 import type { Scene } from 'three'
 import type { SceneGraphObject, ProgramObject } from '../types'
-import { reactive, type UnwrapNestedRefs } from 'vue'
+import { reactive } from '#imports'
+import type { UnwrapNestedRefs } from '#imports'
 
 export interface FPSState {
   value: number

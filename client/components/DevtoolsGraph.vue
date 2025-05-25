@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from '#imports'
 
 const props = withDefaults(defineProps<{
   points?: Array<number> // Array of y-values
