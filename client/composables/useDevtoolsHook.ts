@@ -183,9 +183,9 @@ export function useDevtoolsHook(): DevtoolsHookReturn {
     cb(context: TresContext) {
       scene.value = context.scene.value
       scene.objects = countObjectsInScene(context.scene.value)
-      Object.assign(gl.renderer.info.render, context.renderer.value.info.render)
-      Object.assign(gl.renderer.info.memory, context.renderer.value.info.memory)
-      gl.renderer.info.programs = [...(context.renderer.value.info.programs || []) as unknown as ProgramObject[]]
+      Object.assign(gl.renderer.info.render, context.renderer.instance.value.info.render)
+      Object.assign(gl.renderer.info.memory, context.renderer.instance.value.info.memory)
+      gl.renderer.info.programs = [...(context.renderer.instance.value.info.programs || []) as unknown as ProgramObject[]]
       Object.assign(gl.fps, context.perf.fps)
       gl.fps.accumulator = [...context.perf.fps.accumulator]
       Object.assign(gl.memory, context.perf.memory)
