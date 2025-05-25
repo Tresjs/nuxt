@@ -40,24 +40,24 @@ const { fps, memory, renderer } = useDevtoolsHook()
             {{ renderer.info?.memory?.geometries || 0 }}
             <i class="i-iconoir-box-3d-three-points" />
           </div>
-          <span class="text-xs text-gray-500">Geometries</span>
+          <span class="text-xs dark:text-gray-400 text-gray-500">Geometries</span>
         </div>
         <div class="flex flex-col items-center gap-2">
-          <div class="flex items-center font-mono gap-2">
+          <div class="flex items-center font-mono gap-2 ">
             {{ renderer.info?.memory?.textures || 0 }}
             <i class="i-iconoir-select-face-3d" />
           </div>
-          <span class="text-xs text-gray-500">Textures</span>
+          <span class="text-xs dark:text-gray-400 text-gray-500">Textures</span>
         </div>
       </div>
       <div class="p4">
         <NTip class="text-sm">
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 dark:text-gray-400 text-gray-500">
             <Icon
               class="flex-shrink-0"
               name="carbon:information"
             />
-            <span class="flex items-center text-blue-gray-300">
+            <span class="flex items-center">
               Memory allocated by objects is approx <strong class="ml-1">{{ bytesToKB(memory.allocatedMem) }} KB</strong>
             </span>
           </div>
@@ -71,28 +71,28 @@ const { fps, memory, renderer } = useDevtoolsHook()
             {{ renderer?.info?.render?.calls || 0 }}
             <i class="i-iconoir-comp-align-left" />
           </div>
-          <span class="text-xs text-gray-500">Calls</span>
+          <span class="text-xs dark:text-gray-400 text-gray-500">Calls</span>
         </div>
         <div class="flex flex-col items-center gap-2 mb4">
           <div class="flex items-center font-mono gap-2">
             {{ renderer?.info?.render?.triangles || 0 }}
             <i class="i-iconoir-triangle" />
           </div>
-          <span class="text-xs text-gray-500">Triangles</span>
+          <span class="text-xs dark:text-gray-400 text-gray-500">Triangles</span>
         </div>
         <div class="flex flex-col items-center gap-2 mb4">
           <div class="flex items-center font-mono gap-2">
             {{ renderer?.info?.render?.points || 0 }}
             <i class="i-iconoir-one-point-circle" />
           </div>
-          <span class="text-xs text-gray-500">Points</span>
+          <span class="text-xs dark:text-gray-400 text-gray-500">Points</span>
         </div>
         <div class="flex flex-col items-center gap-2 mb4">
           <div class="flex items-center font-mono gap-2">
             {{ renderer?.info?.render?.lines || 0 }}
             <i class="i-iconoir-linear" />
           </div>
-          <span class="text-xs text-gray-500">Lines</span>
+          <span class="text-xs dark:text-gray-400 text-gray-500">Lines</span>
         </div>
       </div>
     </DevtoolsPane>

@@ -11,7 +11,7 @@ const icons: Record<string, string> = {
 const programs = computed(() => renderer.info.programs.map(
   item => ({
     ...item,
-    // @ts-expect-error xxxx
+    // @ts-expect-error there is a complex relationship between gl and tresjs types
     icon: icons[item.type] || 'i-file-icons-vertexshader',
     // @ts-expect-error xxxx
     uniforms: item.getUniforms(),
