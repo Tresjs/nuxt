@@ -17,6 +17,7 @@ onBeforeRender(({ delta /* invalidate */ }) => {
 </script>
 
 <template>
+  ß
   <TresMesh ref="donutRef">
     <TresTorusGeometry :args="[1, 0.5, 16, 32]" />
     <TresMeshBasicMaterial :color="color" />

@@ -1,7 +1,7 @@
 {
   "name": "@tresjs/nuxt",
   "type": "module",
-  "version": "4.0.0",
+  "version": "4.1.0-next.0",
   "packageManager": "pnpm@10.11.0",
   "description": "TresJS integration for Nuxt.",
   "author": "Daniel Roe (https://github.com/danielroe/)",
@@ -36,7 +36,7 @@
     "dist"
   ],
   "scripts": {
-    "prepack": "npm run module:build && npm run client:build",
+    "prepack": "pnpm run module:build && pnpm run client:build",
     "module:build": "nuxt-module-build prepare && nuxt-module-build build",
     "client:build": "nuxt prepare client && nuxi generate client",
     "client:dev": "nuxi dev client --port 3300",
@@ -55,7 +55,7 @@
   "dependencies": {
     "@nuxt/kit": "^3.16.0",
     "@nuxt/ui": "^2.21.0",
-    "@tresjs/core": "https://pkg.pr.new/@tresjs/core@0e8ac2b",
+    "@tresjs/core": "5.0.0-next.1",
     "@unocss/nuxt": "^66.0.0",
     "defu": "^6.1.4",
     "mlly": "^1.7.4",
@@ -77,7 +77,7 @@
     "@nuxt/test-utils": "^3.18.0",
     "@nuxt/ui": "^2.20.0",
     "@release-it/conventional-changelog": "^9.0.3",
-    "@tresjs/cientos": "https://pkg.pr.new/@tresjs/cientos@14afe95",
+    "@tresjs/cientos": "5.0.0-next.0",
     "@types/node": "^22.15.21",
     "@types/three": "^0.171.0",
     "@unocss/nuxt": "^66.1.2",

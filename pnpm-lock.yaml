@@ -20,8 +20,8 @@ importers:
         specifier: ^2.21.0
         version: 2.22.0(focus-trap@7.6.4)(jwt-decode@4.0.0)(magicast@0.3.5)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(terser@5.39.2)(yaml@2.8.0))(vue@3.5.14(typescript@5.8.3))(zod@3.25.28)
       '@tresjs/core':
-        specifier: https://pkg.pr.new/@tresjs/core@0e8ac2b
-        version: https://pkg.pr.new/@tresjs/core@0e8ac2b(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
+        specifier: 5.0.0-next.1
+        version: 5.0.0-next.1(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
       '@unocss/nuxt':
         specifier: ^66.0.0
         version: 66.1.2(magicast@0.3.5)(postcss@8.5.3)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(terser@5.39.2)(yaml@2.8.0))(vue@3.5.14(typescript@5.8.3))(webpack@5.99.9(esbuild@0.25.4))
@@ -78,8 +78,8 @@ importers:
         specifier: ^9.0.3
         version: 9.0.4(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.1.0)(release-it@17.11.0(typescript@5.8.3))
       '@tresjs/cientos':
-        specifier: https://pkg.pr.new/@tresjs/cientos@14afe95
-        version: https://pkg.pr.new/@tresjs/cientos@14afe95(@tresjs/core@https://pkg.pr.new/@tresjs/core@0e8ac2b(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3)))(@types/three@0.171.0)(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
+        specifier: 5.0.0-next.0
+        version: 5.0.0-next.0(@tresjs/core@5.0.0-next.1(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3)))(@types/three@0.171.0)(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
       '@types/node':
         specifier: ^22.15.21
         version: 22.15.21
@@ -1316,17 +1316,15 @@ packages:
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
 
-  '@tresjs/cientos@https://pkg.pr.new/@tresjs/cientos@14afe95':
-    resolution: {tarball: https://pkg.pr.new/@tresjs/cientos@14afe95}
-    version: 4.3.1
+  '@tresjs/cientos@5.0.0-next.0':
+    resolution: {integrity: sha512-Sj8CyYoOpFU95MnvTUwauz2ce3T39tpHCFX15XKzgQF+WGBhWhEGfkvjh35tTgNUZFPMB8BwUeGlTN5CYolaAQ==}
     peerDependencies:
       '@tresjs/core': '>=4.2.1'
       three: '>=0.133'
       vue: 3.5.14
 
-  '@tresjs/core@https://pkg.pr.new/@tresjs/core@0e8ac2b':
-    resolution: {tarball: https://pkg.pr.new/@tresjs/core@0e8ac2b}
-    version: 5.0.0-next.0
+  '@tresjs/core@5.0.0-next.1':
+    resolution: {integrity: sha512-FRV/f89stpjZ558qjTpP34aGsATZ5UF+m4n3sQ+kVy6n1/a3ravG5TAzJZmwNKM9Qql9zb/S4Cn5KsgMR2GAsA==}
     peerDependencies:
       three: '>=0.133'
       vue: 3.5.14
@@ -7586,9 +7584,9 @@ snapshots:
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
-  '@tresjs/cientos@https://pkg.pr.new/@tresjs/cientos@14afe95(@tresjs/core@https://pkg.pr.new/@tresjs/core@0e8ac2b(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3)))(@types/three@0.171.0)(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))':
+  '@tresjs/cientos@5.0.0-next.0(@tresjs/core@5.0.0-next.1(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3)))(@types/three@0.171.0)(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))':
     dependencies:
-      '@tresjs/core': https://pkg.pr.new/@tresjs/core@0e8ac2b(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
+      '@tresjs/core': 5.0.0-next.1(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
       '@vueuse/core': 12.8.2(typescript@5.8.3)
       camera-controls: 2.10.1(three@0.171.0)
       stats-gl: 2.4.2(@types/three@0.171.0)(three@0.171.0)
@@ -7603,7 +7601,7 @@ snapshots:
       - react
       - typescript
 
-  '@tresjs/core@https://pkg.pr.new/@tresjs/core@0e8ac2b(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))':
+  '@tresjs/core@5.0.0-next.1(three@0.171.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))':
     dependencies:
       '@alvarosabu/utils': 3.2.0
       '@vue/devtools-api': 7.7.6
