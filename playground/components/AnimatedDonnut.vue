@@ -7,10 +7,11 @@ const donutRef = ref()
 
 const { onBeforeRender } = useLoop()
 
-onBeforeRender(({ delta }) => {
+onBeforeRender(({ delta /* invalidate */ }) => {
   if (donutRef.value) {
     donutRef.value.rotation.x += delta
     donutRef.value.rotation.y += delta
+    // invalidate()
   }
 })
 </script>

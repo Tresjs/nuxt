@@ -55,7 +55,7 @@
   "dependencies": {
     "@nuxt/kit": "^3.16.0",
     "@nuxt/ui": "^2.21.0",
-    "@tresjs/core": "5.0.0-next.1",
+    "@tresjs/core": "5.0.0-next.3",
     "@unocss/nuxt": "^66.0.0",
     "defu": "^6.1.4",
     "mlly": "^1.7.4",
@@ -77,7 +77,7 @@
     "@nuxt/test-utils": "^3.18.0",
     "@nuxt/ui": "^2.20.0",
     "@release-it/conventional-changelog": "^9.0.3",
-    "@tresjs/cientos": "5.0.0-next.0",
+    "@tresjs/cientos": "5.0.0-next.2",
     "@types/node": "^22.15.21",
     "@types/three": "^0.171.0",
     "@unocss/nuxt": "^66.1.2",
