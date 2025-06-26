@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0-next.1](https://github.com/Tresjs/nuxt/compare/4.0.0...4.1.0-next.1) (2025-06-26)
+
+### Features
+
+* add pointer events to AnimatedDonnut and update core dependency ([8b6693f](https://github.com/Tresjs/nuxt/commit/8b6693fc55adc215c3381086e819b9f05489751b))
+## [4.0.0-next.0](https://github.com/Tresjs/nuxt/compare/4.0.0...4.1.0-next.1) (2025-02-22)
+
 ## [4.0.0](https://github.com/Tresjs/nuxt/compare/3.0.8...4.0.0) (2025-05-25)
 
 ### ⚠ BREAKING CHANGES
