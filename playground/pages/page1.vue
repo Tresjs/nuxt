@@ -2,12 +2,6 @@
 // for testing purposes with auto-import disabled
 // import { TresCanvas } from '#components'
 // import { onMounted, useRenderLoop } from '#imports'
-
-const { resume } = useRenderLoop()
-
-onMounted(() => {
-  resume()
-})
 </script>
 
 <template>
