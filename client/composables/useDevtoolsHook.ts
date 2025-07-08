@@ -180,8 +180,9 @@ function countObjectsInScene(scene: Scene) {
 export function useDevtoolsHook(): DevtoolsHookReturn {
   // Connect with Core
   const tresGlobalHook = {
-    cb(context: TresContext) {
-      scene.value = context.scene.value
+    cb(context) {
+      console.log('Devtools hook updated', context)
+      /* scene.value = context.scene.value
       scene.objects = countObjectsInScene(context.scene.value)
       Object.assign(gl.renderer.info.render, context.renderer.value.info.render)
       Object.assign(gl.renderer.info.memory, context.renderer.value.info.memory)
@@ -190,7 +191,7 @@ export function useDevtoolsHook(): DevtoolsHookReturn {
       gl.fps.accumulator = [...context.perf.fps.accumulator]
       Object.assign(gl.memory, context.perf.memory)
       gl.memory.accumulator = [...context.perf.memory.accumulator]
-      scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
+      scene.graph = getSceneGraph(context.scene.value as unknown as TresObject) */
       /*
       console.log('Devtools hook updated', context.renderer.value.info.render.triangles) */
     },

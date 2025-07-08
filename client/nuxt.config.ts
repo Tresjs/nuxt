@@ -4,11 +4,11 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/devtools-ui-kit',
-    '@unocss/nuxt',
     '@nuxt/ui',
     '@nuxt/icon',
   ],
   ssr: false,
+  css: ['~/assets/css/main.css'],
 
   app: {
     baseURL: '/__tres_nuxt_devtools',

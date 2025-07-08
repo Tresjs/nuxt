@@ -19,16 +19,14 @@ export function setupDevToolsUI(nuxt: Nuxt, resolver: Resolver) {
       )
     })
   }
-  // In local development, start a separate Nuxt Server and proxy to serve the client
+  // In local development, use Nitro to proxy to the separate Nuxt Server
   else {
-    nuxt.hook('vite:extendConfig', (config) => {
-      config.server = config.server || {}
-      config.server.proxy = config.server.proxy || {}
-      config.server.proxy[DEVTOOLS_UI_ROUTE] = {
-        target: `http://localhost:${DEVTOOLS_UI_LOCAL_PORT}${DEVTOOLS_UI_ROUTE}`,
-        changeOrigin: true,
-        followRedirects: true,
-        rewrite: path => path.replace(DEVTOOLS_UI_ROUTE, ''),
+    // Use Nitro hooks instead of vite:extendConfig for better compatibility with Nuxt 4
+    nuxt.hook('nitro:config', (nitroConfig) => {
+      nitroConfig.routeRules = nitroConfig.routeRules || {}
+      // Add a route rule to proxy the devtools route to the local development server
+      nitroConfig.routeRules[`${DEVTOOLS_UI_ROUTE}/**`] = {
+        proxy: `http://localhost:${DEVTOOLS_UI_LOCAL_PORT}${DEVTOOLS_UI_ROUTE}/**`,
       }
     })
   }

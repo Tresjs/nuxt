@@ -1,16 +1,22 @@
 <!-- eslint-disable max-len -->
 <script setup lang="ts">
 import { useDevtoolsClient } from '@nuxt/devtools-kit/iframe-client'
-import { useDevtoolsHook } from '../composables/useDevtoolsHook'
+// import { useDevtoolsHook } from '../composables/useDevtoolsHook'
 
-const client = useDevtoolsClient()
+// const client = useDevtoolsClient()
 
 // Scene Graph
-const { scene, memory, fps } = useDevtoolsHook()
+/* const { scene, memory, fps } = useDevtoolsHook() */
+const client = useDevtoolsClient()
+
+console.log(client)
 </script>
 
 <template>
-  <div class="relative n-bg-base flex flex-col h-screen">
+  <div>
+    <h1>Hello World</h1>
+  </div>
+  <!-- <div class="relative n-bg-base flex flex-col h-screen">
     <header
       class="p4 flex items-center justify-between hover:bg-active"
       border="b base"
@@ -89,5 +95,5 @@ const { scene, memory, fps } = useDevtoolsHook()
         Failed to connect to the client. Did you open this page inside Nuxt DevTools?
       </NTip>
     </div>
-  </div>
+  </div> -->
 </template>
