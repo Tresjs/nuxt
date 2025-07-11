@@ -4,17 +4,15 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/devtools-ui-kit',
-    '@nuxt/ui',
+    '@nuxt/ui-pro',
     '@nuxt/icon',
   ],
   ssr: false,
-  css: ['~/assets/css/main.css'],
 
   app: {
     baseURL: '/__tres_nuxt_devtools',
   },
-
-  compatibilityDate: '2024-12-19',
+  css: ['~/assets/css/main.css'],
 
   nitro: {
     output: {
@@ -27,6 +25,12 @@ export default defineNuxtConfig({
       include: [
         '@nuxt/devtools-kit/iframe-client',
       ],
+    },
+    server: {
+      hmr: {
+        // Instead of go through proxy, we directly connect real port of the client app
+        clientPort: +(process.env.PORT || 3300),
+      },
     },
   },
 

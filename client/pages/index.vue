@@ -14,7 +14,8 @@ console.log(client)
 
 <template>
   <div>
-    <h1>Hello World</h1>
+    <h1>Awiwi</h1>
+    <UButton>Add</UButton>
   </div>
   <!-- <div class="relative n-bg-base flex flex-col h-screen">
     <header

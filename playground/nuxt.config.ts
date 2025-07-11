@@ -1,14 +1,13 @@
 export default defineNuxtConfig({
-  modules: ['../src/module', '@nuxt/devtools'],
-  ssr: true,
+  modules: ['../src/module', '@nuxt/devtools', '@nuxt/ui-pro'],
 
-  compatibilityDate: '2024-07-17',
+  css: ['~/assets/css/main.css'],
 
   // for testing purposes: include some nuxt build tests
   nitro: {
     routeRules: {
-      '/page1': { ssr: false }, // <== client rendered page
-      '/page2': { prerender: true }, // <== server SSG page + payload
+      '/basic/simple': { ssr: false }, // <== client rendered page
+      '/basic/primitives': { prerender: true }, // <== server SSG page + payload
     },
   },
 
