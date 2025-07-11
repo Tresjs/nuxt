@@ -55,14 +55,50 @@ export default defineNuxtModule<ModuleOptions>({
       },
     ])
 
+    const pkg = await readPackageJSON(nuxt.options.rootDir)
+    const coreDeps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies }).filter(d => d.startsWith('@tresjs/'))
+
+    const mods = new Set([...options.modules, ...coreDeps])
+    // @tresjs/post-processing doesn't have default subpackage export,
+    // we need to import submodules manually here.
+    // The resolvePath call will not be able to resolve the entry file and will fail
+    // when reading the content to get the exports.
+    if (mods.has('@tresjs/post-processing')) {
+      mods.delete('@tresjs/post-processing')
+      mods.add('@tresjs/post-processing/three')
+      mods.add('@tresjs/post-processing/pmndrs')
+    }
+
     nuxt.hook('prepare:types', ({ references }) => {
       references.push({ types: '@tresjs/core' })
+      if (mods.has('@tresjs/post-processing/three')) {
+        references.push({ types: '@tresjs/post-processing/three' })
+      }
+      if (mods.has('@tresjs/post-processing/pmndrs')) {
+        references.push({ types: '@tresjs/post-processing/pmndrs' })
+      }
     })
 
     nuxt.options.vue.compilerOptions.isCustomElement = templateCompilerOptions.template.compilerOptions.isCustomElement
 
-    const pkg = await readPackageJSON(nuxt.options.rootDir)
-    const coreDeps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies }).filter(d => d.startsWith('@tresjs/'))
+    nuxt.options.vite.resolve = defu(nuxt.options.vite.resolve, {
+      dedupe: ['three'],
+    })
+
+    nuxt.options.vite.optimizeDeps = defu(nuxt.options.vite.optimizeDeps, {
+      include: ['three'],
+    })
+
+    const promises: Promise<void>[] = [
+      addComponent({
+        name: 'TresCanvas',
+        filePath: resolver.resolve('./runtime/TresCanvas.client.vue'),
+      }),
+      addComponent({
+        name: 'TresCanvas',
+        filePath: resolver.resolve('./runtime/TresCanvas.server.vue'),
+      }),
+    ]
 
     for (const mod of new Set([...options.modules, ...coreDeps])) {
       if (mod === '@tresjs/core' || mod === '@tresjs/nuxt') {
@@ -84,33 +120,16 @@ export default defineNuxtModule<ModuleOptions>({
           })
         }
         else {
-          addComponent({
+          promises.push(addComponent({
             name,
             filePath: mod,
             export: name,
-          })
+          }))
         }
       }
     }
 
-    nuxt.options.vite.resolve = defu(nuxt.options.vite.resolve, {
-      dedupe: ['three'],
-    })
-
-    nuxt.options.vite.optimizeDeps = defu(nuxt.options.vite.optimizeDeps, {
-      include: ['three'],
-    })
-
-    await Promise.all([
-      addComponent({
-        name: 'TresCanvas',
-        filePath: resolver.resolve('./runtime/TresCanvas.client.vue'),
-      }),
-      addComponent({
-        name: 'TresCanvas',
-        filePath: resolver.resolve('./runtime/TresCanvas.server.vue'),
-      }),
-    ])
+    await Promise.all(promises)
 
     if (options.devtools) {
       setupDevToolsUI(nuxt, resolver)
