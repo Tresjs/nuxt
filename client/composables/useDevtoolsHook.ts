@@ -116,9 +116,10 @@ const icons: Record<string, string> = {
 
 function createNode(object: TresObject) {
   const node: SceneGraphObject = {
-    name: object.name,
+    label: object.name || object.type,
     type: object.type,
     icon: icons[object.type.toLowerCase()] || 'i-carbon-cube',
+    defaultExpanded: object.isScene,
     position: {
       x: object.position.x,
       y: object.position.y,
@@ -132,7 +133,7 @@ function createNode(object: TresObject) {
     children: [],
   }
 
-  if (object.type === 'Mesh') {
+  /* if (object.type === 'Mesh') {
     node.material = object.material
     node.geometry = object.geometry
     node.scale = {
@@ -145,7 +146,7 @@ function createNode(object: TresObject) {
   if (object.type.includes('Light')) {
     node.color = object.color.getHexString()
     node.intensity = object.intensity
-  }
+  } */
   return node
 }
 
@@ -180,20 +181,16 @@ function countObjectsInScene(scene: Scene) {
 export function useDevtoolsHook(): DevtoolsHookReturn {
   // Connect with Core
   const tresGlobalHook = {
-    cb(context) {
-      console.log('Devtools hook updated', context)
-      /* scene.value = context.scene.value
+    cb({ context, performance }) {
       scene.objects = countObjectsInScene(context.scene.value)
-      Object.assign(gl.renderer.info.render, context.renderer.value.info.render)
-      Object.assign(gl.renderer.info.memory, context.renderer.value.info.memory)
-      gl.renderer.info.programs = [...(context.renderer.value.info.programs || []) as unknown as ProgramObject[]]
-      Object.assign(gl.fps, context.perf.fps)
-      gl.fps.accumulator = [...context.perf.fps.accumulator]
-      Object.assign(gl.memory, context.perf.memory)
-      gl.memory.accumulator = [...context.perf.memory.accumulator]
-      scene.graph = getSceneGraph(context.scene.value as unknown as TresObject) */
-      /*
-      console.log('Devtools hook updated', context.renderer.value.info.render.triangles) */
+      scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
+      Object.assign(gl.fps, performance.fps)
+      gl.fps.accumulator = [...performance.fps.accumulator]
+      Object.assign(gl.memory, performance.memory)
+      gl.memory.accumulator = [...performance.memory.accumulator]
+      Object.assign(gl.renderer.info.render, context.renderer.instance.info.render)
+      Object.assign(gl.renderer.info.memory, context.renderer.instance.info.memory)
+      gl.renderer.info.programs = [...(context.renderer.instance.info.programs || []) as unknown as ProgramObject[]]
     },
   }
 

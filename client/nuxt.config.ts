@@ -19,7 +19,6 @@ export default defineNuxtConfig({
       publicDir: resolve(__dirname, '../dist/client'),
     },
   },
-
   vite: {
     optimizeDeps: {
       include: [
@@ -40,5 +39,8 @@ export default defineNuxtConfig({
     aliases: {
       mesh: 'carbon:cube',
     },
+  },
+  uiPro: {
+    license: process.env.NUXT_UI_PRO_LICENSE,
   },
 })
