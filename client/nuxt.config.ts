@@ -3,8 +3,9 @@ import { resolve } from 'pathe'
 export default defineNuxtConfig({
 
   modules: [
-    '@nuxt/devtools-ui-kit',
     '@nuxt/ui-pro',
+    '@vueuse/nuxt',
+    /*   '@nuxt/devtools-ui-kit', */
     '@nuxt/icon',
   ],
   ssr: false,
@@ -33,13 +34,6 @@ export default defineNuxtConfig({
     },
   },
 
-  icon: {
-    size: '24px', // default <Icon> size applied
-    class: 'icon', // default <Icon> class applied
-    aliases: {
-      mesh: 'carbon:cube',
-    },
-  },
   uiPro: {
     license: process.env.NUXT_UI_PRO_LICENSE,
   },

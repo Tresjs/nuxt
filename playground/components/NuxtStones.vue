@@ -1,52 +1,80 @@
 <script setup lang="ts">
 import { MeshBasicMaterial } from 'three'
-import type { Texture } from 'three'
 
-const { nodes } = await useGLTF('/nuxt-stones/nuxt-stones.glb')
-const stonesTexture = await useTexture(['/nuxt-stones/RockBaked.png'])
-const littleStonesTexture = await useTexture(['/nuxt-stones/LittleRocksBaked.png'])
+const { nodes } = useGLTF('/models/nuxt-stones/nuxt-stones.glb')
+const stone = computed(() => nodes.value.Stone)
+const stoneCarved = computed(() => nodes.value.StoneCarved)
+const logo = computed(() => nodes.value.Logo)
+const orbs = computed(() => nodes.value.Orbs)
+const littleStones = computed(() => Object.values(nodes.value).filter(node => node.name.includes('Stone00')))
 
-stonesTexture.flipY = false
-littleStonesTexture.flipY = false
+const { state: stonesTexture } = useTexture('/models/nuxt-stones/RockBaked.png')
+const { state: littleStonesTexture } = useTexture('/models/nuxt-stones/LittleRocksBaked.png')
 
-const stoneBakedMaterial = new MeshBasicMaterial({
-  map: stonesTexture as Texture,
+watch(stonesTexture, (texture) => {
+  texture.flipY = false
 })
 
-const LittleStonesBakedMaterial = new MeshBasicMaterial({
-  map: littleStonesTexture as Texture,
+watch(littleStonesTexture, (texture) => {
+  texture.flipY = false
 })
 
-nodes.Stone.material = stoneBakedMaterial
-nodes.StoneCarved.material = stoneBakedMaterial
+const stoneBakedMaterial = computed(() => new MeshBasicMaterial({
+  map: stonesTexture.value,
+}))
 
-nodes.Logo.material.emissiveIntensity = 10
+const littleStonesBakedMaterial = computed(() => new MeshBasicMaterial({
+  map: littleStonesTexture.value,
+}))
 
-const littleStones = Object.values(nodes).filter(node => node.name.includes('Stone00'))
-
-littleStones.forEach((stone) => {
-  stone.material = LittleStonesBakedMaterial
+watch([stone, stoneCarved, stoneBakedMaterial], ([stone, stoneCarved, texture]) => {
+  if (stone) {
+    stone.material = texture
+  }
+  if (stoneCarved) {
+    stoneCarved.material = texture
+  }
 })
 
-const { onLoop } = useRenderLoop()
-
-onLoop(({ elapsed }) => {
-  nodes.Logo.material.emissiveIntensity = Math.sin(elapsed) * 6 + 7
+watch([littleStones, littleStonesBakedMaterial], ([littleStones, texture]) => {
+  littleStones.forEach((stone) => {
+    stone.material = texture
+  })
 })
 
-const ctx = useNuxtApp()
+watch(logo, (logo) => {
+  logo.material.emissiveIntensity = 10
+})
 
-console.log({ ctx, useFetch: await useFetch('api/url') })
+const { onBeforeRender } = useLoop()
+
+onBeforeRender(({ elapsed }) => {
+  if (logo.value) {
+    logo.value.material.emissiveIntensity = Math.sin(elapsed) * 6 + 7
+  }
+})
 </script>
 
 <template>
-  <primitive :object="nodes.Orbs" />
-  <primitive :object="nodes.Logo" />
-  <primitive :object="nodes.Stone" />
-  <primitive :object="nodes.StoneCarved" />
   <primitive
-    v-for="stone in littleStones"
-    :key="stone.id"
+    v-if="orbs"
+    :object="orbs"
+  />
+  <primitive
+    v-if="logo"
+    :object="logo"
+  />
+  <primitive
+    v-if="stone"
     :object="stone"
+  />
+  <primitive
+    v-if="stoneCarved"
+    :object="stoneCarved"
+  />
+  <primitive
+    v-for="littleStone in littleStones"
+    :key="littleStone.id"
+    :object="littleStone"
   />
 </template>

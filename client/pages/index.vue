@@ -13,7 +13,7 @@ const client = useDevtoolsClient()
 
 const { scene, memory, fps } = useDevtoolsHook()
 
-const items = [
+const tabs = [
   {
     label: 'Scene Graph',
     description: 'Make changes to your account here. Click save when you\'re done.',
@@ -34,9 +34,10 @@ const items = [
     class="pattern-bg "
   >
     <TheHeader />
+
     <main class="bg-(--ui-bg) p-8 min-h-[calc(100vh-var(--ui-header-height))] max-w-screen-xl mx-auto pt-2 bg-default">
       <UTabs
-        :items="items"
+        :items="tabs"
         color="primary"
         size="lg"
         variant="link"
@@ -44,18 +45,11 @@ const items = [
         class="gap-4 w-full"
       >
         <template #scene-graph>
-          <div class="grid grid-cols-2 gap-4">
-            <UTree
-              :items="[scene.graph]"
-            />
-            <div>
-              <pre>{{ scene.graph }}</pre>
-            </div>
-          </div>
+          <SceneGraph />
           <!-- <SceneGraphItem :item="scene.graph" /> -->
         </template>
         <template #performance>
-          <PerformanceMonitor />
+          <!-- <PerformanceMonitor /> -->
         </template>
       </UTabs>
     </main>

@@ -1,30 +1,14 @@
-import type { BufferGeometry, Material, Scene, WebGLRenderer } from 'three'
+import type { Scene, WebGLRenderer } from 'three'
 
 export interface SceneGraphObject {
   name: string
+  label: string
   type: string
   icon: string
-  position: {
-    x: number
-    y: number
-    z: number
-  }
-  rotation: {
-    x: number
-    y: number
-    z: number
-  }
-  scale?: {
-    x: number
-    y: number
-    z: number
-  }
-  color?: string
-  intensity?: number
-  material?: Material
-  geometry?: BufferGeometry
+  defaultExpanded: boolean
+  memorySize: number
   children: SceneGraphObject[]
-  [key: string]: unknown
+  onSelect: () => void
 }
 
 export interface MemoryUsageData {
@@ -65,4 +49,18 @@ export interface ProgramObject {
   uniforms: Record<string, { value: unknown }>
   attributes: Record<string, { value: unknown }>
   isProgram: true
+}
+
+/**
+ * Node type for the property inspector graph.
+ */
+export interface InspectorNode {
+  /** Property key or array index */
+  label: string
+  /** Type of the value (string, number, object, array, boolean, null, undefined) */
+  type: string
+  /** Primitive value or summary for objects/arrays */
+  value?: string | number | boolean | null
+  /** Children nodes for objects/arrays */
+  children?: InspectorNode[]
 }

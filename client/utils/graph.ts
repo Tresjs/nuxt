@@ -1,0 +1,128 @@
+import type { TresObject } from '@tresjs/core'
+import type { SceneGraphObject, InspectorNode } from '../types'
+import { calculateMemoryUsage } from './perf'
+import { hash } from 'ohash'
+
+const iconsMap: Record<string, string> = {
+  scene: 'i-carbon-web-services-container',
+  perspectivecamera: 'i-carbon-video',
+  mesh: 'i-carbon-cube',
+  group: 'i-carbon-group-objects',
+  ambientlight: 'i-carbon-light',
+  directionallight: 'i-carbon-light',
+  spotlight: 'i-iconoir-project-curve-3d',
+  position: 'i-iconoir-axes',
+  rotation: 'i-carbon-rotate-clockwise',
+  scale: 'i-iconoir-ellipse-3d-three-points',
+  bone: 'i-ph-bone',
+  skinnedmesh: 'carbon:3d-print-mesh',
+} as const
+
+export function getObjectHash(object: TresObject) {
+  return hash(object)
+}
+
+function createSceneGraphNode(object: TresObject) {
+  const node: SceneGraphObject = {
+    name: object.name,
+    value: object,
+    label: object.type,
+    type: object.type,
+    icon: iconsMap[object.type.toLowerCase()] || 'i-carbon-cube',
+    defaultExpanded: object.isScene,
+    memorySize: Math.round(calculateMemoryUsage(object) / 1024),
+    children: [],
+  }
+
+  /* if (object.type === 'Mesh') {
+    node.material = object.material
+    node.geometry = object.geometry
+    node.scale = {
+      x: object.scale.x,
+      y: object.scale.y,
+      z: object.scale.z,
+    }
+  }
+
+  if (object.type.includes('Light')) {
+    node.color = object.color.getHexString()
+    node.intensity = object.intensity
+  } */
+  return node
+}
+
+export function getSceneGraph(scene: TresObject) {
+  function buildGraph(object: TresObject, node: SceneGraphObject) {
+    object.children.forEach((child: TresObject) => {
+      const childNode = createSceneGraphNode(child)
+      node.children.push(childNode)
+      buildGraph(child, childNode)
+    })
+  }
+
+  const root = createSceneGraphNode(scene)
+  buildGraph(scene, root)
+
+  return root
+}
+
+// inspectorGraph
+
+/**
+ * Recursively builds an inspector graph for any object, including arrays and nested objects.
+ * Avoids circular references using a WeakSet.
+ * Skips functions and symbols.
+ * @param obj The object to inspect
+ * @param label The label for the current node
+ * @param seen Set of already visited objects to avoid circular refs
+ * @returns InspectorNode
+ */
+export function getInspectorGraph(obj: unknown, label = 'root', seen = new WeakSet()): InspectorNode {
+  // Handle primitives and null
+  const valueType = typeof obj
+  if (obj === null || valueType !== 'object') {
+    return {
+      label,
+      type: valueType,
+      trailingIcon: '',
+      value: obj as string | number | boolean | null,
+    }
+  }
+
+  // Avoid circular references
+  if (seen.has(obj as object)) {
+    return {
+      label,
+      type: 'circular',
+      value: '[Circular]',
+    }
+  }
+  seen.add(obj as object)
+
+  // Handle arrays
+  if (Array.isArray(obj)) {
+    return {
+      label,
+      type: 'array',
+      trailingIcon: '',
+      value: `Array[${obj.length}]`,
+      children: obj.map((item, idx) => getInspectorGraph(item, String(idx), seen)),
+    }
+  }
+
+  // Handle objects
+  const children: InspectorNode[] = []
+  for (const key of Object.keys(obj as object)) {
+    // Skip functions and symbols
+    const val = (obj as Record<string, unknown>)[key]
+    if (typeof val === 'function') continue
+    children.push(getInspectorGraph(val, key, seen))
+  }
+  return {
+    label,
+    type: 'object',
+    trailingIcon: '',
+    value: (obj as object).constructor?.name || 'Object',
+    children,
+  }
+}

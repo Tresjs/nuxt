@@ -1,7 +1,8 @@
 export default defineNuxtConfig({
-  modules: ['../src/module', '@nuxt/devtools', '@nuxt/ui-pro'],
+  modules: ['../src/module', '@nuxt/ui-pro', '@nuxt/devtools'],
 
   css: ['~/assets/css/main.css'],
+  compatibilityDate: '2025-07-16',
 
   // for testing purposes: include some nuxt build tests
   nitro: {

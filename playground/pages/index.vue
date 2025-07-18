@@ -43,6 +43,7 @@ const groupedRoutes = computed<GroupedRoutes[]>(() => {
 const iconMap = {
   basic: 'i-lucide-shapes',
   advanced: 'i-lucide-rocket',
+  loaders: 'i-lucide-cat',
 }
 </script>
 

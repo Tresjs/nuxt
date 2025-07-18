@@ -1,8 +1,9 @@
-import type { TresContext, TresObject } from '@tresjs/core'
+import type { TresObject } from '@tresjs/core'
 import type { Scene } from 'three'
 import type { SceneGraphObject, ProgramObject } from '../types'
-import { reactive } from '#imports'
-import type { UnwrapNestedRefs } from '#imports'
+import { reactive, shallowReactive } from '#imports'
+import type { UnwrapNestedRefs } from 'vue'
+import { getObjectHash, getSceneGraph } from '../utils/graph'
 
 export interface FPSState {
   value: number
@@ -49,20 +50,23 @@ export interface DevtoolsHookReturn {
     objects: number
     graph: Record<string, unknown>
     value: Scene | undefined
+    selected: TresObject | undefined
   }
   fps: FPSState
   memory: MemoryState
   renderer: RendererState
 }
 
-const scene = reactive<{
+const scene = shallowReactive<{
   objects: number
-  graph: Record<string, unknown>
+  graph: SceneGraphObject | null
   value: Scene | undefined
+  selected: TresObject | undefined
 }>({
   objects: 0,
-  graph: {},
+  graph: null,
   value: undefined,
+  selected: undefined,
 })
 
 const gl = {
@@ -99,72 +103,6 @@ const gl = {
   }),
 } satisfies RendererType
 
-const icons: Record<string, string> = {
-  scene: 'i-carbon-web-services-container',
-  perspectivecamera: 'i-carbon-video',
-  mesh: 'i-carbon-cube',
-  group: 'i-carbon-group-objects',
-  ambientlight: 'i-carbon-light',
-  directionallight: 'i-carbon-light',
-  spotlight: 'i-iconoir-project-curve-3d',
-  position: 'i-iconoir-axes',
-  rotation: 'i-carbon-rotate-clockwise',
-  scale: 'i-iconoir-ellipse-3d-three-points',
-  bone: 'i-ph-bone',
-  skinnedmesh: 'carbon:3d-print-mesh',
-}
-
-function createNode(object: TresObject) {
-  const node: SceneGraphObject = {
-    label: object.name || object.type,
-    type: object.type,
-    icon: icons[object.type.toLowerCase()] || 'i-carbon-cube',
-    defaultExpanded: object.isScene,
-    position: {
-      x: object.position.x,
-      y: object.position.y,
-      z: object.position.z,
-    },
-    rotation: {
-      x: object.rotation.x,
-      y: object.rotation.y,
-      z: object.rotation.z,
-    },
-    children: [],
-  }
-
-  /* if (object.type === 'Mesh') {
-    node.material = object.material
-    node.geometry = object.geometry
-    node.scale = {
-      x: object.scale.x,
-      y: object.scale.y,
-      z: object.scale.z,
-    }
-  }
-
-  if (object.type.includes('Light')) {
-    node.color = object.color.getHexString()
-    node.intensity = object.intensity
-  } */
-  return node
-}
-
-function getSceneGraph(scene: TresObject) {
-  function buildGraph(object: TresObject, node: SceneGraphObject) {
-    object.children.forEach((child: TresObject) => {
-      const childNode = createNode(child)
-      node.children.push(childNode)
-      buildGraph(child, childNode)
-    })
-  }
-
-  const root = createNode(scene)
-  buildGraph(scene, root)
-
-  return root
-}
-
 function countObjectsInScene(scene: Scene) {
   let count = 0
 
@@ -178,28 +116,88 @@ function countObjectsInScene(scene: Scene) {
   return count
 }
 
-export function useDevtoolsHook(): DevtoolsHookReturn {
+export interface DevtoolsState {
+  scene: {
+    objects: number
+    graph: SceneGraphObject | null
+    value: Scene | undefined
+    selected: TresObject | undefined
+  }
+  fps: FPSState
+  memory: MemoryState
+  renderer: RendererState
+}
+
+function _useDevtoolsHook(): DevtoolsHookReturn {
+  const state: DevtoolsState = {
+    scene: shallowReactive({
+      objects: 0,
+      graph: null,
+      value: undefined,
+      selected: undefined,
+    }),
+    fps: {
+      value: 0,
+      accumulator: [],
+      lastLoggedTime: Date.now(),
+      logInterval: 1000,
+    },
+    memory: {
+      currentMem: 0,
+      averageMem: 0,
+      maxMemory: 0,
+      allocatedMem: 0,
+      accumulator: [],
+      lastLoggedTime: Date.now(),
+      logInterval: 1000,
+    },
+    renderer: {
+      info: {
+        render: {
+          frame: 0,
+          calls: 0,
+          triangles: 0,
+          points: 0,
+          lines: 0,
+        },
+        memory: {
+          geometries: 0,
+          textures: 0,
+        },
+        programs: [],
+      },
+    },
+  }
+
   // Connect with Core
   const tresGlobalHook = {
     cb({ context, performance }) {
-      scene.objects = countObjectsInScene(context.scene.value)
-      scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
-      Object.assign(gl.fps, performance.fps)
-      gl.fps.accumulator = [...performance.fps.accumulator]
-      Object.assign(gl.memory, performance.memory)
-      gl.memory.accumulator = [...performance.memory.accumulator]
-      Object.assign(gl.renderer.info.render, context.renderer.instance.info.render)
-      Object.assign(gl.renderer.info.memory, context.renderer.instance.info.memory)
-      gl.renderer.info.programs = [...(context.renderer.instance.info.programs || []) as unknown as ProgramObject[]]
+      if (state?.scene?.value === undefined) {
+        state.scene.value = context.scene.value
+        state.scene.objects = countObjectsInScene(context.scene.value)
+        state.scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
+      }
+      /* else {
+        const hasChanged = getObjectHash(context.scene.value) !== getObjectHash(state.scene.value as unknown as TresObject)
+        if (hasChanged) {
+          state.scene.value = context.scene.value
+          state.scene.objects = countObjectsInScene(context.scene.value)
+          state.scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
+        }
+      } */
+      Object.assign(state.fps, performance.fps)
+      state.fps.accumulator = [...performance.fps.accumulator]
+      Object.assign(state.memory, performance.memory)
+      state.memory.accumulator = [...performance.memory.accumulator]
+      Object.assign(state.renderer.info.render, context.renderer.instance.info.render)
+      Object.assign(state.renderer.info.memory, context.renderer.instance.info.memory)
+      state.renderer.info.programs = [...(context.renderer.instance.info.programs || []) as unknown as ProgramObject[]]
     },
   }
 
   window.parent.parent.__TRES__DEVTOOLS__ = tresGlobalHook
 
-  return {
-    scene,
-    fps: gl.fps,
-    memory: gl.memory,
-    renderer: gl.renderer,
-  }
+  return state
 }
+
+export const useDevtoolsHook = createSharedComposable(_useDevtoolsHook)
