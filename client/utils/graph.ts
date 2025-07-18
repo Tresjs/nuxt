@@ -74,17 +74,18 @@ export function getSceneGraph(scene: TresObject) {
  * Skips functions and symbols.
  * @param obj The object to inspect
  * @param label The label for the current node
+ * @param path The current path to this property
  * @param seen Set of already visited objects to avoid circular refs
  * @returns InspectorNode
  */
-export function getInspectorGraph(obj: unknown, label = 'root', seen = new WeakSet()): InspectorNode {
+export function getInspectorGraph(obj: unknown, label = 'root', path = 'root', seen = new WeakSet()): InspectorNode {
   // Handle primitives and null
   const valueType = typeof obj
   if (obj === null || valueType !== 'object') {
     return {
       label,
       type: valueType,
-      trailingIcon: '',
+      path,
       value: obj as string | number | boolean | null,
     }
   }
@@ -94,6 +95,7 @@ export function getInspectorGraph(obj: unknown, label = 'root', seen = new WeakS
     return {
       label,
       type: 'circular',
+      path,
       value: '[Circular]',
     }
   }
@@ -104,25 +106,32 @@ export function getInspectorGraph(obj: unknown, label = 'root', seen = new WeakS
     return {
       label,
       type: 'array',
-      trailingIcon: '',
+      path,
       value: `Array[${obj.length}]`,
-      children: obj.map((item, idx) => getInspectorGraph(item, String(idx), seen)),
+      children: obj.map((item, idx) => getInspectorGraph(item, String(idx), `${path}[${idx}]`, seen)),
     }
   }
 
   // Handle objects
   const children: InspectorNode[] = []
   for (const key of Object.keys(obj as object)) {
+    // Skip Vue-specific properties and internal properties
+    if (key.startsWith('_') || key.startsWith('$') || key === '__v_isRef' || key === '__v_isReactive' || key === '__v_isShallow' || key === '__v_raw' || key === '__v_isReadonly') {
+      continue
+    }
+
     // Skip functions and symbols
     const val = (obj as Record<string, unknown>)[key]
     if (typeof val === 'function') continue
-    children.push(getInspectorGraph(val, key, seen))
+    const childPath = path === 'root' ? key : `${path}.${key}`
+    children.push(getInspectorGraph(val, key, childPath, seen))
   }
   return {
     label,
     type: 'object',
-    trailingIcon: '',
+    path,
     value: (obj as object).constructor?.name || 'Object',
     children,
+    expanded: path === 'root' ? true : false,
   }
 }

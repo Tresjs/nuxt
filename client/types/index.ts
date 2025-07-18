@@ -9,6 +9,7 @@ export interface SceneGraphObject {
   memorySize: number
   children: SceneGraphObject[]
   onSelect: () => void
+  value?: unknown
 }
 
 export interface MemoryUsageData {
@@ -61,6 +62,8 @@ export interface InspectorNode {
   type: string
   /** Primitive value or summary for objects/arrays */
   value?: string | number | boolean | null
+  /** Full path to this property (e.g., "position.x", "scale.y", "rotation.z") */
+  path: string
   /** Children nodes for objects/arrays */
   children?: InspectorNode[]
 }
