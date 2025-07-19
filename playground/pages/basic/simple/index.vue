@@ -15,10 +15,12 @@ const { clearColor } = useControls({
       :clear-color="clearColor"
     >
       <TresPerspectiveCamera />
-      <TresMesh>
-        <TresBoxGeometry />
-        <TresMeshNormalMaterial />
-      </TresMesh>
+      <TresGroup>
+        <TresMesh>
+          <TresBoxGeometry />
+          <TresMeshNormalMaterial />
+        </TresMesh>
+      </TresGroup>
       <OrbitControls />
     </TresCanvas>
   </div>

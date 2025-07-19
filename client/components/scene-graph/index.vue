@@ -1,15 +1,30 @@
 <script setup lang="ts">
-import { getInspectorGraph } from '~/utils/graph'
+import { createHighlightMesh, getInspectorGraph } from '~/utils/graph'
 import { useDevtoolsHook } from '~/composables/useDevtoolsHook'
 import type { InspectorNode } from '~/client/types'
+import type { TresObject } from '@tresjs/core'
+import type { Mesh } from 'three'
 // import { PerspectiveCamera } from 'three'
 
 const { scene } = useDevtoolsHook()
 
 const selectedObject = shallowRef<unknown>(null)
+const highlightMesh = shallowRef<Mesh | null>(null)
+function updateSelectedObject(object: TresObject) {
+  /* const highlightMesh = scene.value?.children.find(child => child.type === 'HighlightMesh')
+  if (highlightMesh) {
+    scene.value?.remove(highlightMesh)
+  }
+ */
+  if (selectedObject.value) {
+    selectedObject.value.remove(highlightMesh.value)
+  }
+  if (object && object.isMesh) {
+    highlightMesh.value = createHighlightMesh(object as TresObject)
+    object.add(toValue(highlightMesh))
+  }
 
-function onUpdateModelValue({ value }: { value: unknown }) {
-  selectedObject.value = value
+  selectedObject.value = object
 }
 
 const inspectorGraph = computed(() => {
@@ -18,10 +33,6 @@ const inspectorGraph = computed(() => {
 
 const itemsForSceneGraph = computed(() => {
   return [scene.graph]
-})
-
-watch(inspectorGraph, (newVal) => {
-  console.log('inspectorGraph', newVal)
 })
 
 /* // Reference to the original object for modifications
@@ -218,16 +229,18 @@ const handleInputKeydown = (event: KeyboardEvent): void => {
 </script>
 
 <template>
-  <div class="grid grid-cols-2 gap-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div>
       <UTree
         v-if="scene.value"
-        :value-key="'key'"
         :items="itemsForSceneGraph"
-        @update:model-value="onUpdateModelValue"
+        :value-key="'key'"
       >
         <template #item-label="{ item }">
-          <div class="flex gap-2">
+          <div
+            class="flex gap-2"
+            @click="updateSelectedObject(item.value)"
+          >
             {{ item.label }}
             <UBadge
               v-if="item.name"

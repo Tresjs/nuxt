@@ -2,6 +2,9 @@ import type { TresObject } from '@tresjs/core'
 import type { SceneGraphObject, InspectorNode } from '../types'
 import { calculateMemoryUsage } from './perf'
 import { hash } from 'ohash'
+import type { Mesh } from 'three'
+import { DoubleSide, MeshBasicMaterial } from 'three'
+import { HighlightMesh } from './highlight'
 
 const iconsMap: Record<string, string> = {
   scene: 'i-carbon-web-services-container',
@@ -55,6 +58,9 @@ function createSceneGraphNode(object: TresObject) {
 export function getSceneGraph(scene: TresObject) {
   function buildGraph(object: TresObject, node: SceneGraphObject) {
     object.children.forEach((child: TresObject) => {
+      if (child.type === 'HighlightMesh') {
+        return
+      }
       const childNode = createSceneGraphNode(child)
       node.children.push(childNode)
       buildGraph(child, childNode)
@@ -138,4 +144,19 @@ export function getInspectorGraph(obj: unknown, label = 'root', path = 'root', s
     defaultExpanded: path === 'root',
     children,
   }
+}
+
+export function createHighlightMesh(object: TresObject): Mesh {
+  const highlightMaterial = new MeshBasicMaterial({
+    color: 0xA7E6D7, // Highlight color, e.g., yellow
+    transparent: true,
+    opacity: 0.2,
+    depthTest: false, // So the highlight is always visible
+    side: DoubleSide, // To e
+  })
+  // Clone the geometry of the object. You might need a more complex approach
+  // if the object's geometry is not straightforward.
+  const highlightMesh = new HighlightMesh(object.geometry.clone(), highlightMaterial)
+
+  return highlightMesh
 }
