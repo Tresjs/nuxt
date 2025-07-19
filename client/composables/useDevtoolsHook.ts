@@ -172,10 +172,13 @@ function _useDevtoolsHook(): DevtoolsHookReturn {
   // Connect with Core
   const tresGlobalHook = {
     cb({ context, performance }) {
-      if (state?.scene?.value === undefined) {
+      if (context.scene.value.children.length > 0) {
         state.scene.value = context.scene.value
         state.scene.objects = countObjectsInScene(context.scene.value)
         state.scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
+      }
+      else {
+        state.scene.value = null
       }
       /* else {
         const hasChanged = getObjectHash(context.scene.value) !== getObjectHash(state.scene.value as unknown as TresObject)

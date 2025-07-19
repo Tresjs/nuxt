@@ -1,6 +1,7 @@
 import type { Scene, WebGLRenderer } from 'three'
 
 export interface SceneGraphObject {
+  key: string
   name: string
   label: string
   type: string
@@ -64,6 +65,8 @@ export interface InspectorNode {
   value?: string | number | boolean | null
   /** Full path to this property (e.g., "position.x", "scale.y", "rotation.z") */
   path: string
+  /** Whether this node should be expanded by default */
+  defaultExpanded?: boolean
   /** Children nodes for objects/arrays */
   children?: InspectorNode[]
 }

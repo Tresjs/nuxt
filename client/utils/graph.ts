@@ -26,6 +26,7 @@ function createSceneGraphNode(object: TresObject) {
   const node: SceneGraphObject = {
     name: object.name,
     value: object,
+    key: object.uuid,
     label: object.type,
     type: object.type,
     icon: iconsMap[object.type.toLowerCase()] || 'i-carbon-cube',
@@ -87,6 +88,7 @@ export function getInspectorGraph(obj: unknown, label = 'root', path = 'root', s
       type: valueType,
       path,
       value: obj as string | number | boolean | null,
+      defaultExpanded: path === 'root',
     }
   }
 
@@ -97,6 +99,7 @@ export function getInspectorGraph(obj: unknown, label = 'root', path = 'root', s
       type: 'circular',
       path,
       value: '[Circular]',
+      defaultExpanded: path === 'root',
     }
   }
   seen.add(obj as object)
@@ -108,6 +111,7 @@ export function getInspectorGraph(obj: unknown, label = 'root', path = 'root', s
       type: 'array',
       path,
       value: `Array[${obj.length}]`,
+      defaultExpanded: path === 'root',
       children: obj.map((item, idx) => getInspectorGraph(item, String(idx), `${path}[${idx}]`, seen)),
     }
   }
@@ -131,7 +135,7 @@ export function getInspectorGraph(obj: unknown, label = 'root', path = 'root', s
     type: 'object',
     path,
     value: (obj as object).constructor?.name || 'Object',
+    defaultExpanded: path === 'root',
     children,
-    expanded: path === 'root' ? true : false,
   }
 }

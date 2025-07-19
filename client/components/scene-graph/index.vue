@@ -8,12 +8,20 @@ const { scene } = useDevtoolsHook()
 
 const selectedObject = shallowRef<unknown>(null)
 
-function onUpdateModelValue({ value }) {
+function onUpdateModelValue({ value }: { value: unknown }) {
   selectedObject.value = value
 }
 
 const inspectorGraph = computed(() => {
   return getInspectorGraph(selectedObject.value)
+})
+
+const itemsForSceneGraph = computed(() => {
+  return [scene.graph]
+})
+
+watch(inspectorGraph, (newVal) => {
+  console.log('inspectorGraph', newVal)
 })
 
 /* // Reference to the original object for modifications
@@ -211,33 +219,44 @@ const handleInputKeydown = (event: KeyboardEvent): void => {
 
 <template>
   <div class="grid grid-cols-2 gap-4">
-    <UTree
-      v-if="scene.graph"
-      :items="[scene.graph]"
-      @update:model-value="onUpdateModelValue"
-    >
-      <template #item-label="{ item }">
-        <div class="flex gap-2">
-          {{ item.label }}
-          <UBadge
-            v-if="item.name"
-            color="primary"
-            size="sm"
-            variant="subtle"
-          >
-            {{ item.name }}
-          </UBadge>
-          <UBadge
-            v-if="item.memorySize > 0"
-            color="warning"
-            size="sm"
-            variant="subtle"
-          >
-            {{ item.memorySize }} KB
-          </UBadge>
-        </div>
-      </template>
-    </UTree>
+    <div>
+      <UTree
+        v-if="scene.value"
+        :value-key="'key'"
+        :items="itemsForSceneGraph"
+        @update:model-value="onUpdateModelValue"
+      >
+        <template #item-label="{ item }">
+          <div class="flex gap-2">
+            {{ item.label }}
+            <UBadge
+              v-if="item.name"
+              color="primary"
+              size="sm"
+              variant="subtle"
+            >
+              {{ item.name }}
+            </UBadge>
+            <UBadge
+              v-if="item.memorySize > 0"
+              color="warning"
+              size="sm"
+              variant="subtle"
+            >
+              {{ item.memorySize }} KB
+            </UBadge>
+          </div>
+        </template>
+      </UTree>
+      <UAlert
+        v-else
+        color="neutral"
+        variant="subtle"
+        title="No scene available"
+        description="Please open a view with a scene to view its graph."
+        icon="i-lucide-terminal"
+      />
+    </div>
     <div>
       <UTree
         v-if="selectedObject"
@@ -245,7 +264,6 @@ const handleInputKeydown = (event: KeyboardEvent): void => {
         :expanded-icon="'i-tabler:caret-down-filled'"
         :collapsed-icon="'i-tabler:caret-right-filled'"
         :trailing-icon="''"
-        :default-expanded="['root']"
         :ui="{
           root: 'relative isolate font-mono text-xs text-gray-500',
         }"
