@@ -29,7 +29,7 @@ const toggleExpanded = () => {
 // Value utilities
 const getValueClass = (value: unknown): string => {
   if (typeof value === 'boolean') return 'text-blue-500'
-  if (typeof value === 'number') return 'text-green-500' 
+  if (typeof value === 'number') return 'text-green-500'
   if (typeof value === 'string') return 'text-red-500'
   if (typeof value === 'undefined') return 'text-gray-400'
   return 'text-gray-600'
@@ -139,23 +139,23 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
 <template>
   <div class="font-mono text-xs text-gray-500">
     <!-- Current node -->
-    <div 
+    <div
       :style="indentStyle"
       class="flex items-center py-0.5 hover:bg-gray-50 group"
       :class="{ 'cursor-pointer': hasChildren }"
     >
       <!-- Expand/collapse icon -->
-      <div 
+      <div
         v-if="hasChildren"
         class="mr-1 w-4 h-4 flex items-center justify-center"
         @click="toggleExpanded"
       >
-        <UIcon 
+        <UIcon
           :name="isExpanded ? 'i-tabler:caret-down-filled' : 'i-tabler:caret-right-filled'"
           class="w-3 h-3 text-gray-400"
         />
       </div>
-      <div 
+      <div
         v-else
         class="mr-1 w-4 h-4"
       />
@@ -164,7 +164,7 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
       <div class="flex items-center gap-1 flex-1 min-w-0">
         <!-- Object/Array display -->
         <template v-if="node.type === 'object' || node.type === 'array'">
-          <span 
+          <span
             class="cursor-pointer select-none"
             @click="hasChildren ? toggleExpanded() : undefined"
           >

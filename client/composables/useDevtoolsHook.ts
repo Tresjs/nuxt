@@ -2,8 +2,9 @@ import type { TresObject } from '@tresjs/core'
 import type { Scene } from 'three'
 import type { SceneGraphObject, ProgramObject } from '../types'
 import { reactive, shallowReactive } from '#imports'
+import { createSharedComposable } from '@vueuse/core'
 import type { UnwrapNestedRefs } from 'vue'
-import { getObjectHash, getSceneGraph } from '../utils/graph'
+import { getSceneGraph } from '../utils/graph'
 
 export interface FPSState {
   value: number
@@ -48,7 +49,7 @@ export interface RendererState {
 export interface DevtoolsHookReturn {
   scene: {
     objects: number
-    graph: Record<string, unknown>
+    graph: SceneGraphObject | null
     value: Scene | undefined
     selected: TresObject | undefined
   }
@@ -169,25 +170,30 @@ function _useDevtoolsHook(): DevtoolsHookReturn {
     },
   }
 
+  let lastSceneUuid: string | null = null
+
   // Connect with Core
   const tresGlobalHook = {
-    cb({ context, performance }) {
+    cb({ context, performance }: { context: any; performance: any }) {
       if (context.scene.value.children.length > 0) {
-        state.scene.value = context.scene.value
-        state.scene.objects = countObjectsInScene(context.scene.value)
-        state.scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
-      }
-      else {
-        state.scene.value = null
-      }
-      /* else {
-        const hasChanged = getObjectHash(context.scene.value) !== getObjectHash(state.scene.value as unknown as TresObject)
-        if (hasChanged) {
+        // Use scene UUID for lightweight change detection
+        const currentSceneUuid = context.scene.value.uuid
+        if (currentSceneUuid !== lastSceneUuid) {
           state.scene.value = context.scene.value
           state.scene.objects = countObjectsInScene(context.scene.value)
           state.scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
+          lastSceneUuid = currentSceneUuid
         }
-      } */
+      }
+      else {
+        // Only clear if we currently have a scene
+        if (state.scene.value !== undefined) {
+          state.scene.value = undefined
+          state.scene.graph = null
+          lastSceneUuid = null
+        }
+      }
+
       Object.assign(state.fps, performance.fps)
       state.fps.accumulator = [...performance.fps.accumulator]
       Object.assign(state.memory, performance.memory)

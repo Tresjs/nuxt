@@ -34,10 +34,6 @@ const inspectorGraph = computed(() => {
   return getInspectorGraph(selectedObject.value)
 })
 
-const itemsForSceneGraph = computed(() => {
-  return [scene.graph]
-})
-
 /* // Reference to the original object for modifications
 const selectedObject = ref<unknown>(null)
 
@@ -88,36 +84,12 @@ const setValueByPath = (obj: unknown, path: string, value: unknown): void => {
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div>
-      <UTree
-        v-if="scene.value"
-        :items="itemsForSceneGraph"
-        :value-key="'key'"
-      >
-        <template #item-label="{ item }">
-          <div
-            class="flex gap-2"
-            @click="updateSelectedObject(item.value)"
-          >
-            {{ item.label }}
-            <UBadge
-              v-if="item.name"
-              color="primary"
-              size="sm"
-              variant="subtle"
-            >
-              {{ item.name }}
-            </UBadge>
-            <UBadge
-              v-if="item.memorySize > 0"
-              color="warning"
-              size="sm"
-              variant="subtle"
-            >
-              {{ item.memorySize }} KB
-            </UBadge>
-          </div>
-        </template>
-      </UTree>
+      <TreeGraph
+        v-if="scene.value && scene.graph"
+        :key="scene.graph.key"
+        :item="scene.graph"
+        @select-object="updateSelectedObject"
+      />
       <UAlert
         v-else
         color="neutral"
