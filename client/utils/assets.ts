@@ -62,28 +62,6 @@ export function extractTextures(scene: Scene): AssetInfo[] {
 }
 
 /**
- * Extracts all geometries from the scene
- */
-export function extractGeometries(scene: Scene): AssetInfo[] {
-  const geometries = new Map<string, BufferGeometry>()
-
-  scene.traverse((object) => {
-    if (object.geometry && object.geometry.isBufferGeometry) {
-      geometries.set(object.geometry.uuid, object.geometry)
-    }
-  })
-
-  return Array.from(geometries.values()).map((geometry): AssetInfo => ({
-    id: geometry.uuid,
-    name: geometry.name || geometry.type || 'Unnamed Geometry',
-    type: 'geometry',
-    size: `${Object.keys(geometry.attributes).length} attributes`,
-    usage: getGeometryMemoryUsage(geometry),
-    object: geometry,
-  }))
-}
-
-/**
  * Extracts all materials from the scene
  */
 export function extractMaterials(scene: Scene): AssetInfo[] {
@@ -113,7 +91,6 @@ export function extractMaterials(scene: Scene): AssetInfo[] {
 export function extractAllAssets(scene: Scene): AssetInfo[] {
   return [
     ...extractTextures(scene),
-    ...extractGeometries(scene),
     ...extractMaterials(scene),
   ]
 }
@@ -150,22 +127,6 @@ function getTextureMemoryUsage(texture: Texture): number {
   if (texture.format === 1025) bytesPerPixel = 1 // Alpha
 
   return Math.round((width * height * bytesPerPixel) / 1024) // KB
-}
-
-function getGeometryMemoryUsage(geometry: BufferGeometry): number {
-  let totalBytes = 0
-
-  Object.values(geometry.attributes).forEach((attribute) => {
-    if (attribute.array) {
-      totalBytes += attribute.array.byteLength
-    }
-  })
-
-  if (geometry.index) {
-    totalBytes += geometry.index.array.byteLength
-  }
-
-  return Math.round(totalBytes / 1024) // KB
 }
 
 /**

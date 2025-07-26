@@ -129,27 +129,10 @@ onMounted(() => {
         <div class="text-center">
           <div class="flex items-center justify-center gap-2 mb-1">
             <UIcon
-              name="i-tabler:box"
-              class="w-5 h-5 text-blue-500"
-            />
-            <div class="font-bold text-blue-600">
-              {{ assetStats.geometries }}
-            </div>
-          </div>
-          <div class="text-sm text-gray-600 dark:text-gray-400">
-            Geometries
-          </div>
-        </div>
-      </UCard>
-
-      <UCard>
-        <div class="text-center">
-          <div class="flex items-center justify-center gap-2 mb-1">
-            <UIcon
               name="i-tabler:database"
-              class="w-5 h-5 text-green-500"
+              class="w-5 h-5"
             />
-            <div class="font-bold text-green-600">
+            <div class="font-bold">
               {{ formatMemorySize(assetStats.totalMemory) }}
             </div>
           </div>
@@ -247,91 +230,6 @@ onMounted(() => {
                   class="flex justify-between"
                 >
                   <span class="text-gray-600 dark:text-gray-400 font-semibold">Memory</span>
-                  <span class="font-mono">{{ formatMemorySize(asset.usage) }}</span>
-                </div>
-              </div>
-            </div>
-          </UCard>
-        </div>
-      </div>
-
-      <!-- Geometries -->
-      <div
-        v-if="groupedAssets.geometries.length > 0"
-        class="pb-4"
-      >
-        <div class="flex items-center gap-2  my-2 mb-4">
-          <UIcon
-            name="i-tabler:box"
-            class="w-5 h-5"
-          />
-          <h3 class="text-lg font-semibold">
-            Geometries
-          </h3>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          <UCard
-            v-for="asset in groupedAssets.geometries"
-            :key="asset.id"
-            class="hover:shadow-md transition-shadow"
-          >
-            <template #header>
-              <div class="flex items-center gap-2">
-                <UIcon
-                  :name="getAssetIcon(asset.type)"
-                  class="w-4 h-4"
-                  :class="`text-${getAssetColor(asset.type)}-500`"
-                />
-                <div class="text-sm font-medium truncate">
-                  {{ asset.name }}
-                </div>
-              </div>
-            </template>
-
-            <div class="pb-3">
-              <!-- Geometry Preview -->
-              <div
-                v-if="geometryPreviews[asset.id]"
-                class="w-full h-32 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden"
-              >
-                <img
-                  :src="geometryPreviews[asset.id]"
-                  :alt="asset.name"
-                  class="w-full h-full object-contain"
-                >
-              </div>
-
-              <!-- Placeholder for geometry preview -->
-              <div
-                v-else
-                class="w-full h-32 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center"
-              >
-                <div class="flex flex-col items-center gap-2">
-                  <UIcon
-                    name="i-tabler:box"
-                    class="w-8 h-8 text-gray-400"
-                  />
-                  <span class="text-xs text-gray-500">
-                    3D Model
-                  </span>
-                </div>
-              </div>
-
-              <div class="pb-2 text-sm">
-                <div
-                  v-if="asset.size"
-                  class="flex justify-between"
-                >
-                  <span class="text-gray-600 dark:text-gray-400">Attributes:</span>
-                  <span>{{ asset.size }}</span>
-                </div>
-
-                <div
-                  v-if="asset.usage"
-                  class="flex justify-between"
-                >
-                  <span class="text-gray-600 dark:text-gray-400">Memory:</span>
                   <span class="font-mono">{{ formatMemorySize(asset.usage) }}</span>
                 </div>
               </div>
