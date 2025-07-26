@@ -5,6 +5,7 @@ import { reactive, shallowReactive } from '#imports'
 import { createSharedComposable } from '@vueuse/core'
 import type { UnwrapNestedRefs } from 'vue'
 import { getSceneGraph } from '../utils/graph'
+import { extractAllAssets, type AssetInfo } from '../utils/assets'
 
 export interface FPSState {
   value: number
@@ -52,6 +53,7 @@ export interface DevtoolsHookReturn {
     graph: SceneGraphObject | null
     value: Scene | undefined
     selected: TresObject | undefined
+    assets: AssetInfo[]
   }
   fps: FPSState
   memory: MemoryState
@@ -123,6 +125,7 @@ export interface DevtoolsState {
     graph: SceneGraphObject | null
     value: Scene | undefined
     selected: TresObject | undefined
+    assets: AssetInfo[]
   }
   fps: FPSState
   memory: MemoryState
@@ -136,6 +139,7 @@ function _useDevtoolsHook(): DevtoolsHookReturn {
       graph: null,
       value: undefined,
       selected: undefined,
+      assets: [],
     }),
     fps: {
       value: 0,
@@ -182,6 +186,7 @@ function _useDevtoolsHook(): DevtoolsHookReturn {
           state.scene.value = context.scene.value
           state.scene.objects = countObjectsInScene(context.scene.value)
           state.scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
+          state.scene.assets = extractAllAssets(context.scene.value)
           lastSceneUuid = currentSceneUuid
         }
       }
@@ -190,6 +195,7 @@ function _useDevtoolsHook(): DevtoolsHookReturn {
         if (state.scene.value !== undefined) {
           state.scene.value = undefined
           state.scene.graph = null
+          state.scene.assets = []
           lastSceneUuid = null
         }
       }

@@ -16,15 +16,21 @@ const { scene, memory, fps } = useDevtoolsHook()
 const tabs = [
   {
     label: 'Scene Graph',
-    description: 'Make changes to your account here. Click save when you\'re done.',
+    description: 'Explore and inspect the 3D scene hierarchy and object properties.',
     icon: 'i-lucide-film',
     slot: 'scene-graph' as const,
   },
   {
     label: 'Performance',
-    description: 'Change your password here. After saving, you\'ll be logged out.',
+    description: 'Monitor frame rate, memory usage, and rendering statistics.',
     icon: 'i-lucide-chart-line',
     slot: 'performance' as const,
+  },
+  {
+    label: 'Assets',
+    description: 'View all loaded textures, geometries, and materials in the scene.',
+    icon: 'i-lucide-package',
+    slot: 'assets' as const,
   },
 ] satisfies TabsItem[]
 </script>
@@ -49,6 +55,9 @@ const tabs = [
         </template>
         <template #performance>
           <PerformanceMonitor />
+        </template>
+        <template #assets>
+          <AssetsMonitor />
         </template>
       </UTabs>
     </main>
