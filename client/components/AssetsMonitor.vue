@@ -1,20 +1,18 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, watch } from '#imports'
 import { useDevtoolsHook } from '../composables/useDevtoolsHook'
-import { generateGeometryPreview } from '../utils/assets'
 
 const { scene, renderer } = useDevtoolsHook()
 
 // Store geometry previews
-const geometryPreviews = ref<Record<string, string>>({})
 
 // Group assets by type
 const groupedAssets = computed(() => {
   const assets = scene.assets || []
   return {
     textures: assets.filter(asset => asset.type === 'texture'),
-    geometries: assets.filter(asset => asset.type === 'geometry'),
     materials: assets.filter(asset => asset.type === 'material'),
+    models: assets.filter(asset => asset.type === 'model'),
   }
 })
 
@@ -26,8 +24,8 @@ const assetStats = computed(() => {
   return {
     total: assets.length,
     textures: groupedAssets.value.textures.length,
-    geometries: groupedAssets.value.geometries.length,
     materials: groupedAssets.value.materials.length,
+    models: groupedAssets.value.models.length,
     totalMemory: Math.round(totalMemory),
   }
 })
@@ -41,6 +39,8 @@ const getAssetIcon = (type: string) => {
       return 'i-tabler:box'
     case 'material':
       return 'i-tabler:palette'
+    case 'model':
+      return 'i-tabler:burger'
     default:
       return 'i-tabler:file'
   }
@@ -59,38 +59,6 @@ const getAssetColor = (type: string) => {
       return 'gray'
   }
 }
-
-// Format memory size
-const formatMemorySize = (kb: number) => {
-  if (kb < 1024) return `${kb} KB`
-  return `${(kb / 1024).toFixed(1)} MB`
-}
-
-// Generate geometry previews when assets change
-const generateGeometryPreviews = async () => {
-  if (!groupedAssets.value.geometries.length) return
-
-  for (const asset of groupedAssets.value.geometries) {
-    if (asset.object && !geometryPreviews.value[asset.id]) {
-      try {
-        // For now, skip geometry screenshots as they require WebGL renderer access
-        // This could be implemented later with proper renderer access
-        geometryPreviews.value[asset.id] = ''
-        console.log('Geometry preview generation temporarily disabled for:', asset.name)
-      }
-      catch (error) {
-        console.warn('Failed to generate preview for geometry:', asset.name, error)
-      }
-    }
-  }
-}
-
-// Watch for asset changes and generate previews
-watch(() => scene.assets, generateGeometryPreviews, { deep: true })
-
-onMounted(() => {
-  generateGeometryPreviews()
-})
 </script>
 
 <template>
@@ -129,12 +97,29 @@ onMounted(() => {
         <div class="text-center">
           <div class="flex items-center justify-center gap-2 mb-1">
             <UIcon
-              name="i-tabler:database"
+              name="i-tabler:burger"
               class="w-5 h-5"
             />
             <div class="font-bold">
-              {{ formatMemorySize(assetStats.totalMemory) }}
+              {{ assetStats.models }}
             </div>
+          </div>
+          <div class="text-sm">
+            Models
+          </div>
+        </div>
+      </UCard>
+
+      <UCard>
+        <div class="text-center">
+          <div class="flex items-center justify-center gap-2 mb-1">
+            <UIcon
+              name="i-tabler:database"
+              class="w-5 h-5"
+            />
+            <!-- <div class="font-bold">
+              {{ formatMemorySize(assetStats.totalMemory) }}
+            </div> -->
           </div>
           <div class="text-sm text-gray-600 dark:text-gray-400">
             Memory Used
@@ -161,80 +146,36 @@ onMounted(() => {
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          <UCard
+          <TextureAssetCard
             v-for="asset in groupedAssets.textures"
             :key="asset.id"
-            class="hover:shadow-md transition-shadow"
-          >
-            <template #header>
-              <div class="flex items-center gap-2">
-                <UIcon
-                  :name="getAssetIcon(asset.type)"
-                  class="w-4 h-4"
-                  :class="`text-${getAssetColor(asset.type)}-500`"
-                />
-                <div class="text-sm font-medium truncate">
-                  {{ asset.source }}
-                </div>
-              </div>
-            </template>
+            :asset="asset"
+          />
+        </div>
+      </div>
 
-            <div class="pb-3">
-              <!-- Texture Preview -->
-              <div
-                v-if="asset.preview"
-                class="w-full h-32 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden"
-              >
-                <img
-                  :src="asset.preview"
-                  :alt="asset.name"
-                  class="w-full h-full object-contain"
-                  @error="$event.target.style.display = 'none'"
-                >
-              </div>
+      <!-- Models -->
 
-              <!-- Fallback for textures without preview -->
-              <div
-                v-else
-                class="w-full h-32 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center"
-              >
-                <UIcon
-                  name="i-tabler:photo-off"
-                  class="w-8 h-8 text-gray-400"
-                />
-              </div>
+      <div
+        v-if="groupedAssets.models.length > 0"
+        class="pb-4"
+      >
+        <div class="flex items-center gap-2 my-2 mb-4">
+          <UIcon
+            name="i-tabler:burger"
+            class="w-5 h-5"
+          />
+          <h3 class="text-lg font-semibold">
+            Models
+          </h3>
+        </div>
 
-              <div class="flex flex-col gap-1 py-2 text-sm">
-                <div
-                  v-if="asset.dimensions"
-                  class="flex justify-between"
-                >
-                  <span class="text-gray-600 dark:text-gray-400 font-semibold">Size</span>
-                  <span class="font-mono">{{ asset.dimensions }} <UBadge
-                    v-if="asset.resolution"
-                    variant="soft"
-                    color="primary"
-                  >{{ asset.resolution }}</UBadge></span>
-                </div>
-
-                <div
-                  v-if="asset.format"
-                  class="flex justify-between"
-                >
-                  <span class="text-gray-600 dark:text-gray-400 font-semibold">Format</span>
-                  <span>{{ asset.format }}</span>
-                </div>
-
-                <div
-                  v-if="asset.usage"
-                  class="flex justify-between"
-                >
-                  <span class="text-gray-600 dark:text-gray-400 font-semibold">Memory</span>
-                  <span class="font-mono">{{ formatMemorySize(asset.usage) }}</span>
-                </div>
-              </div>
-            </div>
-          </UCard>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <ModelAssetCard
+            v-for="asset in groupedAssets.models"
+            :key="asset.id"
+            :asset="asset"
+          />
         </div>
       </div>
 

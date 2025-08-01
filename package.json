@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@nuxt/kit": "4.0.0",
-    "@tresjs/core": "5.0.0-next.6",
+    "@tresjs/core": "https://pkg.pr.new/@tresjs/core@765a095",
     "defu": "^6.1.4",
     "mlly": "^1.7.4",
     "ohash": "^2.0.11",

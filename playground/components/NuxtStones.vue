@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { MeshBasicMaterial } from 'three'
 
-const { nodes } = useGLTF('/models/nuxt-stones/nuxt-stones.glb')
+const { state, nodes } = useGLTF('/models/nuxt-stones/nuxt-stones.glb')
+
+watch(state, (state) => {
+  console.log(state)
+})
+
 const stone = computed(() => nodes.value.Stone)
 const stoneCarved = computed(() => nodes.value.StoneCarved)
 const logo = computed(() => nodes.value.Logo)
@@ -56,7 +61,17 @@ onBeforeRender(({ elapsed }) => {
 </script>
 
 <template>
-  <primitive
+  <TresGroup rotation-y="1.57">
+    <primitive
+      v-if="state"
+      :object="state.scene"
+    />
+  </TresGroup>
+<!--   <primitive
+    v-if="orbs"
+    :object="orbs"
+  /> -->
+  <!-- <primitive
     v-if="orbs"
     :object="orbs"
   />
@@ -76,5 +91,5 @@ onBeforeRender(({ elapsed }) => {
     v-for="littleStone in littleStones"
     :key="littleStone.id"
     :object="littleStone"
-  />
+  /> -->
 </template>

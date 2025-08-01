@@ -4,7 +4,7 @@
 <template>
   <TresCanvas clear-color="#040404">
     <TresPerspectiveCamera
-      :position="[-5.3, 8.3, 10.6]"
+      :position="[5, 5, 5]"
       :look-at="[0, 1, 0]"
     />
 
