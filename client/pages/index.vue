@@ -1,6 +1,5 @@
 <!-- eslint-disable max-len -->
 <script setup lang="ts">
-import { useDevtoolsClient } from '@nuxt/devtools-kit/iframe-client'
 import type { TabsItem } from '@nuxt/ui'
 
 // import { useDevtoolsHook } from '../composables/useDevtoolsHook'
@@ -9,9 +8,6 @@ import type { TabsItem } from '@nuxt/ui'
 
 // Scene Graph
 /* const { scene, memory, fps } = useDevtoolsHook() */
-const client = useDevtoolsClient()
-
-const { scene, memory, fps } = useDevtoolsHook()
 
 const tabs = [
   {
@@ -26,12 +22,12 @@ const tabs = [
     icon: 'i-lucide-chart-line',
     slot: 'performance' as const,
   },
-  {
+  /*  {
     label: 'Assets',
     description: 'View all loaded textures, geometries, and materials in the scene.',
     icon: 'i-lucide-package',
     slot: 'assets' as const,
-  },
+  }, */
 ] satisfies TabsItem[]
 </script>
 
@@ -56,9 +52,9 @@ const tabs = [
         <template #performance>
           <PerformanceMonitor />
         </template>
-        <template #assets>
+        <!-- <template #assets>
           <AssetsMonitor />
-        </template>
+        </template> -->
       </UTabs>
     </main>
   </div>

@@ -5,7 +5,6 @@ import { reactive, shallowReactive } from '#imports'
 import { createSharedComposable } from '@vueuse/core'
 import type { UnwrapNestedRefs } from 'vue'
 import { getSceneGraph } from '../utils/graph'
-import { formatAsset, type AssetInfo } from '../utils/assets'
 
 // Define message data types for different message types
 export interface ContextMessageData {
@@ -38,7 +37,7 @@ export interface PerformanceMessageData {
 }
 
 // Union type for all possible message types
-export type DevtoolsMessageData = AssetLoadData | ContextMessageData | PerformanceMessageData
+export type DevtoolsMessageData = ContextMessageData | PerformanceMessageData
 
 export interface FPSState {
   value: number
@@ -86,7 +85,7 @@ export interface DevtoolsHookReturn {
     graph: SceneGraphObject | null
     value: Scene | undefined
     selected: TresObject | undefined
-    assets: AssetInfo[]
+    /* assets: AssetInfo[] */
   }
   fps: FPSState
   memory: MemoryState
@@ -112,7 +111,7 @@ export interface DevtoolsState {
     graph: SceneGraphObject | null
     value: Scene | undefined
     selected: TresObject | undefined
-    assets: AssetInfo[]
+    /* assets: AssetInfo[] */
   }
   fps: FPSState
   memory: MemoryState
@@ -167,12 +166,13 @@ function _useDevtoolsHook(): DevtoolsHookReturn {
   if (typeof window !== 'undefined' && window.parent.parent.__TRES__DEVTOOLS__) {
     // Subscribe to different message types
     window.parent.parent.__TRES__DEVTOOLS__.subscribe((message: DevtoolsMessage<DevtoolsMessageData>) => {
-      if (message.type === 'asset-load') {
+      /* if (message.type === 'asset-load') {
         const messageData = message.data as AssetLoadData
         const formattedAsset = formatAsset(messageData)
         state.scene.assets.push(formattedAsset)
-      }
-      else if (message.type === 'context') {
+      } */
+
+      if (message.type === 'context') {
         const context = message.data as ContextMessageData
         if (context.scene.value.children.length > 0) {
           // Use scene UUID for lightweight change detection
@@ -187,7 +187,7 @@ function _useDevtoolsHook(): DevtoolsHookReturn {
         else {
           state.scene.value = undefined
           state.scene.graph = null
-          state.scene.assets = []
+          /* state.scene.assets = [] */
           lastSceneUuid = null
         }
 
@@ -205,52 +205,8 @@ function _useDevtoolsHook(): DevtoolsHookReturn {
         Object.assign(state.memory, performance.memory)
         state.memory.accumulator = [...performance.memory.accumulator]
       }
-
-      /*  Object.assign(state.fps, performance.fps)
-      state.fps.accumulator = [...performance.fps.accumulator]
-      Object.assign(state.memory, performance.memory)
-      state.memory.accumulator = [...performance.memory.accumulator]
-      Object.assign(state.renderer.info.render, context.renderer.instance.info.render)
-      Object.assign(state.renderer.info.memory, context.renderer.instance.info.memory)
-      state.renderer.info.programs = [...(context.renderer.instance.info.programs || []) as unknown as ProgramObject[]] */
     })
   }
-
-  // Connect with Core
-  /*   const tresGlobalHook = {
-    cb({ context, performance }: { context: any, performance: any }) {
-      if (context.scene.value.children.length > 0) {
-        // Use scene UUID for lightweight change detection
-        const currentSceneUuid = context.scene.value.uuid
-        if (currentSceneUuid !== lastSceneUuid) {
-          state.scene.value = context.scene.value
-          state.scene.objects = countObjectsInScene(context.scene.value)
-          state.scene.graph = getSceneGraph(context.scene.value as unknown as TresObject)
-          state.scene.assets = extractAllAssets(context.scene.value)
-          lastSceneUuid = currentSceneUuid
-        }
-      }
-      else {
-        // Only clear if we currently have a scene
-        if (state.scene.value !== undefined) {
-          state.scene.value = undefined
-          state.scene.graph = null
-          state.scene.assets = []
-          lastSceneUuid = null
-        }
-      }
-
-      Object.assign(state.fps, performance.fps)
-      state.fps.accumulator = [...performance.fps.accumulator]
-      Object.assign(state.memory, performance.memory)
-      state.memory.accumulator = [...performance.memory.accumulator]
-      Object.assign(state.renderer.info.render, context.renderer.instance.info.render)
-      Object.assign(state.renderer.info.memory, context.renderer.instance.info.memory)
-      state.renderer.info.programs = [...(context.renderer.instance.info.programs || []) as unknown as ProgramObject[]]
-    },
-  } */
-
-  // window.parent.parent.__TRES__DEVTOOLS__ = tresGlobalHook
 
   return state
 }

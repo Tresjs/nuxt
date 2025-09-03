@@ -105,6 +105,7 @@ const setValueByPath = (obj: unknown, path: string, value: unknown): void => {
         class="relative isolate"
       >
         <InspectorProps
+          :key="refreshTrigger"
           :object="selectedObject"
         />
         <USeparator />

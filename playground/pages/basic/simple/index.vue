@@ -21,7 +21,7 @@ const { clearColor } = useControls({
           <TresMeshNormalMaterial />
         </TresMesh>
         <TresMesh
-          position-x="1"
+          :position-x="1"
         >
           <TresSphereGeometry />
           <TresMeshBasicMaterial
