@@ -37,23 +37,23 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
 <template>
   <div class="font-mono text-xs">
     <!-- Current node -->
-    <div 
+    <div
       :style="indentStyle"
       class="flex items-center py-1 hover:bg-gray-50 group cursor-pointer"
       @click="handleSelect"
     >
       <!-- Expand/collapse icon -->
-      <div 
+      <div
         v-if="hasChildren"
         class="mr-1 w-4 h-4 flex items-center justify-center"
         @click.stop="toggleExpanded"
       >
-        <UIcon 
+        <UIcon
           :name="isExpanded ? 'i-tabler:caret-down-filled' : 'i-tabler:caret-right-filled'"
           class="w-3 h-3 text-gray-400"
         />
       </div>
-      <div 
+      <div
         v-else
         class="mr-1 w-4 h-4"
       />
@@ -61,11 +61,11 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
       <!-- Node content -->
       <div class="flex items-center gap-2 flex-1 min-w-0">
         <!-- Icon -->
-        <UIcon 
+        <UIcon
           :name="item.icon"
           class="w-4 h-4 text-gray-600 flex-shrink-0"
         />
-        
+
         <!-- Label -->
         <span class="text-gray-700 font-medium">
           {{ item.label }}
@@ -76,7 +76,7 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
           v-if="item.name"
           color="primary"
           size="sm"
-          variant="subtle"
+          variant="soft"
         >
           {{ item.name }}
         </UBadge>
@@ -86,10 +86,36 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
           v-if="item.memorySize > 0"
           color="warning"
           size="sm"
-          variant="subtle"
+          variant="soft"
         >
           {{ item.memorySize }} KB
         </UBadge>
+
+        <ul
+          v-if="item.value?.isCamera"
+          class="flex gap-1"
+        >
+          <li>
+            <UTooltip :text="`Fov: ${item.value?.fov} degrees`">
+              <UBadge
+                color="neutral"
+                size="sm"
+                variant="soft"
+              >
+                {{ item.value?.fov }}°
+              </UBadge>
+            </UTooltip>
+          </li>
+          <li>
+            <UBadge
+              color="neutral"
+              size="sm"
+              variant="soft"
+            >
+              {{ `x:${Math.round(item.value?.position?.x)} y:${Math.round(item.value?.position?.y)} z:${Math.round(item.value?.position?.z)}` }}
+            </UBadge>
+          </li>
+        </ul>
       </div>
     </div>
 

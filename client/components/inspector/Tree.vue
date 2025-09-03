@@ -274,7 +274,7 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
 
     <!-- Children nodes -->
     <template v-if="hasChildren && isExpanded">
-      <TreeInspector
+      <InspectorTree
         v-for="child in node.children"
         :key="`${child.path}-${child.label}`"
         :node="child"

@@ -6,7 +6,7 @@ import type { Mesh } from 'three'
 import { DoubleSide, MeshBasicMaterial } from 'three'
 import { HighlightMesh } from './highlight'
 
-const iconsMap: Record<string, string> = {
+export const iconsMap: Record<string, string> = {
   scene: 'i-carbon-web-services-container',
   perspectivecamera: 'i-carbon-video',
   mesh: 'i-carbon-cube',

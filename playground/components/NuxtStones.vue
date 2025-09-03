@@ -10,7 +10,6 @@ watch(state, (state) => {
 const stone = computed(() => nodes.value.Stone)
 const stoneCarved = computed(() => nodes.value.StoneCarved)
 const logo = computed(() => nodes.value.Logo)
-const orbs = computed(() => nodes.value.Orbs)
 const littleStones = computed(() => Object.values(nodes.value).filter(node => node.name.includes('Stone00')))
 
 const { state: stonesTexture } = useTexture('/models/nuxt-stones/RockBaked.png')
@@ -67,29 +66,4 @@ onBeforeRender(({ elapsed }) => {
       :object="state.scene"
     />
   </TresGroup>
-<!--   <primitive
-    v-if="orbs"
-    :object="orbs"
-  /> -->
-  <!-- <primitive
-    v-if="orbs"
-    :object="orbs"
-  />
-  <primitive
-    v-if="logo"
-    :object="logo"
-  />
-  <primitive
-    v-if="stone"
-    :object="stone"
-  />
-  <primitive
-    v-if="stoneCarved"
-    :object="stoneCarved"
-  />
-  <primitive
-    v-for="littleStone in littleStones"
-    :key="littleStone.id"
-    :object="littleStone"
-  /> -->
 </template>

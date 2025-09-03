@@ -104,7 +104,12 @@ const setValueByPath = (obj: unknown, path: string, value: unknown): void => {
         v-if="selectedObject"
         class="relative isolate"
       >
-        <TreeInspector
+        <InspectorProps
+          :object="selectedObject"
+        />
+        <USeparator />
+        <InspectorTree
+          class="pt-4"
           :node="inspectorGraph"
           :selected-object="selectedObject"
           @update-value="handleValueUpdate"
