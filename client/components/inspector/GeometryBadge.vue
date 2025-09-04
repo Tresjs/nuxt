@@ -55,7 +55,7 @@ function getGeometryIcon(geometry: unknown): string {
  */
 function getValueClass(value: unknown): string {
   if (typeof value === 'boolean') return 'text-blue-500'
-  if (typeof value === 'number') return 'text-green-500'
+  if (typeof value === 'number') return 'text-primary-500'
   if (typeof value === 'string') return 'text-red-500'
   if (typeof value === 'undefined') return 'text-gray-400'
   return 'text-gray-600'

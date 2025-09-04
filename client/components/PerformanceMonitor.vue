@@ -188,7 +188,7 @@ const memoryStatus = computed(() => {
             <div class="flex items-center justify-center gap-2 mb-2">
               <UIcon
                 name="i-tabler:refresh"
-                class="w-4 h-4 text-green-500"
+                class="w-4 h-4 text-primary-500"
               />
               <span class="font-mono font-bold">{{ renderer?.info?.render?.calls || 0 }}</span>
             </div>
