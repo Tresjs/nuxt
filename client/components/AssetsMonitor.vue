@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, watch } from '#imports'
+import { computed } from '#imports'
 import { useDevtoolsHook } from '../composables/useDevtoolsHook'
 
-const { scene, renderer } = useDevtoolsHook()
+const { scene } = useDevtoolsHook()
 
 // Store geometry previews
 

@@ -3,6 +3,7 @@ import type { TresObject } from '@tresjs/core'
 import type { Mesh } from 'three'
 import { createHighlightMesh, getInspectorGraph } from '~/utils/graph'
 import { useDevtoolsHook } from '~/composables/useDevtoolsHook'
+import { computed, ref, shallowRef, toValue } from 'vue'
 
 const { scene } = useDevtoolsHook()
 
@@ -30,6 +31,7 @@ function updateSelectedObject(object: TresObject) {
 
 const inspectorGraph = computed(() => {
   // Use refreshTrigger to force reactivity
+  // eslint-disable-next-line
   refreshTrigger.value
   return getInspectorGraph(selectedObject.value)
 })
@@ -117,7 +119,6 @@ const setValueByPath = (obj: unknown, path: string, value: unknown): void => {
           @update-value="handleValueUpdate"
         />
       </div>
-      <!--  <pre>{{ inspectorGraph }}</pre> -->
     </div>
   </div>
 </template>

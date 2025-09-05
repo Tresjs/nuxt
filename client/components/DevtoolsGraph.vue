@@ -15,10 +15,6 @@ const props = withDefaults(defineProps<{
   color: 'primary',
 })
 
-const textColor = computed(() => { // ''
-  return props.color === 'warning' ? 'text-[#827717] dark:text-[#EAB306]' : 'text-[#15803D] dark:text-[#34E676]'
-})
-
 const height = 40
 const strokeWidth = 2
 

@@ -4,7 +4,7 @@ interface Props {
   displayValue: string
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 /**
  * Icons for different geometry types

@@ -1,4 +1,4 @@
-import type { TresObject, DevtoolsMessage, AssetLoadData } from '@tresjs/core'
+import type { TresObject, DevtoolsMessage } from '@tresjs/core'
 import type { Scene } from 'three'
 import type { SceneGraphObject } from '../types'
 import { reactive, shallowReactive } from '#imports'

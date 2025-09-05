@@ -4,7 +4,7 @@ interface Props {
   displayValue: string
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 /**
  * Check if value is a Material object
