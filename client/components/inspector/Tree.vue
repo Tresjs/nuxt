@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue'
 import type { InspectorNode } from '~/client/types'
 
 interface Props {
@@ -190,8 +191,8 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
             v-else-if="editingItem?.path === node.path && typeof node.value !== 'number' && typeof node.value !== 'boolean'"
             v-model="editingItem!.value"
             size="xs"
-            variant="subtle"
             class="w-20"
+            variant="soft"
             @keydown.stop="handleInputKeydown"
             @blur="applyEdit"
             @focus="(event: FocusEvent) => (event.target as HTMLInputElement)?.select()"

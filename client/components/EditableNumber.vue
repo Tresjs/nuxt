@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed, ref, watch } from 'vue'
+
 interface Props {
   modelValue: number
 }
@@ -52,6 +54,7 @@ const cancelEditing = () => {
     ref="inputRef"
     v-model="editValue"
     :step="0.01"
+    variant="soft"
     size="xs"
     orientation="vertical"
     :format-options="{
