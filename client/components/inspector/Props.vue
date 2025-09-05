@@ -5,6 +5,12 @@ import { iconsMap } from '../../utils/graph'
 import MaterialBadge from './MaterialBadge.vue'
 import GeometryBadge from './GeometryBadge.vue'
 
+interface Emits {
+  (e: 'update-value', path: string, value: unknown): void
+}
+
+const emit = defineEmits<Emits>()
+
 const props = defineProps<{
   object: TresObject
 }>()
@@ -190,30 +196,18 @@ function getValueClass(value: unknown): string {
         <!-- Vector3 values with individual badges -->
         <template v-if="isVector3(prop.value)">
           <div class="flex items-center gap-1 ml-1">
-            <UBadge
-              variant="soft"
-              color="neutral"
-              size="sm"
-              class="font-mono"
-            >
-              {{ Number((prop.value as { x: number }).x).toFixed(2) }}
-            </UBadge>
-            <UBadge
-              variant="soft"
-              color="neutral"
-              size="sm"
-              class="font-mono"
-            >
-              {{ Number((prop.value as { y: number }).y).toFixed(2) }}
-            </UBadge>
-            <UBadge
-              variant="soft"
-              color="neutral"
-              size="sm"
-              class="font-mono"
-            >
-              {{ Number((prop.value as { z: number }).z).toFixed(2) }}
-            </UBadge>
+            <EditableNumber
+              v-model="prop.value.x"
+              @update:model-value="(val) => emit('update-value', prop.key + '.x', val)"
+            />
+            <EditableNumber
+              v-model="prop.value.y"
+              @update:model-value="(val) => emit('update-value', prop.key + '.y', val)"
+            />
+            <EditableNumber
+              v-model="prop.value.z"
+              @update:model-value="(val) => emit('update-value', prop.key + '.z', val)"
+            />
           </div>
         </template>
 

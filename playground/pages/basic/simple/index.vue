@@ -16,7 +16,7 @@ const { clearColor } = useControls({
     >
       <TresPerspectiveCamera />
       <TresGroup>
-        <TresMesh>
+        <TresMesh name="Im a pretty Box">
           <TresBoxGeometry />
           <TresMeshNormalMaterial />
         </TresMesh>

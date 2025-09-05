@@ -107,6 +107,7 @@ const setValueByPath = (obj: unknown, path: string, value: unknown): void => {
         <InspectorProps
           :key="refreshTrigger"
           :object="selectedObject"
+          @update-value="handleValueUpdate"
         />
         <USeparator />
         <InspectorTree

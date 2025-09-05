@@ -99,7 +99,7 @@ const applyEdit = (): void => {
     let parsedValue: unknown = value
 
     // Try to parse as number if it looks like a number
-    if (!Number.isNaN(Number(value)) && value.trim() !== '') {
+    if (!Number.isNaN(Number(value))) {
       parsedValue = Number(value)
     }
     // Try to parse as boolean
@@ -204,9 +204,12 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
             v-model="editingItem!.value"
             size="xs"
             variant="subtle"
+            orientation="vertical"
+            :format-options="{
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 2,
+            }"
             class="w-20"
-            :min="-999999"
-            :max="999999"
             @keydown.stop="handleInputKeydown"
             @blur="applyEdit"
             @focus="(event: FocusEvent) => (event.target as HTMLInputElement)?.select()"
