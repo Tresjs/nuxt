@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Node } from 'three/webgpu'
 import { computed, ref } from 'vue'
 import type { InspectorNode } from '~/client/types'
 
@@ -59,7 +58,7 @@ const copyPath = async (path: string): Promise<void> => {
 
 const copyProp = async (node: InspectorNode): Promise<void> => {
   try {
-    const propString = `:${node.path.replace(/\./g, '-')}="${typeof node.value === 'string' ? node.value : JSON.stringify(node.value)}"`
+    const propString = `:${node.path.replace(/\./g, '-')}="${JSON.stringify(node.value)}"`
     await navigator.clipboard.writeText(propString)
   }
   catch (error) {
@@ -80,7 +79,7 @@ const copyPropAsArray = async (node: InspectorNode): Promise<void> => {
 
 const copyValue = async (value: unknown): Promise<void> => {
   try {
-    const stringValue = typeof value === 'string' ? value : JSON.stringify(value)
+    const stringValue = JSON.stringify(value)
     await navigator.clipboard.writeText(stringValue)
   }
   catch (error) {
