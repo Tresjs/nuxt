@@ -225,6 +225,15 @@ function getValueClass(value: unknown): string {
           :display-value="prop.displayValue"
         />
 
+        <UButton
+          v-if="typeof prop.value === 'boolean'"
+          size="xs"
+          class="ml-1 mr-1"
+          variant="soft"
+          :icon="prop.value ? 'i-lucide-eye' : 'i-lucide-eye-off'"
+          @click="() => emit('update-value', prop.key, !prop.value)"
+        />
+
         <!-- Color value with preview dot -->
         <template v-else-if="prop.key === 'color' && prop.value && typeof prop.value === 'object' && 'getHexString' in prop.value">
           <div
