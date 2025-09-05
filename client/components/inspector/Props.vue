@@ -167,7 +167,7 @@ function getValueClass(value: unknown): string {
 <template>
   <div class="text-sm text-gray-500 pt-2 pb-8">
     <!-- Object Type Header - compact -->
-    <div class="flex items-center gap-1 py-0.5 mb-1 hover:bg-gray-50 group">
+    <div class="flex items-center gap-1 py-0.5 mb-4 hover:bg-gray-50 group">
       <UIcon
         :name="titleIcon"
         class="w-4 h-4 text-gray-600 flex-shrink-0"
@@ -176,7 +176,6 @@ function getValueClass(value: unknown): string {
       <UBadge
         v-if="object.name"
         variant="soft"
-        color="gray"
         size="xs"
         class="ml-2"
       >
@@ -185,72 +184,99 @@ function getValueClass(value: unknown): string {
     </div>
 
     <!-- Key Properties - following inspector tree pattern -->
-    <div class="flex flex-col gap-1">
+    <div class="pl-5 flex flex-col gap-1">
       <div
         v-for="prop in keyProperties"
         :key="prop.key"
-        class="flex items-center py-0.5 hover:bg-gray-50 group"
+        class="flex items-center justify-between py-0.5 hover:bg-gray-50 group"
       >
-        <span>{{ prop.key }} :</span>
+        <div class="flex items-center gap-1 min-w-0">
+          <span>{{ prop.key }} :</span>
 
-        <!-- Vector3 values with individual badges -->
-        <template v-if="isVector3(prop.value)">
-          <div class="flex items-center gap-1 ml-1">
-            <EditableNumber
-              v-model="prop.value.x"
-              @update:model-value="(val) => emit('update-value', prop.key + '.x', val)"
-            />
-            <EditableNumber
-              v-model="prop.value.y"
-              @update:model-value="(val) => emit('update-value', prop.key + '.y', val)"
-            />
-            <EditableNumber
-              v-model="prop.value.z"
-              @update:model-value="(val) => emit('update-value', prop.key + '.z', val)"
-            />
-          </div>
-        </template>
+          <!-- Vector3 values with individual badges -->
+          <template v-if="isVector3(prop.value)">
+            <div class="flex items-center gap-1 ml-1">
+              <EditableNumber
+                v-model="prop.value.x"
+                @update:model-value="(val) => emit('update-value', prop.key + '.x', val)"
+              />
+              <EditableNumber
+                v-model="prop.value.y"
+                @update:model-value="(val) => emit('update-value', prop.key + '.y', val)"
+              />
+              <EditableNumber
+                v-model="prop.value.z"
+                @update:model-value="(val) => emit('update-value', prop.key + '.z', val)"
+              />
+            </div>
+          </template>
 
-        <!-- Material values with color preview -->
-        <MaterialBadge
-          v-else-if="isMaterial(prop.value)"
-          :material="prop.value"
-          :display-value="prop.displayValue"
-        />
-
-        <!-- Geometry values with icon -->
-        <GeometryBadge
-          v-else-if="isGeometry(prop.value)"
-          :geometry="prop.value"
-          :display-value="prop.displayValue"
-        />
-
-        <UButton
-          v-if="typeof prop.value === 'boolean'"
-          size="xs"
-          class="ml-1 mr-1"
-          variant="soft"
-          :icon="prop.value ? 'i-lucide-eye' : 'i-lucide-eye-off'"
-          @click="() => emit('update-value', prop.key, !prop.value)"
-        />
-
-        <!-- Color value with preview dot -->
-        <template v-else-if="prop.key === 'color' && prop.value && typeof prop.value === 'object' && 'getHexString' in prop.value">
-          <div
-            class="w-3 h-3 rounded-full border border-gray-300 dark:border-gray-600 ml-1 mr-1"
-            :style="{ backgroundColor: '#' + (prop.value as { getHexString: () => string }).getHexString() }"
+          <!-- Material values with color preview -->
+          <MaterialBadge
+            v-else-if="isMaterial(prop.value)"
+            :material="prop.value"
+            :display-value="prop.displayValue"
           />
-          <span :class="getValueClass(prop.value)">{{ prop.displayValue }}</span>
-        </template>
 
-        <!-- Regular values -->
-        <template v-else>
-          <span
-            :class="[getValueClass(prop.value), 'ml-1']"
-          >
-            {{ prop.displayValue }}
-          </span>
-        </template>
+          <!-- Geometry values with icon -->
+          <GeometryBadge
+            v-else-if="isGeometry(prop.value)"
+            :geometry="prop.value"
+            :display-value="prop.displayValue"
+          />
+
+          <UButton
+            v-else-if="prop.key === 'visible'"
+            size="xs"
+            class="ml-1 mr-1"
+            variant="soft"
+            :icon="prop.value ? 'i-lucide-eye' : 'i-lucide-eye-closed'"
+            @click="() => emit('update-value', prop.key, !prop.value)"
+          />
+
+          <!-- Color value with preview dot -->
+          <template v-else-if="prop.key === 'color' && prop.value && typeof prop.value === 'object' && 'getHexString' in prop.value">
+            <div
+              class="w-3 h-3 rounded-full border border-gray-300 dark:border-gray-600 ml-1 mr-1"
+              :style="{ backgroundColor: '#' + (prop.value as { getHexString: () => string }).getHexString() }"
+            />
+            <span :class="getValueClass(prop.value)">{{ prop.displayValue }}</span>
+          </template>
+
+          <!-- Regular values -->
+          <template v-else>
+            <span
+              :class="[getValueClass(prop.value), 'ml-1']"
+            >
+              {{ prop.displayValue }}
+            </span>
+          </template>
+        </div>
+
+        <div
+          class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity ml-auto"
+          @click.stop
+        >
+          <!-- Copy value button -->
+          <UButton
+            size="xs"
+            variant="ghost"
+            color="gray"
+            icon="i-tabler:copy"
+            title="Copy value"
+            @click.stop="copyValue(node.value)"
+          />
+
+          <!-- Copy path button -->
+          <UButton
+            size="xs"
+            variant="ghost"
+            color="gray"
+            icon="i-tabler:link"
+            title="Copy path"
+            @click.stop="copyPath(node.path)"
+          />
+        </div>
       </div>
     </div>
   </div>

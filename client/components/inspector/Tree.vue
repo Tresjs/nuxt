@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Node } from 'three/webgpu'
 import { computed, ref } from 'vue'
 import type { InspectorNode } from '~/client/types'
 
@@ -46,15 +47,6 @@ const getLabel = (value: unknown): string => {
 }
 
 // Copy functionality
-const copyValue = async (value: unknown): Promise<void> => {
-  try {
-    const stringValue = typeof value === 'string' ? value : JSON.stringify(value)
-    await navigator.clipboard.writeText(stringValue)
-  }
-  catch (error) {
-    console.error('Failed to copy value:', error)
-  }
-}
 
 const copyPath = async (path: string): Promise<void> => {
   try {
@@ -65,6 +57,72 @@ const copyPath = async (path: string): Promise<void> => {
   }
 }
 
+const copyProp = async (node: InspectorNode): Promise<void> => {
+  try {
+    const propString = `:${node.path.replace(/\./g, '-')}="${typeof node.value === 'string' ? node.value : JSON.stringify(node.value)}"`
+    await navigator.clipboard.writeText(propString)
+  }
+  catch (error) {
+    console.error('Failed to copy prop:', error)
+  }
+}
+
+const copyPropAsArray = async (node: InspectorNode): Promise<void> => {
+  try {
+    const arrayValue = node.children?.map(child => child.value) || []
+    const propString = `:${node.path.replace(/\./g, '-')}='[${arrayValue.map(v => (typeof v === 'string' ? `"${v}"` : v)).join(', ')}]'`
+    await navigator.clipboard.writeText(propString)
+  }
+  catch (error) {
+    console.error('Failed to copy prop as array:', error)
+  }
+}
+
+const copyValue = async (value: unknown): Promise<void> => {
+  try {
+    const stringValue = typeof value === 'string' ? value : JSON.stringify(value)
+    await navigator.clipboard.writeText(stringValue)
+  }
+  catch (error) {
+    console.error('Failed to copy value:', error)
+  }
+}
+
+const copyValueAsVector3 = async (node: InspectorNode): Promise<void> => {
+  try {
+    await navigator.clipboard.writeText(`new Vector3(${node.children[0].value}, ${node.children[1].value}, ${node.children[2].value})`)
+  }
+  catch (error) {
+    console.error('Failed to copy prop as Vector3:', error)
+  }
+}
+
+const copyValueAsArray = async (node: InspectorNode): Promise<void> => {
+  try {
+    const arrayValue = node.children?.map(child => child.value) || []
+    const propString = `[${arrayValue.map(v => (typeof v === 'string' ? `"${v}"` : v)).join(', ')}]`
+    await navigator.clipboard.writeText(propString)
+  }
+  catch (error) {
+    console.error('Failed to copy prop as array:', error)
+  }
+}
+
+const copyValueAsJSON = async (node: InspectorNode): Promise<void> => {
+  try {
+    let object = {}
+    if (node.children && node.children.length > 0) {
+      object = node.children.reduce((acc, child) => {
+        acc[child.label] = child.value
+        return acc
+      }, {} as Record<string, unknown>)
+    }
+    await navigator.clipboard.writeText(JSON.stringify(object, null, 2))
+  }
+  catch (error) {
+    console.error('Failed to copy value as JSON:', error)
+  }
+}
 // Value modification
 const incrementValue = (): void => {
   if (typeof props.node.value === 'number') {
@@ -171,6 +229,29 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
           >
             {{ node.label }} : <span class="text-gray-600 font-semibold">{{ node.value }}</span>
           </span>
+
+          <UDropdownMenu
+            v-if="node.type !== 'array'"
+            size="xs"
+            :items="[
+              { label: 'Copy Path', icon: 'i-lucide:link', onSelect: () => copyPath(node.path) },
+              { label: 'Copy value as Array', icon: 'i-material-symbols:data-array', onSelect: () => copyValueAsArray(node) },
+              node.value === '_Vector3' ? { label: 'Copy value as Vector3', icon: 'i-lucide:pen-line', onSelect: () => copyValueAsVector3(node) } : null,
+              { label: 'Copy value as JSON', icon: 'i-material-symbols:data-object', onSelect: () => copyValueAsJSON(node) },
+              node.value === '_Vector3' || node.value === '_Euler' ? { label: 'Copy as Prop', icon: 'i-lucide:code', onSelect: () => copyPropAsArray(node) } : null,
+            ].filter(Boolean)"
+            :ui="{
+              content: 'w-48',
+            }"
+          >
+            <UButton
+              size="xs"
+              variant="ghost"
+              color="gray"
+              icon="i-lucide-ellipsis-vertical"
+              title="Copy value"
+            />
+          </UDropdownMenu>
         </template>
 
         <!-- Primitive value display -->
@@ -233,26 +314,6 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
           class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity ml-auto"
           @click.stop
         >
-          <!-- Copy value button -->
-          <UButton
-            size="xs"
-            variant="ghost"
-            color="gray"
-            icon="i-tabler:copy"
-            title="Copy value"
-            @click.stop="copyValue(node.value)"
-          />
-
-          <!-- Copy path button -->
-          <UButton
-            size="xs"
-            variant="ghost"
-            color="gray"
-            icon="i-tabler:link"
-            title="Copy path"
-            @click.stop="copyPath(node.path)"
-          />
-
           <!-- Number controls -->
           <template v-if="typeof node.value === 'number'">
             <UButton
@@ -272,6 +333,25 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
               @click.stop="incrementValue"
             />
           </template>
+          <UDropdownMenu
+            size="xs"
+            :items="[
+              { label: 'Copy Value', icon: 'i-lucide:copy', onSelect: () => copyValue(node.value) },
+              { label: 'Copy Path', icon: 'i-lucide:link', onSelect: () => copyPath(node.path) },
+              { label: 'Copy as prop', icon: 'i-lucide:pen-line', onSelect: () => copyProp(node) },
+            ]"
+            :ui="{
+              content: 'w-48',
+            }"
+          >
+            <UButton
+              size="xs"
+              variant="ghost"
+              color="gray"
+              icon="i-lucide-ellipsis-vertical"
+              title="Copy value"
+            />
+          </UDropdownMenu>
         </div>
       </div>
     </div>
