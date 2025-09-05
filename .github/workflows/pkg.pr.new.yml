@@ -34,5 +34,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build
-        run: pnpm prepack
+        run: pnpm build
       - run: pnpx pkg-pr-new publish --compact --pnpm
