@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import type { TresObject } from '@tresjs/core'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
+import { copyPath, copyProp, copyPropAsArray, copyValue, copyValueAsArray, copyValueAsJSON, copyValueAsVector3 } from '~/utils/clipboard'
+
 import { iconsMap } from '../../utils/graph'
 import MaterialBadge from './MaterialBadge.vue'
 import GeometryBadge from './GeometryBadge.vue'
+import type path from 'node:path'
 
 interface Emits {
   (e: 'update-value', path: string, value: unknown): void
@@ -62,6 +65,11 @@ const keyProperties = computed(() => {
     }
   }).filter(prop => prop.value !== undefined)
 })
+
+watch(keyProperties, (newObj) => {
+  // You can perform actions when the object prop changes, if needed
+  console.log('keyProperties', newObj)
+}, { immediate: true })
 
 /**
  * Get nested property value (e.g., position.x, rotation.y)
@@ -253,29 +261,45 @@ function getValueClass(value: unknown): string {
           </template>
         </div>
 
+        <!-- Control buttons -->
         <div
           class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity ml-auto"
           @click.stop
         >
-          <!-- Copy value button -->
-          <UButton
+          <UDropdownMenu
             size="xs"
-            variant="ghost"
-            color="gray"
-            icon="i-tabler:copy"
-            title="Copy value"
-            @click.stop="copyValue(node.value)"
-          />
+            :items="[
+              { label: 'Copy Value', icon: 'i-lucide:copy', onSelect: () => copyValue(prop.value) },
+              prop.displayValue === 'vector'
+                && { label: 'Copy as prop',
+                     icon: 'i-material-symbols:data-array',
+                     onSelect: () => copyProp({
+                       path: prop.key,
+                       value: Object.values(prop.value),
+                     }) },
+              prop.displayValue === 'vector'
+                && { label: 'Copy value as Vector3',
+                     icon: 'i-lucide:pen-line',
+                     onSelect: () => copyValueAsVector3({
+                       children: Object.values(prop.value).map(v => ({
+                         value: v,
+                       })),
+                     }),
+                },
 
-          <!-- Copy path button -->
-          <UButton
-            size="xs"
-            variant="ghost"
-            color="gray"
-            icon="i-tabler:link"
-            title="Copy path"
-            @click.stop="copyPath(node.path)"
-          />
+            ].filter(Boolean)"
+            :ui="{
+              content: 'w-48',
+            }"
+          >
+            <UButton
+              size="xs"
+              variant="ghost"
+              color="gray"
+              icon="i-lucide-ellipsis-vertical"
+              title="Copy value"
+            />
+          </UDropdownMenu>
         </div>
       </div>
     </div>

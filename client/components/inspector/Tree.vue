@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import type { InspectorNode } from '~/client/types'
+import { copyPath, copyProp, copyPropAsArray, copyValue, copyValueAsArray, copyValueAsJSON, copyValueAsVector3 } from '~/utils/clipboard'
 
 interface Props {
   node: InspectorNode
@@ -45,83 +46,6 @@ const getLabel = (value: unknown): string => {
   return 'object'
 }
 
-// Copy functionality
-
-const copyPath = async (path: string): Promise<void> => {
-  try {
-    await navigator.clipboard.writeText(path)
-  }
-  catch (error) {
-    console.error('Failed to copy path:', error)
-  }
-}
-
-const copyProp = async (node: InspectorNode): Promise<void> => {
-  try {
-    const propString = `:${node.path.replace(/\./g, '-')}="${JSON.stringify(node.value)}"`
-    await navigator.clipboard.writeText(propString)
-  }
-  catch (error) {
-    console.error('Failed to copy prop:', error)
-  }
-}
-
-const copyPropAsArray = async (node: InspectorNode): Promise<void> => {
-  try {
-    const arrayValue = node.children?.map(child => child.value) || []
-    const propString = `:${node.path.replace(/\./g, '-')}='[${arrayValue.map(v => (typeof v === 'string' ? `"${v}"` : v)).join(', ')}]'`
-    await navigator.clipboard.writeText(propString)
-  }
-  catch (error) {
-    console.error('Failed to copy prop as array:', error)
-  }
-}
-
-const copyValue = async (value: unknown): Promise<void> => {
-  try {
-    const stringValue = JSON.stringify(value)
-    await navigator.clipboard.writeText(stringValue)
-  }
-  catch (error) {
-    console.error('Failed to copy value:', error)
-  }
-}
-
-const copyValueAsVector3 = async (node: InspectorNode): Promise<void> => {
-  try {
-    await navigator.clipboard.writeText(`new Vector3(${node.children[0].value}, ${node.children[1].value}, ${node.children[2].value})`)
-  }
-  catch (error) {
-    console.error('Failed to copy prop as Vector3:', error)
-  }
-}
-
-const copyValueAsArray = async (node: InspectorNode): Promise<void> => {
-  try {
-    const arrayValue = node.children?.map(child => child.value) || []
-    const propString = `[${arrayValue.map(v => (typeof v === 'string' ? `"${v}"` : v)).join(', ')}]`
-    await navigator.clipboard.writeText(propString)
-  }
-  catch (error) {
-    console.error('Failed to copy prop as array:', error)
-  }
-}
-
-const copyValueAsJSON = async (node: InspectorNode): Promise<void> => {
-  try {
-    let object = {}
-    if (node.children && node.children.length > 0) {
-      object = node.children.reduce((acc, child) => {
-        acc[child.label] = child.value
-        return acc
-      }, {} as Record<string, unknown>)
-    }
-    await navigator.clipboard.writeText(JSON.stringify(object, null, 2))
-  }
-  catch (error) {
-    console.error('Failed to copy value as JSON:', error)
-  }
-}
 // Value modification
 const incrementValue = (): void => {
   if (typeof props.node.value === 'number') {
