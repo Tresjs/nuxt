@@ -97,3 +97,22 @@ export const copyValueAsEuler = async (node: InspectorNode): Promise<void> => {
     console.error('Failed to copy value as Euler:', error)
   }
 }
+
+export const copyValueAsQuaternion = async (node: InspectorNode): Promise<void> => {
+  try {
+    const xChild = node.children?.find(child => child.label === 'x')
+    const yChild = node.children?.find(child => child.label === 'y')
+    const zChild = node.children?.find(child => child.label === 'z')
+    const wChild = node.children?.find(child => child.label === 'w')
+
+    const x = xChild?.value || 0
+    const y = yChild?.value || 0
+    const z = zChild?.value || 0
+    const w = wChild?.value || 1
+
+    await navigator.clipboard.writeText(`new Quaternion(${x}, ${y}, ${z}, ${w})`)
+  }
+  catch (error) {
+    console.error('Failed to copy value as Quaternion:', error)
+  }
+}

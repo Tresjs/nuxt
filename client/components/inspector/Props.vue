@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TresObject } from '@tresjs/core'
 import { computed, watch } from 'vue'
-import { copyPath, copyProp, copyPropAsArray, copyValue, copyValueAsArray, copyValueAsJSON, copyValueAsVector3, copyValueAsEuler } from '~/utils/clipboard'
+import { copyPath, copyProp, copyPropAsArray, copyValue, copyValueAsArray, copyValueAsJSON, copyValueAsVector3, copyValueAsEuler, copyValueAsQuaternion } from '~/utils/clipboard'
 
 import { iconsMap } from '../../utils/graph'
 import MaterialBadge from './MaterialBadge.vue'
@@ -296,6 +296,18 @@ function getValueClass(value: unknown): string {
                        children: Object.values(prop.value).map(v => ({
                          value: v,
                        })),
+                     }),
+                },
+              prop.displayValue === 'vector' && prop.key === 'quaternion'
+                && { label: 'Copy as Quaternion',
+                     icon: 'i-lucide:rotate-3d',
+                     onSelect: () => copyValueAsQuaternion({
+                       children: [
+                         { label: 'x', value: prop.value.x },
+                         { label: 'y', value: prop.value.y },
+                         { label: 'z', value: prop.value.z },
+                         { label: 'w', value: prop.value.w || 1 },
+                       ],
                      }),
                 },
 

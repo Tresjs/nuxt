@@ -125,7 +125,7 @@ export function getInspectorGraph(obj: unknown, label = 'root', path = 'root', s
   // Handle objects
   const children: InspectorNode[] = []
   const objectName = (obj as object).constructor?.name || 'Object'
-  
+
   // Special handling for Three.js Euler objects
   if (objectName === '_Euler') {
     console.log('Processing _Euler object:', obj, 'Constructor name:', objectName)
@@ -138,7 +138,17 @@ export function getInspectorGraph(obj: unknown, label = 'root', path = 'root', s
       children.push(getInspectorGraph(val, key, childPath, seen))
     }
   }
-  // Special handling for Three.js Vector3 objects  
+  // Special handling for Three.js Quaternion objects
+  else if (objectName === 'Quaternion') {
+    const quaternionObj = obj as { x: number, y: number, z: number, w: number }
+    const quaternionProps = ['x', 'y', 'z', 'w']
+    for (const key of quaternionProps) {
+      const val = quaternionObj[key as keyof typeof quaternionObj]
+      const childPath = path === 'root' ? key : `${path}.${key}`
+      children.push(getInspectorGraph(val, key, childPath, seen))
+    }
+  }
+  // Special handling for Three.js Vector3 objects
   else if (objectName === '_Vector3') {
     const vectorObj = obj as { x: number, y: number, z: number }
     const vectorProps = ['x', 'y', 'z']
@@ -167,7 +177,7 @@ export function getInspectorGraph(obj: unknown, label = 'root', path = 'root', s
     label,
     type: 'object',
     path,
-    value: objectName === '_Euler' ? '_Euler' : objectName === '_Vector3' ? '_Vector3' : objectName,
+    value: objectName === 'Euler' ? 'Euler' : objectName === 'Quaternion' ? 'Quaternion' : objectName === 'Vector3' ? 'Vector3' : objectName,
     defaultExpanded: path === 'root',
     children,
   }

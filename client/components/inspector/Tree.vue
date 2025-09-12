@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import type { InspectorNode } from '~/client/types'
-import { copyPath, copyProp, copyPropAsArray, copyValue, copyValueAsArray, copyValueAsJSON, copyValueAsVector3, copyValueAsEuler } from '~/utils/clipboard'
+import { copyPath, copyProp, copyPropAsArray, copyValue, copyValueAsArray, copyValueAsJSON, copyValueAsVector3, copyValueAsEuler, copyValueAsQuaternion } from '~/utils/clipboard'
 
 interface Props {
   node: InspectorNode
@@ -168,8 +168,9 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
               { label: 'Copy value as Array', icon: 'i-material-symbols:data-array', onSelect: () => copyValueAsArray(node) },
               node.value === '_Vector3' ? { label: 'Copy value as Vector3', icon: 'i-lucide:pen-line', onSelect: () => copyValueAsVector3(node) } : null,
               node.value === '_Euler' ? { label: 'Copy as Euler', icon: 'i-lucide:rotate-3d', onSelect: () => copyValueAsEuler(node) } : null,
+              node.value === '_Quaternion' ? { label: 'Copy as Quaternion', icon: 'i-lucide:rotate-3d', onSelect: () => copyValueAsQuaternion(node) } : null,
               { label: 'Copy value as JSON', icon: 'i-material-symbols:data-object', onSelect: () => copyValueAsJSON(node) },
-              node.value === '_Vector3' || node.value === '_Euler' ? { label: 'Copy as Prop', icon: 'i-lucide:code', onSelect: () => copyPropAsArray(node) } : null,
+              node.value === '_Vector3' || node.value === '_Euler' || node.value === '_Quaternion' ? { label: 'Copy as Prop', icon: 'i-lucide:code', onSelect: () => copyPropAsArray(node) } : null,
             ].filter(Boolean)"
             :ui="{
               content: 'w-48',
