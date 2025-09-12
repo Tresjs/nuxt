@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TresObject } from '@tresjs/core'
 import { computed, watch } from 'vue'
-import { copyPath, copyProp, copyPropAsArray, copyValue, copyValueAsArray, copyValueAsJSON, copyValueAsVector3 } from '~/utils/clipboard'
+import { copyPath, copyProp, copyPropAsArray, copyValue, copyValueAsArray, copyValueAsJSON, copyValueAsVector3, copyValueAsEuler } from '~/utils/clipboard'
 
 import { iconsMap } from '../../utils/graph'
 import MaterialBadge from './MaterialBadge.vue'
@@ -277,8 +277,20 @@ function getValueClass(value: unknown): string {
                        path: prop.key,
                        value: Object.values(prop.value),
                      }) },
-              prop.displayValue === 'vector'
-                && { label: 'Copy value as Vector3',
+              prop.displayValue === 'vector' && prop.key === 'rotation'
+                && { label: 'Copy as Euler',
+                     icon: 'i-lucide:rotate-3d',
+                     onSelect: () => copyValueAsEuler({
+                       children: [
+                         { label: 'x', value: prop.value.x },
+                         { label: 'y', value: prop.value.y },
+                         { label: 'z', value: prop.value.z },
+                         { label: 'order', value: prop.value.order || 'XYZ' },
+                       ],
+                     }),
+                },
+              prop.displayValue === 'vector' && prop.key !== 'rotation'
+                && { label: 'Copy as Vector3',
                      icon: 'i-lucide:pen-line',
                      onSelect: () => copyValueAsVector3({
                        children: Object.values(prop.value).map(v => ({

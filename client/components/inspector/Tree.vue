@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import type { InspectorNode } from '~/client/types'
-import { copyPath, copyProp, copyPropAsArray, copyValue, copyValueAsArray, copyValueAsJSON, copyValueAsVector3 } from '~/utils/clipboard'
+import { copyPath, copyProp, copyPropAsArray, copyValue, copyValueAsArray, copyValueAsJSON, copyValueAsVector3, copyValueAsEuler } from '~/utils/clipboard'
 
 interface Props {
   node: InspectorNode
@@ -16,6 +16,13 @@ interface Emits {
 const props = withDefaults(defineProps<Props>(), {
   level: 0,
 })
+
+watch(() => props.node, (newNode) => {
+  // Auto-expand if the node is the selected object
+  if (newNode.path === 'rotation') {
+    console.log('rotation node', newNode)
+  }
+}, { immediate: true })
 
 const emit = defineEmits<Emits>()
 
@@ -160,6 +167,7 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
               { label: 'Copy Path', icon: 'i-lucide:link', onSelect: () => copyPath(node.path) },
               { label: 'Copy value as Array', icon: 'i-material-symbols:data-array', onSelect: () => copyValueAsArray(node) },
               node.value === '_Vector3' ? { label: 'Copy value as Vector3', icon: 'i-lucide:pen-line', onSelect: () => copyValueAsVector3(node) } : null,
+              node.value === '_Euler' ? { label: 'Copy as Euler', icon: 'i-lucide:rotate-3d', onSelect: () => copyValueAsEuler(node) } : null,
               { label: 'Copy value as JSON', icon: 'i-material-symbols:data-object', onSelect: () => copyValueAsJSON(node) },
               node.value === '_Vector3' || node.value === '_Euler' ? { label: 'Copy as Prop', icon: 'i-lucide:code', onSelect: () => copyPropAsArray(node) } : null,
             ].filter(Boolean)"

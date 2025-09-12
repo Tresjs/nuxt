@@ -124,23 +124,50 @@ export function getInspectorGraph(obj: unknown, label = 'root', path = 'root', s
 
   // Handle objects
   const children: InspectorNode[] = []
-  for (const key of Object.keys(obj as object)) {
-    // Skip Vue-specific properties and internal properties
-    if (key.startsWith('_') || key.startsWith('$') || key === '__v_isRef' || key === '__v_isReactive' || key === '__v_isShallow' || key === '__v_raw' || key === '__v_isReadonly') {
-      continue
+  const objectName = (obj as object).constructor?.name || 'Object'
+  
+  // Special handling for Three.js Euler objects
+  if (objectName === '_Euler') {
+    console.log('Processing _Euler object:', obj, 'Constructor name:', objectName)
+    const eulerObj = obj as { x: number, y: number, z: number, order: string }
+    const eulerProps = ['x', 'y', 'z', 'order']
+    for (const key of eulerProps) {
+      const val = eulerObj[key as keyof typeof eulerObj]
+      console.log(`_Euler ${key}:`, val)
+      const childPath = path === 'root' ? key : `${path}.${key}`
+      children.push(getInspectorGraph(val, key, childPath, seen))
     }
+  }
+  // Special handling for Three.js Vector3 objects  
+  else if (objectName === '_Vector3') {
+    const vectorObj = obj as { x: number, y: number, z: number }
+    const vectorProps = ['x', 'y', 'z']
+    for (const key of vectorProps) {
+      const val = vectorObj[key as keyof typeof vectorObj]
+      const childPath = path === 'root' ? key : `${path}.${key}`
+      children.push(getInspectorGraph(val, key, childPath, seen))
+    }
+  }
+  // Default object handling
+  else {
+    for (const key of Object.keys(obj as object)) {
+      // Skip Vue-specific properties and internal properties
+      if (key.startsWith('_') || key.startsWith('$') || key === '__v_isRef' || key === '__v_isReactive' || key === '__v_isShallow' || key === '__v_raw' || key === '__v_isReadonly') {
+        continue
+      }
 
-    // Skip functions and symbols
-    const val = (obj as Record<string, unknown>)[key]
-    if (typeof val === 'function') continue
-    const childPath = path === 'root' ? key : `${path}.${key}`
-    children.push(getInspectorGraph(val, key, childPath, seen))
+      // Skip functions and symbols
+      const val = (obj as Record<string, unknown>)[key]
+      if (typeof val === 'function') continue
+      const childPath = path === 'root' ? key : `${path}.${key}`
+      children.push(getInspectorGraph(val, key, childPath, seen))
+    }
   }
   return {
     label,
     type: 'object',
     path,
-    value: (obj as object).constructor?.name || 'Object',
+    value: objectName === '_Euler' ? '_Euler' : objectName === '_Vector3' ? '_Vector3' : objectName,
     defaultExpanded: path === 'root',
     children,
   }

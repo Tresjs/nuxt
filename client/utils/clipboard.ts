@@ -44,6 +44,7 @@ export const copyValue = async (value: unknown): Promise<void> => {
 
 export const copyValueAsVector3 = async (node: InspectorNode): Promise<void> => {
   try {
+    if (!node.children || node.children.length < 3) return
     await navigator.clipboard.writeText(`new Vector3(${node.children[0].value}, ${node.children[1].value}, ${node.children[2].value})`)
   }
   catch (error) {
@@ -75,5 +76,24 @@ export const copyValueAsJSON = async (node: InspectorNode): Promise<void> => {
   }
   catch (error) {
     console.error('Failed to copy value as JSON:', error)
+  }
+}
+
+export const copyValueAsEuler = async (node: InspectorNode): Promise<void> => {
+  try {
+    const xChild = node.children?.find(child => child.label === 'x')
+    const yChild = node.children?.find(child => child.label === 'y')
+    const zChild = node.children?.find(child => child.label === 'z')
+    const orderChild = node.children?.find(child => child.label === 'order')
+
+    const x = xChild?.value || 0
+    const y = yChild?.value || 0
+    const z = zChild?.value || 0
+    const order = orderChild?.value || 'XYZ'
+
+    await navigator.clipboard.writeText(`new Euler(${x}, ${y}, ${z}, '${order}')`)
+  }
+  catch (error) {
+    console.error('Failed to copy value as Euler:', error)
   }
 }
