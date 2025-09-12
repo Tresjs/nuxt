@@ -20,16 +20,8 @@ const { clearColor } = useControls({
           <TresBoxGeometry />
           <TresMeshNormalMaterial />
         </TresMesh>
-        <TresMesh
-          :position-x="1"
-        >
-          <TresSphereGeometry />
-          <TresMeshBasicMaterial
-            color="cyan"
-          />
-        </TresMesh>
       </TresGroup>
-      <OrbitControls />
+      <!--  <OrbitControls /> -->
     </TresCanvas>
   </div>
 </template>

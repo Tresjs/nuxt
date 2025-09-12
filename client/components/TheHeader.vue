@@ -28,6 +28,7 @@
         <UButton
           color="neutral"
           variant="ghost"
+          size="xs"
           to="https://github.com/nuxt/ui"
           target="_blank"
           icon="i-simple-icons-github"

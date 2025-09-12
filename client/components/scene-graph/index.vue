@@ -48,7 +48,6 @@ inspectorGraph.value = getInspectorGraph(object) */
 const handleValueUpdate = (path: string, value: unknown): void => {
   if (selectedObject.value) {
     setValueByPath(selectedObject.value, path, value)
-    console.log(`Updated ${path}:`, value)
     // Trigger reactive update
     refreshTrigger.value++
   }
@@ -80,11 +79,30 @@ const setValueByPath = (obj: unknown, path: string, value: unknown): void => {
   // Set the value on the final property
   const finalKey = keys[keys.length - 1]!
   current[finalKey] = value
+
+  // Check if this is a camera and update projection matrix if needed
+  const rootObj = obj as any
+  if (rootObj.isCamera && isCameraProjectionProperty(path)) {
+    rootObj.updateProjectionMatrix()
+  }
+}
+
+/**
+ * Checks if a property path affects camera projection and requires updateProjectionMatrix()
+ */
+const isCameraProjectionProperty = (path: string): boolean => {
+  const projectionProperties = [
+    'fov', 'aspect', 'near', 'far', // PerspectiveCamera
+    'left', 'right', 'top', 'bottom', // OrthographicCamera
+  ]
+
+  const property = path.split('.').pop()
+  return projectionProperties.includes(property || '')
 }
 </script>
 
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <div>
       <TreeGraph
         v-if="scene.value && scene.graph"

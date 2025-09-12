@@ -17,13 +17,6 @@ const props = withDefaults(defineProps<Props>(), {
   level: 0,
 })
 
-watch(() => props.node, (newNode) => {
-  // Auto-expand if the node is the selected object
-  if (newNode.path === 'rotation') {
-    console.log('rotation node', newNode)
-  }
-}, { immediate: true })
-
 const emit = defineEmits<Emits>()
 
 // Local state

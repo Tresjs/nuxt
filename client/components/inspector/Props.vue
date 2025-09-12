@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import type { TresObject } from '@tresjs/core'
-import { computed, watch } from 'vue'
-import { copyPath, copyProp, copyPropAsArray, copyValue, copyValueAsArray, copyValueAsJSON, copyValueAsVector3, copyValueAsEuler, copyValueAsQuaternion } from '~/utils/clipboard'
+import { computed } from 'vue'
+import { copyProp, copyValue, copyValueAsVector3, copyValueAsEuler, copyValueAsQuaternion } from '~/utils/clipboard'
 
 import { iconsMap } from '../../utils/graph'
 import MaterialBadge from './MaterialBadge.vue'
 import GeometryBadge from './GeometryBadge.vue'
-import type path from 'node:path'
 
 interface Emits {
   (e: 'update-value', path: string, value: unknown): void
@@ -65,11 +64,6 @@ const keyProperties = computed(() => {
     }
   }).filter(prop => prop.value !== undefined)
 })
-
-watch(keyProperties, (newObj) => {
-  // You can perform actions when the object prop changes, if needed
-  console.log('keyProperties', newObj)
-}, { immediate: true })
 
 /**
  * Get nested property value (e.g., position.x, rotation.y)
@@ -250,6 +244,13 @@ function getValueClass(value: unknown): string {
             />
             <span :class="getValueClass(prop.value)">{{ prop.displayValue }}</span>
           </template>
+
+          <EditableNumber
+            v-else-if="typeof prop.value === 'number'"
+            v-model="prop.value"
+            class="ml-1"
+            @update:model-value="(val) => emit('update-value', prop.key, val)"
+          />
 
           <!-- Regular values -->
           <template v-else>

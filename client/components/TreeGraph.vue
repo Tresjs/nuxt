@@ -90,32 +90,6 @@ const indentStyle = computed(() => ({ paddingLeft: `${props.level * 16}px` }))
         >
           {{ item.memorySize }} KB
         </UBadge>
-
-        <ul
-          v-if="item.value?.isCamera"
-          class="flex gap-1"
-        >
-          <li>
-            <UTooltip :text="`Fov: ${item.value?.fov} degrees`">
-              <UBadge
-                color="neutral"
-                size="sm"
-                variant="soft"
-              >
-                {{ item.value?.fov }}°
-              </UBadge>
-            </UTooltip>
-          </li>
-          <li>
-            <UBadge
-              color="neutral"
-              size="sm"
-              variant="soft"
-            >
-              {{ `x:${Math.round(item.value?.position?.x)} y:${Math.round(item.value?.position?.y)} z:${Math.round(item.value?.position?.z)}` }}
-            </UBadge>
-          </li>
-        </ul>
       </div>
     </div>
 

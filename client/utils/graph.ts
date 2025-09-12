@@ -128,12 +128,10 @@ export function getInspectorGraph(obj: unknown, label = 'root', path = 'root', s
 
   // Special handling for Three.js Euler objects
   if (objectName === '_Euler') {
-    console.log('Processing _Euler object:', obj, 'Constructor name:', objectName)
     const eulerObj = obj as { x: number, y: number, z: number, order: string }
     const eulerProps = ['x', 'y', 'z', 'order']
     for (const key of eulerProps) {
       const val = eulerObj[key as keyof typeof eulerObj]
-      console.log(`_Euler ${key}:`, val)
       const childPath = path === 'root' ? key : `${path}.${key}`
       children.push(getInspectorGraph(val, key, childPath, seen))
     }

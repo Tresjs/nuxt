@@ -18,10 +18,6 @@ const inputRef = ref<HTMLInputElement>()
 
 const displayValue = computed(() => Number(props.modelValue).toFixed(2))
 
-watch(displayValue, (newVal) => {
-  console.log('Display value updated:', newVal)
-}, { immediate: true })
-
 const startEditing = () => {
   isEditing.value = true
   editValue.value = props.modelValue
@@ -61,7 +57,7 @@ const cancelEditing = () => {
       minimumFractionDigits: 0,
       maximumFractionDigits: 2,
     }"
-    class="w-20"
+    class="w-20 font-mono"
     @blur="finishEditing"
     @keyup.enter="finishEditing"
     @keyup.escape="cancelEditing"
