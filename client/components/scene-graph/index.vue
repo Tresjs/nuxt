@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { TresObject } from '@tresjs/core'
 import type { Mesh } from 'three'
+import { Color } from 'three'
 import { createHighlightMesh, getInspectorGraph } from '~/utils/graph'
 import { useDevtoolsHook } from '~/composables/useDevtoolsHook'
 import { computed, ref, shallowRef, toValue } from 'vue'
@@ -49,7 +50,10 @@ const handleValueUpdate = (path: string, value: unknown): void => {
   if (selectedObject.value) {
     setValueByPath(selectedObject.value, path, value)
     // Trigger reactive update
-    refreshTrigger.value++
+    if (!path.includes('color')) {
+      // Avoid excessive updates for color changes
+      refreshTrigger.value++
+    }
   }
 }
 
@@ -78,7 +82,12 @@ const setValueByPath = (obj: unknown, path: string, value: unknown): void => {
 
   // Set the value on the final property
   const finalKey = keys[keys.length - 1]!
-  current[finalKey] = value
+
+  // Check if value is a hex string and should be converted to Color
+  const isHexString = (val: unknown): val is string =>
+    typeof val === 'string' && /^#[0-9a-f]{6}$/i.test(val)
+
+  current[finalKey] = isHexString(value) ? new Color(value) : value
 
   // Check if this is a camera and update projection matrix if needed
   const rootObj = obj as any

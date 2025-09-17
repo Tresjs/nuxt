@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TresObject } from '@tresjs/core'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { copyProp, copyValue, copyValueAsVector3, copyValueAsEuler, copyValueAsQuaternion } from '~/utils/clipboard'
 
 import { iconsMap } from '../../utils/graph'
@@ -31,7 +31,7 @@ const importantProperties: Record<string, string[]> = {
   OrthographicCamera: ['position', 'rotation', 'left', 'right', 'top', 'bottom', 'near', 'far'],
 
   // Light properties
-  DirectionalLight: ['color', 'intensity', 'position', 'target'],
+  DirectionalLight: ['color', 'intensity', 'position'],
   PointLight: ['color', 'intensity', 'position', 'distance', 'decay'],
   SpotLight: ['color', 'intensity', 'position', 'target', 'angle', 'penumbra'],
   AmbientLight: ['color', 'intensity'],
@@ -48,6 +48,14 @@ const importantProperties: Record<string, string[]> = {
   Scene: ['background', 'environment', 'fog'],
 }
 
+function formatValue(key: string, value: unknown): unknown {
+  // Handle Color objects
+  if (value && typeof value === 'object' && 'r' in value && 'g' in value && 'b' in value && 'getHexString' in value) {
+    return `#${(value as { getHexString: () => string }).getHexString()}`
+  }
+  return value
+}
+
 /**
  * Get the important properties for the current object type
  */
@@ -59,11 +67,16 @@ const keyProperties = computed(() => {
     const value = getNestedValue(props.object, prop)
     return {
       key: prop,
-      value,
-      displayValue: formatPropertyValue(prop, value),
+      value: formatValue(prop, value),
+      displayValue: formatPropertyDisplayValue(prop, value),
     }
   }).filter(prop => prop.value !== undefined)
 })
+
+watch(keyProperties, (newProps) => {
+  // Ensure Vector3 properties are reactive
+  console.log('Key properties updated:', newProps)
+}, { immediate: true })
 
 /**
  * Get nested property value (e.g., position.x, rotation.y)
@@ -79,7 +92,7 @@ function getNestedValue(obj: unknown, path: string): unknown {
 /**
  * Format property values for display (compact inspector style)
  */
-function formatPropertyValue(key: string, value: unknown): string {
+function formatPropertyDisplayValue(key: string, value: unknown): string {
   if (value === null || value === undefined) return 'undefined'
 
   // Handle Vector3-like objects - will be handled separately in template
@@ -237,12 +250,11 @@ function getValueClass(value: unknown): string {
           />
 
           <!-- Color value with preview dot -->
-          <template v-else-if="prop.key === 'color' && prop.value && typeof prop.value === 'object' && 'getHexString' in prop.value">
-            <div
-              class="w-3 h-3 rounded-full border border-gray-300 dark:border-gray-600 ml-1 mr-1"
-              :style="{ backgroundColor: '#' + (prop.value as { getHexString: () => string }).getHexString() }"
+          <template v-else-if="prop.key === 'color'">
+            <EditableColor
+              v-model="prop.value"
+              @update:model-value="(val) => emit('update-value', prop.key, val)"
             />
-            <span :class="getValueClass(prop.value)">{{ prop.displayValue }}</span>
           </template>
 
           <EditableNumber
