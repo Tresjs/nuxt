@@ -90,7 +90,7 @@ const setValueByPath = (obj: unknown, path: string, value: unknown): void => {
   current[finalKey] = isHexString(value) ? new Color(value) : value
 
   // Check if this is a camera and update projection matrix if needed
-  const rootObj = obj as any
+  const rootObj = obj as TresObject
   if (rootObj.isCamera && isCameraProjectionProperty(path)) {
     rootObj.updateProjectionMatrix()
   }
