@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0-rc.0](https://github.com/Tresjs/nuxt/compare/4.1.0-next.1...5.0.0-rc.0) (2025-09-20)
+
+### ⚠ BREAKING CHANGES
+
+* upgrade Nuxt 4 (#171)
+
+### Features
+
+* upgrade Nuxt 4 ([#171](https://github.com/Tresjs/nuxt/issues/171)) ([2cb9e6b](https://github.com/Tresjs/nuxt/commit/2cb9e6b624cf1714edaa0b05be768ca99a4d32dc))
+* v5-tres-devtools ([#172](https://github.com/Tresjs/nuxt/issues/172)) ([b86f224](https://github.com/Tresjs/nuxt/commit/b86f224e189f83600646099bef3348f7c7a8a893))
+
 ## [4.1.0-next.1](https://github.com/Tresjs/nuxt/compare/4.0.0...4.1.0-next.1) (2025-06-26)
 
 ### Features
