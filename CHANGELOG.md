@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.0.0-rc.1](https://github.com/Tresjs/nuxt/compare/5.0.0-rc.0...5.0.0-rc.1) (2025-09-20)
+
+### Bug Fixes
+
+* integrate useAttrs composable in TresCanvas component ([16f12e7](https://github.com/Tresjs/nuxt/commit/16f12e79334c6dcbd3d78412838b41a00a47185d))
+
 ## [5.0.0-rc.0](https://github.com/Tresjs/nuxt/compare/4.1.0-next.1...5.0.0-rc.0) (2025-09-20)
 
 ### ⚠ BREAKING CHANGES
