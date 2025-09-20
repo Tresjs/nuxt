@@ -36,7 +36,7 @@
     "dist"
   ],
   "scripts": {
-    "prepack": "pnpm run module:build && pnpm run client:build",
+    "build": "pnpm run module:build && pnpm run client:build",
     "module:build": "nuxt-module-build prepare && nuxt-module-build build",
     "client:build": "nuxt prepare client && nuxi generate client",
     "client:dev": "nuxi dev client --port 3300",
@@ -53,49 +53,38 @@
     "three": ">=0.133"
   },
   "dependencies": {
-    "@nuxt/kit": "4.0.0-alpha.4",
-    "@nuxt/ui": "^2.21.0",
-    "@tresjs/core": "5.0.0-next.6",
-    "@unocss/nuxt": "^66.0.0",
+    "@nuxt/kit": "4.0.0",
+    "@tresjs/core": "5.0.0-alpha.2",
     "defu": "^6.1.4",
     "mlly": "^1.7.4",
-    "pkg-types": "^1.3.1",
+    "ohash": "^2.0.11",
+    "pkg-types": "^2.2.0",
     "sirv": "^3.0.1",
-    "vite-plugin-glsl": "^1.3.1"
+    "vite-plugin-glsl": "^1.5.1"
   },
   "devDependencies": {
-    "@iconify-json/carbon": "^1.2.5",
-    "@iconify-json/file-icons": "^1.2.1",
-    "@iconify-json/iconoir": "^1.2.6",
-    "@iconify-json/ph": "^1.2.2",
-    "@nuxt/devtools": "^2.4.0",
-    "@nuxt/devtools-ui-kit": "^2.4.1",
-    "@nuxt/eslint-config": "^1.4.1",
-    "@nuxt/icon": "^1.10.2",
+    "@nuxt/devtools": "^2.6.2",
+    "@nuxt/devtools-ui-kit": "^2.6.2",
+    "@nuxt/eslint-config": "^1.5.2",
     "@nuxt/module-builder": "^1.0.1",
-    "@nuxt/schema": "^4.0.0-alpha.4",
-    "@nuxt/test-utils": "^3.18.0",
-    "@nuxt/ui": "^2.20.0",
-    "@release-it/conventional-changelog": "^9.0.3",
+    "@nuxt/schema": "^4.0.0",
+    "@nuxt/test-utils": "^3.19.2",
+    "@nuxt/ui-pro": "^3.2.0",
+    "@release-it/conventional-changelog": "^10.0.1",
     "@tresjs/cientos": "5.0.0-next.3",
-    "@types/node": "^22.15.21",
-    "@types/three": "^0.177.0",
-    "@unocss/nuxt": "^66.1.2",
-    "changelogen": "^0.6.1",
-    "eslint": "^9.26.0",
-    "nuxt": "4.0.0-alpha.4",
-    "playwright": "^1.49.1",
-    "release-it": "^19.0.3",
-    "three": "^0.177.0",
+    "@tresjs/leches": "1.0.0-next.0",
+    "@types/node": "^24.0.14",
+    "@types/three": "^0.178.1",
+    "@vueuse/nuxt": "13.5.0",
+    "eslint": "^9.31.0",
+    "nuxt": "4.0.0",
+    "playwright": "^1.54.1",
+    "release-it": "^19.0.4",
+    "three": "^0.178.0",
     "typescript": "^5.8.3",
-    "vitest": "^3.1.3",
+    "vitest": "^3.2.4",
     "vue": "3.5.17",
     "vue-tsc": "^3.0.1"
-  },
-  "resolutions": {
-    "@nuxt/kit": "4.0.0-alpha.4",
-    "nuxt": "4.0.0-alpha.4",
-    "vue": "3.5.17"
   },
   "build": {
     "externals": [
@@ -113,7 +102,8 @@
       "pnpapi",
       "picocolors",
       "source-map-js",
-      "nanoid/non-secure"
+      "nanoid/non-secure",
+      "@nuxt/devtools-kit"
     ]
   },
   "pnpm": {
