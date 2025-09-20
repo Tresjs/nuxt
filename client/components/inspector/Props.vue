@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TresObject } from '@tresjs/core'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 import { copyProp, copyValue, copyValueAsVector3, copyValueAsEuler, copyValueAsQuaternion } from '~/utils/clipboard'
 
 import { iconsMap } from '../../utils/graph'
@@ -72,11 +72,6 @@ const keyProperties = computed(() => {
     }
   }).filter(prop => prop.value !== undefined)
 })
-
-watch(keyProperties, (newProps) => {
-  // Ensure Vector3 properties are reactive
-  console.log('Key properties updated:', newProps)
-}, { immediate: true })
 
 /**
  * Get nested property value (e.g., position.x, rotation.y)
