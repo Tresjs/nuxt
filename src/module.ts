@@ -82,6 +82,13 @@ export default defineNuxtModule<ModuleOptions>({
       references.push({ types: '@tresjs/core' })
     })
 
+
+    const { isCustomElement } = nuxt.options.vue.compilerOptions
+
+    nuxt.options.vue.compilerOptions.isCustomElement = (tag: string) => {
+      return (typeof isCustomElement === 'function' && isCustomElement(tag)) || templateCompilerOptions.template.compilerOptions.isCustomElement(tag)
+    }
+
     nuxt.options.vue.compilerOptions.isCustomElement = templateCompilerOptions.template.compilerOptions.isCustomElement
 
     const allDeps = await getAllPackageDeps(nuxt.options.rootDir)
