@@ -82,7 +82,6 @@ export default defineNuxtModule<ModuleOptions>({
       references.push({ types: '@tresjs/core' })
     })
 
-
     const { isCustomElement } = nuxt.options.vue.compilerOptions
 
     nuxt.options.vue.compilerOptions.isCustomElement = (tag: string) => {
