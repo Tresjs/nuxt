@@ -11,7 +11,7 @@ Official Nuxt module for TresJS. Build 3D scenes as they were Vue components.
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
   <!-- - [🏀 Online playground](https://stackblitz.com/github/@tresjs/nuxt?file=playground%2Fapp.vue) -->
-- [📖 &nbsp;Documentation](https://tresjs.org/guide/nuxt.html)
+- [📖 &nbsp;Documentation](https://docs.tresjs.org/getting-started/installation#nuxt-project)
 
 ## Features
 
